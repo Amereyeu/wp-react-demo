@@ -67,7 +67,7 @@ function Contact() {
                 single[1].acf.address !== "" && (
                   <li>
                     <FaMapMarkerAlt />
-                    Adresa: {single[1].acf.address}
+                    Address: {single[1].acf.address}
                   </li>
                 )}
 
@@ -75,7 +75,7 @@ function Contact() {
                 single[1].acf.phone !== "" && (
                   <li>
                     <FaPhone />
-                    Telefon: {single[1].acf.phone}
+                    Phone: {single[1].acf.phone}
                   </li>
                 )}
 
@@ -83,7 +83,7 @@ function Contact() {
                 single[1].acf.ico !== "" && (
                   <li>
                     <FaAddressCard />
-                    IČO: {single[1].acf.ico}
+                    ICO: {single[1].acf.ico}
                   </li>
                 )}
 

@@ -6,15 +6,21 @@
   background: $color-primary;
 
   &__logo {
-    height: 100px;
+    display: flex;
     margin: 0 auto;
-    fill: var(--text);
+    
+    &__icon {
+      fill: $color-secondary;
+      font-size: 4rem;
+
+    }
   }
 
   &__copyright p {
     font-size: 0.9rem;
     margin-top: 1rem;
     text-align: center;
+    color: $color-secondary;
   }
 }
 
