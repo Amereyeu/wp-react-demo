@@ -1,0 +1,55 @@
+.news {
+  margin: 2rem 1rem 0;
+  padding: 1rem;
+  background: $color-primary;
+  align-items: center;
+  max-width: 1000px;
+  border: 5px solid white;
+  -webkit-box-shadow: 0 0 4px $color-primary;
+  box-shadow: 0 0 4px $color-primary;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1rem;
+  order: reverse;
+
+  @include break($medium) {
+    margin: 4rem auto 0;
+    grid-template-columns: minmax(90px, 120px) 1fr;
+    min-height: 240px;
+  }
+
+  &__icon {
+    background: $color-secondary;
+    color: #fff;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  &__text p {
+    font-family: $heading;
+    font-weight: 400;
+    color: #fff;
+    margin-left: 1rem;
+    font-size: 2rem;
+
+    @include break($medium) {
+      font-size: 2.75rem;
+    }
+
+    &:nth-child(2) {
+      font-weight: bold;
+    }
+  }
+}
+

@@ -1,0 +1,37 @@
+.notfound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  min-width: 300px;
+  width: 100%;
+  height: calc( 100vh - 198px );
+  padding: 1rem;
+
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+
+    @include break($medium) {
+      font-size: 4rem;
+    }
+  }
+
+  &__link {
+    font-size: 1.4rem;
+    color: var(--text);
+    text-decoration: none;
+
+    @include break($medium) {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+

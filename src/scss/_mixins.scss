@@ -1,0 +1,44 @@
+
+@mixin break($breakpoint...) {
+  @if length($breakpoint) ==1 {
+    @media (min-width: nth($breakpoint, 1)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+      @content;
+    }
+  }
+}
+
+
+
+@mixin states($color: $default) {
+  border-color: $color;
+  color: rgba(255, 255, 255, 0.9);
+  background: $color;
+  outline: none;
+
+  &:hover {
+    border-color: $color;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  &:active {
+    color: rgba(255, 255, 255, 0.9);
+    border-color: darken($color, 10%);
+  }
+}
+
+
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}

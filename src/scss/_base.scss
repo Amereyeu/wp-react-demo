@@ -1,0 +1,43 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@600&Raleway:wght@400;700&&display=swap");
+
+$color-primary: #000;
+$color-secondary: #f8f8f8;
+$color-white: #fff;
+
+$primary: "Poppins", sans-serif;
+$heading: "Big Shoulders Text", sans-serif;
+
+
+$small: 480px;
+$medium: 769px;
+$large: 993px;
+$xlarge: 1200px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $primary;
+  line-height: 1.2;
+
+}
+
+
+
+:root {
+  --text: #333;
+  --bg: #fcfcfc;
+}
+
+html[data-theme="dark"] {
+  --bg: #2f2f2f;
+  --text: #fcfcfc;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+

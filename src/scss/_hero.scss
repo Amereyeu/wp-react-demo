@@ -1,0 +1,95 @@
+.hero {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+background: linear-gradient(to top, #151515ba, #484848cc), url(/img/hero.png) no-repeat center center;
+
+
+
+  h1 {
+    color: $color-white;
+    font-family: $heading;
+    font-size: 3.5rem;
+    font-weight: 400;
+    position: absolute;
+    z-index: 10;
+    text-shadow: 2px 2px #000;
+    text-align: center;
+
+    @include break($medium) {
+      font-size: 7rem;
+    }
+  }
+}
+
+// modal popup styles
+.popup-overlay {
+  background: rgba(black, 0.8) !important;
+  z-index: 9999 !important;
+
+  .popup-content {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 10px $color-primary;
+    box-shadow: 0 0 10px $color-primary;
+    width: 90% !important;
+
+    @include break($large) {
+      width: 60% !important;
+      max-width: 1000px;
+    }
+
+    .close {
+      background-color: $color-primary;
+      color: #fff;
+      cursor: pointer;
+      display: block;
+      font-size: 24px;
+      padding: 0 5px;
+      position: absolute;
+      right: -10px;
+      top: -10px;
+    }
+
+    p {
+      font-size: 20px;
+      text-align: center;
+      line-height: unset;
+    }
+  }
+}
+.info-modal {
+  padding: 1rem;
+  background: $color-primary;
+  align-items: center;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1rem;
+
+  @include break($medium) {
+    grid-template-columns: minmax(90px, 120px) 1fr;
+    height: auto;
+  }
+
+  &__icon {
+    color: #fff;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: #fff;
+  }
+
+  &__text p {
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
