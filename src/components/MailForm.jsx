@@ -18,17 +18,17 @@ function MailForm(props) {
   function onSubmit(e) {
     emailjs
       .sendForm(
-        "service_kkkleu23j",
-        "template_lllgi4fg5",
+        "service_dwg0yqa",
+        "template_z2f9oax",
         "#contact-form",
-        "user_loiW6bMl8l67S4Q5dM5fG"
+        "1Di9IOAL5wlbreKHz"
       )
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
 
-    toast.success("Zpráva byla odeslána", {
+    toast.success("Message was sent", {
       position: "top-center",
       autoClose: 4000,
       hideProgressBar: false,
@@ -43,14 +43,14 @@ function MailForm(props) {
 
   return (
     <>
-      <h2 className="contact__title">Kontakt</h2>
+      <h2 className="contact__title">Contact</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} id="contact-form">
         <div className="contact__input__wrap">
           <input
             type="text"
             name="name"
-            placeholder="Jméno a příjmení"
+            placeholder="Name"
             className="border1"
             onChange={(e) => setName(e.currentTarget.value)}
             {...register("name", {
@@ -62,13 +62,13 @@ function MailForm(props) {
           <span className="bb"></span>
         </div>
         {errors.name && errors.name.type === "required" && (
-          <div className="validation-error">Toto pole je třeba vyplnit.</div>
+          <div className="validation-error">Cannot be empty</div>
         )}
         {errors.name && errors.name.type === "minLength" && (
-          <div className="validation-error">Minimální počet znaků je 3.</div>
+          <div className="validation-error">At least 3 characters.</div>
         )}
         {errors.name && errors.name.type === "maxLength" && (
-          <div className="validation-error">Maximální počet znaků je 20.</div>
+          <div className="validation-error">No more then 20 characters.</div>
         )}
 
         <div className="contact__input__wrap">
@@ -87,11 +87,11 @@ function MailForm(props) {
           <span className="bb"></span>
         </div>
         {errors.email && errors.email.type === "required" && (
-          <div className="validation-error">Toto pole je třeba vyplnit.</div>
+          <div className="validation-error">Cannot be empty</div>
         )}
         {errors.email && errors.email.type === "pattern" && (
           <div className="validation-error">
-            Vložte emailovou adresu ve správném formátu.
+            Insert email address in correct form
           </div>
         )}
 
@@ -99,19 +99,19 @@ function MailForm(props) {
           <textarea
             className="border1"
             name="message"
-            placeholder="Vaše zpráva"
+            placeholder="Your message"
             onChange={(e) => setText(e.currentTarget.value)}
             {...register("message", { required: true })}
           ></textarea>
           <span className="bb"></span>
         </div>
         {errors.message && errors.message.type === "required" && (
-          <div className="validation-error">Toto pole je třeba vyplnit.</div>
+          <div className="validation-error">Cannot be empty</div>
         )}
 
         <div className="contact__button">
           <button className="contact__button__send" type="submit">
-            Odeslat
+            Send
           </button>
         </div>
       </form>
@@ -120,6 +120,7 @@ function MailForm(props) {
 }
 
 export default MailForm;
+
 
 
 

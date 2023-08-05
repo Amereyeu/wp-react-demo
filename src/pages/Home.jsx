@@ -6,16 +6,17 @@ import CustomPost from "./CustomPost";
 import News from "./News";
 import Post from "./Post";
 
+
 function Home() {
   return (
     <main>
       <Hero />
-
       <Post />
       <About />
       <CustomPost />
       {/* <News /> */}
-      {/* <Cakes /> */}
+      {/* <Cakes /> */} 
+      
     </main>
   );
 }
