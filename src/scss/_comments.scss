@@ -1,0 +1,43 @@
+.comment {
+  &__item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem;
+    box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
+
+    &__left {
+      img {
+        width: 80px;
+        height: 80px;
+        border: 1px solid $color-secondary;
+        border-radius: 100%;
+      }
+    }
+
+    &__right {
+      h5 {
+        text-transform: uppercase;
+        margin-bottom: .4rem;
+      }
+
+      p {
+        margin-bottom: .4rem;
+      }
+    }
+  }
+
+  .subitem {
+    margin-left: 5rem;
+  }
+
+  .subitem2 {
+    margin-left: 10rem;
+  }
+  
+  .subitem3 {
+    margin-left: 15rem;
+  }
+}
+

@@ -1,23 +1,44 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import Comments from './Comments'
 import ScrollTo from "../ScrollTo";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
+  const [comments, setComments] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
 
-  function getEvents() {
-    axios
-      .get(
-        `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
-      )
-      .then((response) => response.data)
-      .then((data) => {
-        setPost(data);
+  // function getEvents() {
+  //   axios
+  //     .get(
+  //       `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
+  //     )
+  //     .then((response) => response.data)
+  //     .then((data) => {
+  //       setPost(data);
+  //       setIsLoaded(true);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
+
+    function getEvents() {
+    const getPost = axios.get(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
+    );
+
+    const getComments = axios.get(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/comments?post=${id}`
+    );
+
+    Promise.all([getPost, getComments])
+      .then((res) => {
+        setPost(res[0].data);
+        setComments(res[1].data);
+
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
@@ -27,7 +48,8 @@ function MainPostDetail() {
     getEvents();
   }, []);
 
- // console.log(post);
+  // console.log(post);
+console.log(comments);
 
   if (isLoaded) {
     return (
@@ -36,8 +58,7 @@ function MainPostDetail() {
           className="featured__image"
           style={{
             backgroundImage: `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
-          }}
-        >
+          }}>
           <h3 className="blog-detail__title"> {post.title.rendered}</h3>
         </div>
 
@@ -45,10 +66,11 @@ function MainPostDetail() {
           className="blog-detail__content"
           dangerouslySetInnerHTML={{
             __html: post.content.rendered,
-          }}
-        ></div>
+          }}></div>
 
         <button onClick={() => navigate(-1)}>Back to post</button>
+
+        <Comments comments={comments} isLoaded={isLoaded} />
 
         <ScrollTo />
       </div>
@@ -65,4 +87,9 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
+
+
+
+
 
