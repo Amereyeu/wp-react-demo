@@ -3,6 +3,7 @@
   padding: 1rem;
   display: grid;
   max-width: 1200px;
+  place-content: center;
 
   @include break($medium) {
     margin: 4rem auto;
