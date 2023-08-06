@@ -45,13 +45,11 @@
     margin-bottom: 0;
   }
 
-  /*   &:nth-of-type(2) {
-    @include break($medium) {
-      display: grid;
-      grid-template-columns: minmax(200px, 210px) 1fr;
-    }
-  } */
+  &--full {
+    grid-template-columns: 1fr !important;
+  }
 
+ 
   &:nth-of-type(2n) {
     @include break($medium) {
       display: grid;

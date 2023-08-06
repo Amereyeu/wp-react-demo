@@ -6,18 +6,19 @@ function MainPost({ posts, isLoaded }) {
       <>
         {posts.map((post) => (
           <div
-            className="post"
-            key={post.id}
-          >
-            <div className="post__image">
-              <img
-                src={
-                  post._embedded["wp:featuredmedia"][0].media_details.sizes
-                    .medium.source_url
-                }
-                alt={post._embedded["wp:featuredmedia"][0].title.rendered}
-              />
-            </div>
+            className={`post ${post.featured_media === 0 ? "post--full" : ""}`}
+            key={post.id}>
+            {post.featured_media !== 0 && (
+              <div className="post__image">
+                <img
+                  src={
+                    post._embedded["wp:featuredmedia"][0].media_details.sizes
+                      .medium.source_url
+                  }
+                  alt={post._embedded["wp:featuredmedia"][0].title.rendered}
+                />
+              </div>
+            )}
 
             <div className="post__text">
               <h3 className="post__text__title">
@@ -35,8 +36,7 @@ function MainPost({ posts, isLoaded }) {
                       <li key={cat.id}>
                         <Link
                           className="category__pill"
-                          to={`/category/${cat.id}`}
-                        >
+                          to={`/category/${cat.id}`}>
                           {cat.name}
                         </Link>
                       </li>
@@ -48,8 +48,7 @@ function MainPost({ posts, isLoaded }) {
               <div
                 dangerouslySetInnerHTML={{
                   __html: post.excerpt.rendered,
-                }}
-              ></div>
+                }}></div>
 
               <div className="tag">
                 <ul>

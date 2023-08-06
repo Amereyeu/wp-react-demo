@@ -35,12 +35,12 @@ function Navigation({ handleThemeChange, theme }) {
             <button>Gallery</button>
           </Link>
 
-          <Link
+          {/* <Link
             to="/alergens"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
             <button>Alergeny</button>
-          </Link>
+          </Link> */}
 
           <Link
             to="/contact"
@@ -49,12 +49,12 @@ function Navigation({ handleThemeChange, theme }) {
             <button>Contact</button>
           </Link>
 
-          <Link
+          {/* <Link
             to="/blog"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
             <button>Blog</button>
-          </Link>
+          </Link> */}
 
           <div className="navigation__menu__item" onClick={toggleNavigation}>
             <button onClick={handleThemeChange}>

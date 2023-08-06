@@ -17,6 +17,7 @@ function Comments({ comments, isLoaded }) {
               <div className="comment__item__left">
                 <img
                   src="http://0.gravatar.com/avatar/64e1b8d34f425d19e1ee2ea7236d3028?s=96&d=mm&r=g"
+                  // src={comment.author_avatar_urls[0].[1]}
                   alt={comment.author_name}
                 />
               </div>

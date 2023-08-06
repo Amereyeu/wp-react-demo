@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Comments from './Comments'
+import Comments from "./Comments";
 import ScrollTo from "../ScrollTo";
+import defaultImage from "/img/hero.png";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
@@ -25,7 +26,7 @@ function MainPostDetail() {
   //     .catch((err) => console.log(err));
   // }
 
-    function getEvents() {
+  function getEvents() {
     const getPost = axios.get(
       `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
     );
@@ -51,18 +52,30 @@ function MainPostDetail() {
   }, []);
 
   // console.log(post);
-console.log(comments);
+  console.log(comments);
 
   if (isLoaded) {
     return (
       <div className="blog-detail">
-        <div
-          className="featured__image"
-          style={{
-            backgroundImage: `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
-          }}>
-          <h3 className="blog-detail__title"> {post.title.rendered}</h3>
-        </div>
+        {post.featured_media !== 0 && (
+          <div
+            className="featured__image"
+            style={{
+              backgroundImage: `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
+            }}>
+            <h3 className="blog-detail__title"> {post.title.rendered}</h3>
+          </div>
+        )}
+
+        {post.featured_media === 0 && (
+          <div
+            className="featured__image"
+            style={{
+              backgroundImage: `url(${defaultImage})`,
+            }}>
+            <h3 className="blog-detail__title"> {post.title.rendered}</h3>
+          </div>
+        )}
 
         <div
           className="blog-detail__content"
@@ -89,12 +102,4 @@ console.log(comments);
 }
 
 export default MainPostDetail;
-
-
-
-
-
-
-
-
 
