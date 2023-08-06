@@ -15,6 +15,7 @@
       margin: 2px 3px;
       color: var(--text);
       background: var(--bg);
+      transition: all 0.6s;
 
       &:hover {
         background: var(--text);
@@ -34,3 +35,4 @@
     }
   }
 }
+

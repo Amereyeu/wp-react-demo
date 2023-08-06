@@ -2,19 +2,16 @@
   display: grid;
   place-items: center;
   min-height: 100vh;
-background: linear-gradient(to top, #151515ba, #484848cc), url(/img/hero.png) no-repeat center center;
-
-
+  background: linear-gradient(to top, #151515ba, #484848cc),
+    url(/img/hero.png) no-repeat center center;
 
   h1 {
     color: $color-white;
     font-family: $heading;
     font-size: 3.5rem;
-    font-weight: 400;
-    position: absolute;
-    z-index: 10;
     text-shadow: 2px 2px #000;
     text-align: center;
+    padding: 1rem;
 
     @include break($medium) {
       font-size: 7rem;

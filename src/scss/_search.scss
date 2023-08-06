@@ -70,11 +70,11 @@
     flex-direction: column;
     padding: 1em;
     overflow-y: auto;
-    background-color: $color-white;
+    background-color: var(--bg);
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
 
     &__warning {
-      color: #000;
+      color: var(--text);
       font-size: 1rem;
       display: grid;
       place-content: center;
@@ -89,7 +89,7 @@
 
         a {
           text-decoration: none;
-          color: #000;
+          color: var(--text);
         }
       }
     }

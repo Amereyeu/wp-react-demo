@@ -26,12 +26,12 @@ function CategoryPost({ posts, isLoaded }) {
                   {post._embedded.author[0].name}
                 </h4>
 
-                <div className="category">
+                <div className="post__text__category">
                   <ul>
                     {post._embedded["wp:term"][0].map((cat) => (
                       <li key={cat.id}>
                         <Link
-                          className="category__pill"
+                          className="post__text__category__pill"
                           to={`/category/${cat.id}`}>
                           {cat.name}
                         </Link>
@@ -46,12 +46,14 @@ function CategoryPost({ posts, isLoaded }) {
                   __html: post.excerpt.rendered,
                 }}></div>
 
-              <div className="tag">
+              <div className="post__text__tag">
                 <ul>
                   <li>tags:</li>
                   {post._embedded["wp:term"][1].map((tag) => (
                     <li key={tag.id}>
-                      <Link className="tag__pill" to={`/tag/${tag.id}`}>
+                      <Link
+                        className="post__text__tag__pill"
+                        to={`/tag/${tag.id}`}>
                         {tag.name}
                       </Link>
                     </li>
@@ -69,5 +71,9 @@ function CategoryPost({ posts, isLoaded }) {
 }
 
 export default CategoryPost;
+
+
+
+
 
 

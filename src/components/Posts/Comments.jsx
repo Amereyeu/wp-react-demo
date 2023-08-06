@@ -1,5 +1,3 @@
-
-
 function Comments({ comments, isLoaded }) {
   if (isLoaded) {
     return (
@@ -16,8 +14,7 @@ function Comments({ comments, isLoaded }) {
               } ${comment.parent === 7 ? "subitem3" : ""}`}>
               <div className="comment__item__left">
                 <img
-                  src="http://0.gravatar.com/avatar/64e1b8d34f425d19e1ee2ea7236d3028?s=96&d=mm&r=g"
-                  // src={comment.author_avatar_urls[0].[1]}
+                  src={comment.author_avatar_urls["48"]}
                   alt={comment.author_name}
                 />
               </div>
@@ -39,6 +36,4 @@ function Comments({ comments, isLoaded }) {
 }
 
 export default Comments;
-
-
 
