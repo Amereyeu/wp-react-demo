@@ -15,11 +15,13 @@ function MainPosts() {
 
   function getEvents() {
     const getPosts = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts?_embed=1&per_page=99`
+      `${
+        import.meta.env.VITE_BASE_URL
+      }/wp-json/wp/v2/posts?_embed=1&per_page=99`
     );
 
     const getCategories = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories?_embed=1`
     );
 
     Promise.all([getPosts, getCategories])
@@ -79,5 +81,4 @@ function MainPosts() {
 }
 
 export default MainPosts;
-
 
