@@ -256,7 +256,8 @@
 
     &__item {
       cursor: pointer;
-      margin: 0 3px;
+      margin: 4px 3px;
+      display: flex;
 
       &__link {
         background: var(--bg);
@@ -289,7 +290,7 @@
       padding: 0.5rem 1rem;
       border: 1px solid var(--text);
       cursor: pointer;
-      margin: 0 3px;
+      margin: 2px 3px;
       color: var(--text);
       background: var(--bg);
 
