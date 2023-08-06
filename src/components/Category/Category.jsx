@@ -78,7 +78,7 @@ function Category() {
 
   return (
     <div className="post-wrap">
-      <div className="post__placeholder">
+      <div className="category__placeholder">
         <div className="circle"></div>
       </div>
     </div>

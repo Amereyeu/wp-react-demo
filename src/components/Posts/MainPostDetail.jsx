@@ -83,7 +83,7 @@ function MainPostDetail() {
             __html: post.content.rendered,
           }}></div>
 
-        <button onClick={() => navigate(-1)}>Back to post</button>
+        <button className="blog-detail__button" onClick={() => navigate(-1)}>Back to articles</button>
 
         <Comments comments={comments} isLoaded={isLoaded} />
 

@@ -1,0 +1,33 @@
+// category list on the top of page
+.categorylist-wrap {
+  margin: 3rem 0;
+
+  .categorylist {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+
+    &__item {
+      cursor: pointer;
+      margin: 4px 3px;
+      display: flex;
+
+      &__link {
+        background: var(--bg);
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--text);
+        text-decoration: none;
+        color: var(--text);
+        text-transform: uppercase;
+        transition: all 0.6s;
+
+        &:hover {
+          background: var(--text);
+          color: var(--bg);
+        }
+      }
+    }
+  }
+}
+

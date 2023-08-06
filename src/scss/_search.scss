@@ -4,7 +4,8 @@
   &__container {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    min-width: 300px;
+    width: 50%;
     height: 34px;
     border: none;
     margin: 0 auto;

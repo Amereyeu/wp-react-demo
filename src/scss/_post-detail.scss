@@ -1,0 +1,80 @@
+// post detail page
+.blog-detail {
+  margin: 5rem auto;
+  display: block;
+  width: 90%;
+
+  @include break($medium) {
+    margin: 7rem auto 4rem;
+  }
+
+  @include break(1000px) {
+    max-width: 1000px;
+  }
+
+  .featured__image {
+    background-size: cover;
+    position: relative;
+    border: 5px solid white;
+    -webkit-box-shadow: 0 0 4px $color-primary;
+    box-shadow: 0 0 4px $color-primary;
+    overflow: hidden;
+
+    height: 300px;
+    width: 100%;
+    display: grid;
+    place-content: center;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    background: transparent;
+    color: $color-secondary;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: $heading;
+    font-weight: 400;
+    padding: 1rem;
+    background: rgba($color-primary, 0.6);
+
+    @include break($medium) {
+      font-size: 2em;
+    }
+
+    @include break($large) {
+      font-size: 2.25em;
+    }
+  }
+
+  &__content {
+    ul {
+      list-style: none;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--text);
+      max-width: 600px;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__button {
+    background: var(--bg);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--text);
+    text-decoration: none;
+    color: var(--text);
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 0 auto 4rem;
+    display: inherit;
+
+    &:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+  }
+}
+

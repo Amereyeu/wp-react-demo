@@ -1,0 +1,36 @@
+// pagination on the bottom of the page
+.pagination-wrap {
+  margin: 2rem;
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+
+    .page-item {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--text);
+      cursor: pointer;
+      margin: 2px 3px;
+      color: var(--text);
+      background: var(--bg);
+
+      &:hover {
+        background: var(--text);
+        color: var(--bg);
+      }
+
+      &:last-child:hover {
+        color: unset;
+        background: unset;
+        cursor: auto;
+      }
+
+      &.current {
+        background: #39f;
+        color: #fff;
+      }
+    }
+  }
+}
