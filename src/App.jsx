@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div className="App">
-      <SkeletonTheme baseColor="#cd90de" highlightColor="#e399f8">
+      <SkeletonTheme baseColor="#ddd" highlightColor="#eee">
         <BrowserRouter>
           <Navigation handleThemeChange={handleThemeChange} theme={theme} />
           <Routes>
