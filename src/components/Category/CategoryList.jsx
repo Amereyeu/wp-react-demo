@@ -4,9 +4,19 @@ function CategoryList({ categories }) {
   return (
     <div className="categorylist-wrap">
       <ul className="categorylist">
+        <li className="categorylist__item">
+          <Link className="categorylist__item__link" to="/">
+            ALL
+          </Link>
+        </li>
+
         {categories.map((category) => (
           <li className="categorylist__item" key={category.id}>
-            <Link className="categorylist__item__link" to={`/category/${category.id}`}>{category.name}</Link>
+            <Link
+              className="categorylist__item__link"
+              to={`/category/${category.id}`}>
+              {category.name}
+            </Link>
           </li>
         ))}
       </ul>
