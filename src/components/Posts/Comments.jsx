@@ -3,15 +3,13 @@ function Comments({ comments, isLoaded }) {
     return (
       <div className="comment">
         {comments
-          // .sort((a, b) => a.parent - b.parent)
+          // .sort(
+          //   (a, b) =>
+          //     a._links.self[0].href.slice(45, 47) -
+          //     b._links.self[0].href.slice(45, 47)
+          // )
           .map((comment) => (
-            <div
-              key={comment.id}
-              className={`comment__item ${
-                comment.parent === 3 ? "subitem" : ""
-              } ${comment.parent === 4 ? "subitem2" : ""} ${
-                comment.parent === 6 ? "subitem" : ""
-              } ${comment.parent === 7 ? "subitem3" : ""}`}>
+            <div key={comment.id} className="comment__item">
               <div className="comment__item__left">
                 <img
                   src={comment.author_avatar_urls["48"]}

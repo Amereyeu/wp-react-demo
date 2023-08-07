@@ -21,7 +21,7 @@ function MainPosts() {
     );
 
     const getCategories = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories?`
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
     );
 
     Promise.all([getPosts, getCategories])

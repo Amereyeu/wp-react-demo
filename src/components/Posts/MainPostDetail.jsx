@@ -34,7 +34,7 @@ function MainPostDetail() {
     const getComments = axios.get(
       `${
         import.meta.env.VITE_BASE_URL
-      }/wp-json/wp/v2/comments?post=${id}&order=asc&orderby=parent`
+      }/wp-json/wp/v2/comments?post=${id}&order=asc`
     );
 
     Promise.all([getPost, getComments])
