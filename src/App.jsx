@@ -1,22 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import "./App.scss";
-import Home from "./pages/Home";
-import CakeDetail from "./components/Gallery/CakeDetail";
 import { SkeletonTheme } from "react-loading-skeleton";
-import Navigation from "./components/Navigation";
+
+import Home from "./pages/Home";
 import Alergens from "./pages/Alergens";
-import Footer from "./components/Footer";
+import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import NoPage from "./pages/NoPage";
+
+import CakeDetail from "./components/Gallery/CakeDetail";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import ControlledPopup from "./components/Popup";
-import Blog from "./pages/Blog";
 import BlogPostDetail from "./components/Blog/BlogPostDetail";
 import Category from "./components/Category/Category";
 import Tags from "./components/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
+
+import "./App.scss";
 
 function App() {
   const [theme, setTheme] = useState(

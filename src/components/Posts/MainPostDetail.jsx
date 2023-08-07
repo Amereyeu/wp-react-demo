@@ -52,7 +52,7 @@ function MainPostDetail() {
   }, []);
 
   // console.log(post);
-  console.log(comments);
+  // console.log(comments);
 
   if (isLoaded) {
     return (
