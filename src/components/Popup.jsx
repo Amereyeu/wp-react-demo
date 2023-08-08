@@ -22,7 +22,7 @@ const ControlledPopup = () => {
     getEvents();
   }, []);
 
-  console.log(single);
+  // console.log(single);
 
   const [open, setOpen] = useState(true);
 
@@ -37,9 +37,9 @@ const ControlledPopup = () => {
         {single.acf.page_visible === "yes" && (
           <Popup open={open} onClose={closeModal}>
             <div className="modal">
-              <a className="close" onClick={closeModal}>
+              <div className="close" onClick={closeModal}>
                 &times;
-              </a>
+              </div>
 
               <div
                 className={`info-modal ${
@@ -47,7 +47,7 @@ const ControlledPopup = () => {
                 }`}>
                 <div className="info-modal__icon">
                   {single.acf.image !== null && (
-                    <img src={single.acf.image.sizes.thumbnail} alt="image" />
+                    <img src={single.acf.image.sizes.medium} alt="image" />
                   )}
                 </div>
 

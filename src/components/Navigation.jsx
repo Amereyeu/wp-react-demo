@@ -25,40 +25,26 @@ function Navigation({ handleThemeChange, theme }) {
             to="/"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
-            <button>Home</button>
+            <button aria-label="Home">Home</button>
           </Link>
 
           <Link
             to="/gallery"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
-            <button>Gallery</button>
+            <button aria-label="Gallery">Gallery</button>
           </Link>
-
-          {/* <Link
-            to="/alergens"
-            className="navigation__menu__item"
-            onClick={toggleNavigation}>
-            <button>Alergeny</button>
-          </Link> */}
 
           <Link
             to="/contact"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
-            <button>Contact</button>
+            <button aria-label="Contact">Contact</button>
           </Link>
 
-          {/* <Link
-            to="/blog"
-            className="navigation__menu__item"
-            onClick={toggleNavigation}>
-            <button>Blog</button>
-          </Link> */}
-
           <div className="navigation__menu__item" onClick={toggleNavigation}>
-            <button onClick={handleThemeChange}>
-              {theme === "white" ? <GiMoon /> : <GiSun />}
+            <button onClick={handleThemeChange} aria-label="Theme Switch">
+              {theme === "light" ? <GiMoon /> : <GiSun />}
             </button>
           </div>
         </div>

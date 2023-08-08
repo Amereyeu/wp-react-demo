@@ -28,9 +28,9 @@
         cursor: auto;
       }
 
-      &.current {
-        background: #39f;
-        color: #fff;
+      &--current {
+        background: var(--text);
+        color: var(--bg);
       }
     }
   }

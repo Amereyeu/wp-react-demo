@@ -28,7 +28,12 @@ function About() {
           <div className="about">
             <picture className="about__image">
               {/* <source srcSet="./img/06.jpg" media="(min-width: 769px)" /> */}
-              <img src={single.acf.image.url} alt="image" />
+              <img
+                src={single.acf.image.url}
+                alt="image"
+                width="360"
+                height="448"
+              />
             </picture>
 
             <div className="about__text">
@@ -47,4 +52,5 @@ function About() {
 }
 
 export default About;
+
 

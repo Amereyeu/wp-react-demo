@@ -16,6 +16,7 @@ function MainPost({ posts, isLoaded }) {
                       .medium.source_url
                   }
                   alt={post._embedded["wp:featuredmedia"][0].title.rendered}
+                  width="300" height="225"
                 />
               </div>
             )}

@@ -25,7 +25,7 @@ export const Pagination = ({
 
         {pageNumbers.map((number) => (
           <li
-            className="page-item"
+            className={`page-item ${currentPage == number ? "page-item--current" : ""}`}
             key={number}
             onClick={() => paginate(number)}>
             <span className="page-link">{number}</span>
@@ -49,4 +49,5 @@ export const Pagination = ({
 };
 
 export default Pagination;
+
 

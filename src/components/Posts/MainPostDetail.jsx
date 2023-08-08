@@ -83,7 +83,10 @@ function MainPostDetail() {
             __html: post.content.rendered,
           }}></div>
 
-        <button className="blog-detail__button" onClick={() => navigate(-1)}>
+        <button
+          className="blog-detail__button"
+          onClick={() => navigate(-1)}
+          aria-label="Back">
           Back to articles
         </button>
 
@@ -104,4 +107,5 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
 

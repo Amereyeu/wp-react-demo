@@ -23,11 +23,11 @@ import "./App.scss";
 
 function App() {
   const [theme, setTheme] = useState(
-    JSON.parse(localStorage.getItem("theme")) || "dark"
+    JSON.parse(localStorage.getItem("theme")) || "light"
   );
 
   const handleThemeChange = () => {
-    theme === "white" ? setTheme("dark") : setTheme("white");
+    theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
   useEffect(() => {
