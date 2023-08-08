@@ -22,14 +22,14 @@ function MainPost({ posts, isLoaded }) {
             )}
 
             <div className="post__text">
-              <h3 className="post__text__title">
+              <h2 className="post__text__title">
                 <Link to={`/post/${post.id}`}>{post.title.rendered}</Link>
-              </h3>
+              </h2>
 
               <div className="row">
-                <h4 className="post__text__author">
+                <h3 className="post__text__author">
                   {post._embedded.author[0].name}
-                </h4>
+                </h3>
 
                 <div className="post__text__category">
                   <ul>

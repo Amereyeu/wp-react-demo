@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import CategoryPost from "./CategoryPost";
-import Pagination from "../Pagination";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import Pagination from "../Pagination";
 import CategoryList from "./CategoryList";
+import MainPost from "../Posts/MainPost";
 
 function Category() {
   const [posts, setPosts] = useState([]);
@@ -58,7 +58,7 @@ function Category() {
         <div className="posts">
           <CategoryList categories={categories} />
 
-          <CategoryPost posts={currentPosts} isLoaded={isLoaded} />
+          <MainPost posts={currentPosts} isLoaded={isLoaded} />
 
           <Pagination
             postsPerPage={postsPerPage}

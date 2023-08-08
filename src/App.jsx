@@ -15,7 +15,7 @@ import Footer from "./components/Footer";
 import ControlledPopup from "./components/Popup";
 import BlogPostDetail from "./components/Blog/BlogPostDetail";
 import Category from "./components/Category/Category";
-import Tags from "./components/Tags";
+import Tags from "./components/Tag/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
 import ScrollTo from "./components/ScrollTo";
 

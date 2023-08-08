@@ -47,7 +47,12 @@ const ControlledPopup = () => {
                 }`}>
                 <div className="info-modal__icon">
                   {single.acf.image !== null && (
-                    <img src={single.acf.image.sizes.medium} alt="image" />
+                    <img
+                      src={single.acf.image.sizes.medium}
+                      alt="image"
+                      width="150"
+                      height="150"
+                    />
                   )}
                 </div>
 
@@ -68,4 +73,5 @@ const ControlledPopup = () => {
 };
 
 export default ControlledPopup;
+
 

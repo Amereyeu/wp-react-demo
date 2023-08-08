@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-import CategoryPost from "./Category/CategoryPost";
-import Pagination from "./Pagination";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import MainPost from "../Posts/MainPost";
+import Pagination from "../Pagination";
+import TagList from "./TagList";
 
 function Tags() {
   const [posts, setPosts] = useState([]);
+  const [tags, setTags] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
@@ -18,16 +20,22 @@ function Tags() {
       `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts?_embed=1&tags=${id}`
     );
 
-    Promise.all([getPosts])
+    const getTags = axios.get(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/tags`
+    );
+
+    Promise.all([getPosts, getTags])
       .then((res) => {
         setPosts(res[0].data);
+        setTags(res[1].data);
 
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
   }
 
-  //console.log(posts);
+  // console.log(posts);
+  // console.log(tags);
 
   useEffect(() => {
     getEvents();
@@ -47,7 +55,9 @@ function Tags() {
     return (
       <div className="post-wrap">
         <div className="posts">
-          <CategoryPost posts={currentPosts} isLoaded={isLoaded} />
+          <TagList tags={tags} />
+
+          <MainPost posts={currentPosts} isLoaded={isLoaded} />
 
           <Pagination
             postsPerPage={postsPerPage}
