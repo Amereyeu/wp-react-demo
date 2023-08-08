@@ -1,5 +1,3 @@
-import React from "react";
-
 export const Pagination = ({
   postsPerPage,
   totalPosts,
@@ -29,8 +27,7 @@ export const Pagination = ({
           <li
             className="page-item"
             key={number}
-            onClick={() => paginate(number)}
-          >
+            onClick={() => paginate(number)}>
             <span className="page-link">{number}</span>
           </li>
         ))}

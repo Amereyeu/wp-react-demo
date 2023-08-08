@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 function CustomPost({ posts, isLoaded }) {
   if (isLoaded) {
     return (

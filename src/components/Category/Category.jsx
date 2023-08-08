@@ -3,7 +3,6 @@ import axios from "axios";
 import CategoryPost from "./CategoryPost";
 import Pagination from "../Pagination";
 import { useNavigate, useParams } from "react-router-dom";
-import ScrollTo from "../ScrollTo";
 import CategoryList from "./CategoryList";
 
 function Category() {
@@ -69,8 +68,6 @@ function Category() {
             previousPage={previousPage}
             currentPage={currentPage}
           />
-
-          <ScrollTo />
         </div>
       </div>
     );

@@ -17,6 +17,7 @@ import BlogPostDetail from "./components/Blog/BlogPostDetail";
 import Category from "./components/Category/Category";
 import Tags from "./components/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
+import ScrollTo from "./components/ScrollTo";
 
 import "./App.scss";
 
@@ -26,11 +27,7 @@ function App() {
   );
 
   const handleThemeChange = () => {
-    if (theme === "white") {
-      setTheme("dark");
-    } else {
-      setTheme("white");
-    }
+    theme === "white" ? setTheme("dark") : setTheme("white");
   };
 
   useEffect(() => {
@@ -58,6 +55,7 @@ function App() {
           </Routes>
 
           <Footer />
+          <ScrollTo />
           <ControlledPopup />
         </BrowserRouter>
       </SkeletonTheme>
@@ -66,7 +64,4 @@ function App() {
 }
 
 export default App;
-
-
-
 

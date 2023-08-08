@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import BlogPost from "./BlogPost";
 import Pagination from "../Pagination";
-import ScrollTo from "../ScrollTo";
 import CategoryList from "../Category/CategoryList";
 
 function BlogPosts() {
@@ -64,8 +63,6 @@ function BlogPosts() {
           previousPage={previousPage}
           currentPage={currentPage}
         />
-
-        <ScrollTo />
       </div>
     );
   }

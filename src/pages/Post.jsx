@@ -1,4 +1,3 @@
-import React from "react";
 import MainPosts from "../components/Posts/MainPosts";
 
 function Post() {

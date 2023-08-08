@@ -8,11 +8,11 @@ import { IoClose, IoSearch } from "react-icons/io5";
 export function SearchBar(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [parentRef, isClickedOutside] = useClickOutside();
-  const inputRef = useRef();
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const [noArticles, setNoArticles] = useState(false);
+  const inputRef = useRef();
 
   const isEmpty = !articles || articles.length === 0;
 
@@ -70,7 +70,7 @@ export function SearchBar(props) {
 
     if (response) {
       console.log("Response: ", response.data);
-      
+
       if (response.data && response.data.length === 0) {
         setNoArticles(true);
       }
@@ -149,6 +149,4 @@ export function SearchBar(props) {
     </div>
   );
 }
-
-
 

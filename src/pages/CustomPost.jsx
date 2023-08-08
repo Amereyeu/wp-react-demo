@@ -1,4 +1,3 @@
-import React from "react";
 import CustomPosts from "../components/CustomPosts/CustomPosts";
 
 function CustomPost() {

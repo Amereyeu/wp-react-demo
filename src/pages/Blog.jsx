@@ -1,4 +1,3 @@
-import React from "react";
 import BlogPosts from "../components/Blog/BlogPosts";
 
 function Blog() {

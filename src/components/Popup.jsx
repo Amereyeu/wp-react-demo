@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { FaWordpressSimple, FaReact } from "react-icons/fa";
 
 const ControlledPopup = () => {
   const [single, setSingle] = useState([]);
@@ -47,8 +46,6 @@ const ControlledPopup = () => {
                   single.acf.image === null ? "info-modal--full" : ""
                 }`}>
                 <div className="info-modal__icon">
-                  {/* <FaWordpressSimple />
-                  <FaReact /> */}
                   {single.acf.image !== null && (
                     <img src={single.acf.image.sizes.thumbnail} alt="image" />
                   )}
