@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
-import ScrollTo from "../ScrollTo";
 import defaultImage from "/img/hero.png";
+import { FaRegComments, FaRegClock } from "react-icons/fa";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
@@ -66,7 +66,6 @@ function MainPostDetail() {
             <h3 className="blog-detail__title"> {post.title.rendered}</h3>
           </div>
         )}
-
         {post.featured_media === 0 && (
           <div
             className="featured__image"
@@ -77,12 +76,52 @@ function MainPostDetail() {
           </div>
         )}
 
+        <div className="blog-detail__info">
+          <div className="blog-detail__info__left">
+            <img
+              className="blog-detail__info__left__image"
+              src={post._embedded.author[0].avatar_urls["24"]}
+              alt={post._embedded.author[0].name}
+            />
+
+            <div className="blog-detail__info__left__author">
+              {post._embedded.author[0].name}
+            </div>
+
+            <div className="blog-detail__info__left__date">
+              <FaRegClock /> {post.date.slice(0, 10)}
+            </div>
+
+            <div className="blog-detail__info__left__comments">
+              <FaRegComments /> <span>Comments: </span> {comments.length}
+            </div>
+          </div>
+
+          <div className="blog-detail__info__right">
+            <div className="blog-detail__info__right__category">
+              <ul>
+                <li>
+                  <span>Categories:</span>
+                </li>
+                {post._embedded["wp:term"][0].map((cat) => (
+                  <li key={cat.id}>
+                    <Link
+                      className="blog-detail__info__right__category__pill"
+                      to={`/category/${cat.id}`}>
+                      {cat.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div
           className="blog-detail__content"
           dangerouslySetInnerHTML={{
             __html: post.content.rendered,
           }}></div>
-
         <button
           className="blog-detail__button"
           onClick={() => navigate(-1)}
@@ -92,7 +131,7 @@ function MainPostDetail() {
 
         <Comments comments={comments} isLoaded={isLoaded} />
 
-        <ScrollTo />
+
       </div>
     );
   }
@@ -107,5 +146,4 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
-
 
