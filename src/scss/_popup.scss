@@ -50,25 +50,15 @@
     grid-template-columns: minmax(90px, 150px) 1fr;
     height: auto;
   }
-  
+
   &--full {
     grid-template-columns: 1fr !important;
   }
-  
+
   &__icon {
-    // color: $color-white;
-    // border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    // fill: $color-white;
-    border: 1px solid red;
-
-    svg {
-      height: 3rem;
-      width: 3rem;
-      margin-right: 1rem;
-    }
   }
 
   &__text {
@@ -76,10 +66,6 @@
       font-weight: 400;
       color: #fff;
       margin-bottom: 0.4rem;
-
-      // &:last-of-type {
-      //   margin-bottom: 0;
-      // }
     }
 
     ul {
