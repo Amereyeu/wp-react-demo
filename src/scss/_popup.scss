@@ -47,17 +47,22 @@
   gap: 1rem;
 
   @include break($medium) {
-    grid-template-columns: minmax(90px, 120px) 1fr;
+    grid-template-columns: minmax(90px, 150px) 1fr;
     height: auto;
   }
-
+  
+  &--full {
+    grid-template-columns: 1fr !important;
+  }
+  
   &__icon {
-    color: $color-white;
-    border-radius: 100%;
+    // color: $color-white;
+    // border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    fill: $color-white;
+    // fill: $color-white;
+    border: 1px solid red;
 
     svg {
       height: 3rem;
@@ -70,7 +75,7 @@
     p {
       font-weight: 400;
       color: #fff;
-      margin-bottom: .4rem;
+      margin-bottom: 0.4rem;
 
       // &:last-of-type {
       //   margin-bottom: 0;
@@ -82,7 +87,7 @@
 
       li {
         color: $color-white;
-        margin-bottom: .4rem;
+        margin-bottom: 0.4rem;
       }
     }
   }

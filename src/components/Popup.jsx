@@ -10,7 +10,7 @@ const ControlledPopup = () => {
 
   function getEvents() {
     axios
-      .get(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/pages`)
+      .get(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/pages/510`)
       .then((response) => response.data)
       .then((data) => {
         setSingle(data);
@@ -23,6 +23,8 @@ const ControlledPopup = () => {
     getEvents();
   }, []);
 
+  console.log(single);
+
   const [open, setOpen] = useState(true);
 
   const closeModal = () => {
@@ -33,22 +35,29 @@ const ControlledPopup = () => {
     // popup modal
     return (
       <>
-        {single[0].acf.page_visible === "yes" && (
+        {single.acf.page_visible === "yes" && (
           <Popup open={open} onClose={closeModal}>
             <div className="modal">
               <a className="close" onClick={closeModal}>
                 &times;
               </a>
 
-              <div className="info-modal">
+              <div
+                className={`info-modal ${
+                  single.acf.image === null ? "info-modal--full" : ""
+                }`}>
                 <div className="info-modal__icon">
-                  <FaWordpressSimple />
-                  <FaReact />
+                  {/* <FaWordpressSimple />
+                  <FaReact /> */}
+                  {single.acf.image !== null && (
+                    <img src={single.acf.image.sizes.thumbnail} alt="image" />
+                  )}
                 </div>
+
                 <div
                   className="info-modal__text"
                   dangerouslySetInnerHTML={{
-                    __html: single[0].content.rendered,
+                    __html: single.content.rendered,
                   }}></div>
               </div>
             </div>
