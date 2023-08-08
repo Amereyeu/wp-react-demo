@@ -56,49 +56,43 @@ function MainPostDetail() {
 
   if (isLoaded) {
     return (
-      <div className="blog-detail">
-        {post.featured_media !== 0 && (
-          <div
-            className="featured__image"
-            style={{
-              backgroundImage: `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
-            }}>
-            <h3 className="blog-detail__title"> {post.title.rendered}</h3>
-          </div>
-        )}
-        {post.featured_media === 0 && (
-          <div
-            className="featured__image"
-            style={{
-              backgroundImage: `url(${defaultImage})`,
-            }}>
-            <h3 className="blog-detail__title"> {post.title.rendered}</h3>
-          </div>
-        )}
+      <div className="detail">
+        <div
+          className="detail__featured-image"
+          style={{
+            backgroundImage:
+              post.featured_media === 0
+                ? `url(${defaultImage})`
+                : `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
+          }}>
+          <h3 className="detail__featured-image__title">
+            {post.title.rendered}
+          </h3>
+        </div>
 
-        <div className="blog-detail__info">
-          <div className="blog-detail__info__left">
+        <div className="detail__info">
+          <div className="detail__info__left">
             <img
-              className="blog-detail__info__left__image"
+              className="detail__info__left__image"
               src={post._embedded.author[0].avatar_urls["24"]}
               alt={post._embedded.author[0].name}
             />
 
-            <div className="blog-detail__info__left__author">
+            <div className="detail__info__left__author">
               {post._embedded.author[0].name}
             </div>
 
-            <div className="blog-detail__info__left__date">
+            <div className="detail__info__left__date">
               <FaRegClock /> {post.date.slice(0, 10)}
             </div>
 
-            <div className="blog-detail__info__left__comments">
+            <div className="detail__info__left__comments">
               <FaRegComments /> <span>Comments: </span> {comments.length}
             </div>
           </div>
 
-          <div className="blog-detail__info__right">
-            <div className="blog-detail__info__right__category">
+          <div className="detail__info__right">
+            <div className="detail__info__right__category">
               <ul>
                 <li>
                   <span>Categories:</span>
@@ -106,7 +100,7 @@ function MainPostDetail() {
                 {post._embedded["wp:term"][0].map((cat) => (
                   <li key={cat.id}>
                     <Link
-                      className="blog-detail__info__right__category__pill"
+                      className="detail__info__right__category__pill"
                       to={`/category/${cat.id}`}>
                       {cat.name}
                     </Link>
@@ -118,20 +112,19 @@ function MainPostDetail() {
         </div>
 
         <div
-          className="blog-detail__content"
+          className="detail__content"
           dangerouslySetInnerHTML={{
             __html: post.content.rendered,
           }}></div>
+
         <button
-          className="blog-detail__button"
+          className="detail__button"
           onClick={() => navigate(-1)}
-          aria-label="Back">
+          aria-label="Back to articles">
           Back to articles
         </button>
 
         <Comments comments={comments} isLoaded={isLoaded} />
-
-
       </div>
     );
   }

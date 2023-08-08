@@ -1,5 +1,5 @@
 // post detail page
-.blog-detail {
+.detail {
   margin: 5rem auto;
   display: block;
   width: 90%;
@@ -12,7 +12,7 @@
     max-width: 1000px;
   }
 
-  .featured__image {
+  &__featured-image {
     background-size: cover;
     position: relative;
     border: 5px solid white;
@@ -25,6 +25,25 @@
     display: grid;
     place-content: center;
     margin-bottom: 0.5rem;
+
+    &__title {
+      background: transparent;
+      color: $color-secondary;
+      text-align: center;
+      font-size: 1.5rem;
+      font-family: $heading;
+      font-weight: 400;
+      padding: 1rem;
+      background: rgba($color-primary, 0.6);
+
+      @include break($medium) {
+        font-size: 2em;
+      }
+
+      @include break($large) {
+        font-size: 2.25em;
+      }
+    }
   }
 
   &__info {
@@ -123,25 +142,6 @@
           }
         }
       }
-    }
-  }
-
-  &__title {
-    background: transparent;
-    color: $color-secondary;
-    text-align: center;
-    font-size: 1.5rem;
-    font-family: $heading;
-    font-weight: 400;
-    padding: 1rem;
-    background: rgba($color-primary, 0.6);
-
-    @include break($medium) {
-      font-size: 2em;
-    }
-
-    @include break($large) {
-      font-size: 2.25em;
     }
   }
 
