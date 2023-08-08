@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import MainPost from "./MainPost";
 import Pagination from "../Pagination";
@@ -11,6 +11,7 @@ function MainPosts() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
+
 
   function getEvents() {
     const getPosts = axios.get(
@@ -78,4 +79,5 @@ function MainPosts() {
 }
 
 export default MainPosts;
+
 

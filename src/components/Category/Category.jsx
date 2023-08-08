@@ -4,6 +4,7 @@ import axios from "axios";
 import Pagination from "../Pagination";
 import CategoryList from "./CategoryList";
 import MainPost from "../Posts/MainPost";
+import { SearchBar } from "../Search/Search";
 
 function Category() {
   const [posts, setPosts] = useState([]);
@@ -56,6 +57,8 @@ function Category() {
     return (
       <div className="post-wrap">
         <div className="posts">
+          <SearchBar />
+
           <CategoryList categories={categories} />
 
           <MainPost posts={currentPosts} isLoaded={isLoaded} />

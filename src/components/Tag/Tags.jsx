@@ -4,6 +4,7 @@ import axios from "axios";
 import MainPost from "../Posts/MainPost";
 import Pagination from "../Pagination";
 import TagList from "./TagList";
+import { SearchBar } from "../Search/Search";
 
 function Tags() {
   const [posts, setPosts] = useState([]);
@@ -55,6 +56,8 @@ function Tags() {
     return (
       <div className="post-wrap">
         <div className="posts">
+          <SearchBar />
+
           <TagList tags={tags} />
 
           <MainPost posts={currentPosts} isLoaded={isLoaded} />
