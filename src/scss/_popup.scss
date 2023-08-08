@@ -1,0 +1,90 @@
+// modal popup styles
+.popup-overlay {
+  background: rgba(black, 0.8) !important;
+  z-index: 9999 !important;
+
+  .popup-content {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 10px $color-primary;
+    box-shadow: 0 0 10px $color-primary;
+    width: 90% !important;
+
+    @include break($large) {
+      width: 60% !important;
+      max-width: 1000px;
+    }
+
+    .close {
+      background-color: $color-white;
+      color: $color-primary;
+      cursor: pointer;
+      display: block;
+      font-size: 2rem;
+      padding: 0 8px;
+      position: absolute;
+      right: -13px;
+      top: -16px;
+      border-radius: 100%;
+      width: 34px;
+      height: 34px;
+    }
+
+    p {
+      font-size: 20px;
+      text-align: center;
+      line-height: unset;
+    }
+  }
+}
+.info-modal {
+  padding: 1rem;
+  background: $color-primary;
+  align-items: center;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1rem;
+
+  @include break($medium) {
+    grid-template-columns: minmax(90px, 120px) 1fr;
+    height: auto;
+  }
+
+  &__icon {
+    color: $color-white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: $color-white;
+
+    svg {
+      height: 3rem;
+      width: 3rem;
+      margin-right: 1rem;
+    }
+  }
+
+  &__text {
+    p {
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: .4rem;
+
+      // &:last-of-type {
+      //   margin-bottom: 0;
+      // }
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        color: $color-white;
+        margin-bottom: .4rem;
+      }
+    }
+  }
+}
+
