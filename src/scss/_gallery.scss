@@ -98,12 +98,12 @@
     h2 {
       background: transparent;
       text-transform: uppercase;
-      color: $color-secondary;
+      color: $color-white;
       position: absolute;
       font-size: 28px;
       top: 2rem;
       left: 1.5rem;
-      font-family: $primary;
+      font-family: $heading;
       text-shadow: 2px 2px #000;
 
       @include break($medium) {
