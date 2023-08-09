@@ -1,6 +1,7 @@
 import React from "react";
+import CreatePost from "./CreatePost";
 
-function Dashboard({ username }) {
+function Dashboard() {
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/";
@@ -9,7 +10,9 @@ function Dashboard({ username }) {
   return (
     <div className="post-wrap">
       <div className="posts">
-        <div>Welcome {username}</div>
+        <div>Welcome </div>
+
+        <CreatePost />
 
         <button className="navigation__menu__item" onClick={handleLogout}>
           <span>Logout</span>
