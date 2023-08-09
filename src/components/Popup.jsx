@@ -26,26 +26,37 @@ const ControlledPopup = () => {
 
   const [open, setOpen] = useState(true);
 
+  const [popupIsShown, setPopupIsShown] = useState(
+    JSON.parse(localStorage.getItem("popupIsShown")) || "1"
+  );
+
   const closeModal = () => {
     setOpen(false);
+    setPopupIsShown("0");
   };
+
+  useEffect(() => {
+    localStorage.setItem("popupIsShown", JSON.stringify(popupIsShown));
+  }, [popupIsShown]);
+
+
 
   if (isLoaded) {
     // popup modal
     return (
       <>
-        {single.acf.page_visible === "yes" && (
+        {single.acf.page_visible === "yes" && popupIsShown === "1" && (
           <Popup open={open} onClose={closeModal}>
             <div className="modal">
-              <div className="close" onClick={closeModal}>
+              <div className="modal__close" onClick={closeModal}>
                 &times;
               </div>
 
               <div
-                className={`info-modal ${
-                  single.acf.image === null ? "info-modal--full" : ""
+                className={`modal__info ${
+                  single.acf.image === null ? "modal__info--full" : ""
                 }`}>
-                <div className="info-modal__icon">
+                <div className="modal__info__icon">
                   {single.acf.image !== null && (
                     <img
                       src={single.acf.image.sizes.medium}
@@ -57,7 +68,7 @@ const ControlledPopup = () => {
                 </div>
 
                 <div
-                  className="info-modal__text"
+                  className="modal__info__text"
                   dangerouslySetInnerHTML={{
                     __html: single.content.rendered,
                   }}></div>
@@ -73,5 +84,4 @@ const ControlledPopup = () => {
 };
 
 export default ControlledPopup;
-
 
