@@ -18,8 +18,11 @@ import Category from "./components/Category/Category";
 import Tags from "./components/Tag/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
 import ScrollTo from "./components/ScrollTo";
+import Login from "./components/Auth/Login";
 
 import "./App.scss";
+import Dashboard from "./components/User/Dashboard";
+import PrivateRoutes from "./components/Auth/PrivateRoutes";
 
 function App() {
   const [theme, setTheme] = useState(
@@ -52,6 +55,10 @@ function App() {
             <Route path="/tag/:id" element={<Tags />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPostDetail />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path="/dashboard/:username" element={<Dashboard />} />
+            </Route>
           </Routes>
 
           <Footer />

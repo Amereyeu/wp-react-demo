@@ -41,6 +41,13 @@ function Navigation({ handleThemeChange, theme }) {
             onClick={toggleNavigation}>
             <button aria-label="Contact">Contact</button>
           </Link>
+          
+          <Link
+            to="/login"
+            className="navigation__menu__item"
+            onClick={toggleNavigation}>
+            <button aria-label="Login">Login</button>
+          </Link>
 
           <div className="navigation__menu__item" onClick={toggleNavigation}>
             <button onClick={handleThemeChange} aria-label="Theme Switch">
