@@ -41,3 +41,9 @@ body {
   color: var(--text);
 }
 
+
+
+.App {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
