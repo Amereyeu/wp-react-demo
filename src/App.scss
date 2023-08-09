@@ -2,26 +2,30 @@
 @import "scss/mixins";
 
 @import "scss/navigation";
-
-@import "scss/about";
 @import "scss/hero";
-@import "scss/news";
+@import "scss/about";
+@import "scss/footer";
+
+// @import "scss/news";
+// @import "scss/alergens";
 @import "scss/gallery";
-@import "scss/custom-posts";
-@import "scss/alergens";
-@import "scss/search";
-@import "scss/loader";
-@import "scss/pagination";
-@import "scss/category-list";
-@import "scss/comments";
 @import "scss/image-gallery";
+
 @import "scss/detail";
 @import "scss/contact";
+@import "scss/search";
+@import "scss/category-list";
 @import "scss/post";
+@import "scss/pagination";
 @import "scss/post-detail";
-@import "scss/footer";
+@import "scss/comments";
+
+@import "scss/custom-posts";
+
 @import "scss/popup";
 @import "scss/nopage";
 @import "scss/scroll";
+@import "scss/skeleton";
+@import "scss/loader";
 @import "scss/toastify";
 
