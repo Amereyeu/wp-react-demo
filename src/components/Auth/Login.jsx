@@ -1,12 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { FiAlertTriangle, FiCheck } from "react-icons/fi";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [message, setMessage] = useState("");
 
   function onSubmit(e) {
     e.preventDefault();
@@ -36,8 +38,16 @@ function Login() {
 
         console.log(response.data);
       })
-      .catch((err) => console.log(err.response.data.message));
+      .catch((err) => {
+        setMessage(err.response.data.message);
+      });
   }
+
+  // console.log(token);
+
+  const createMarkup = (data) => ({
+    __html: data,
+  });
 
   if (loggedIn || localStorage.getItem("token")) {
     return <Navigate to={`/dashboard/${username}`} />;
@@ -47,33 +57,49 @@ function Login() {
         <div className="posts">
           <div className="container">
             <form onSubmit={onSubmit}>
-              <div className="">
-                <div className="contact__input__wrap">
+              <div className="login">
+                {message ? (
+                  <div
+                    className={`alert ${
+                      loggedIn ? "alert--success" : "alert--danger"
+                    }`}>
+                    <div className="alert__icon">
+                      {loggedIn === "true" ? <FiCheck /> : <FiAlertTriangle />}
+                    </div>
+                    <div
+                      className="alert__message"
+                      dangerouslySetInnerHTML={createMarkup(message)}></div>
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                <div className="login__input">
                   <input
                     placeholder="Username"
                     type="text"
                     name="username"
-                    className="border1"
+                    className="login__input__border"
                     value={username}
                     onChange={(e) => setUsername(e.currentTarget.value)}
                   />
                   <span className="bb"></span>
                 </div>
 
-                <div className="contact__input__wrap">
+                <div className="login__input">
                   <input
                     placeholder="Password"
                     type="Password"
                     name="password"
-                    className="border1"
+                    className="login__input__border"
                     value={password}
                     onChange={(e) => setPassword(e.currentTarget.value)}
                   />
                   <span className="bb"></span>
                 </div>
 
-                <div className="contact__button">
-                  <button className="contact__button__send" type="submit">
+                <div className="login__button">
+                  <button className="login__button__send" type="submit">
                     Login
                   </button>
                 </div>
