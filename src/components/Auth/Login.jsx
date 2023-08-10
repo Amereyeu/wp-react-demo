@@ -25,25 +25,25 @@ function Login() {
       )
       .then((response) => {
         if (undefined === response.data.token) {
+          setMessage(err.response.data.message);
           setIsLoaded(true);
           return;
         }
 
-        const { token } = response.data;
+        const { token, user_nicename } = response.data;
 
         localStorage.setItem("token", token);
+        localStorage.setItem("userName", user_nicename);
 
         setLoggedIn(true);
         setIsLoaded(true);
 
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((err) => {
         setMessage(err.response.data.message);
       });
   }
-
-  // console.log(token);
 
   const createMarkup = (data) => ({
     __html: data,

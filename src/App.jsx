@@ -19,11 +19,11 @@ import Tags from "./components/Tag/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
 import ScrollTo from "./components/ScrollTo";
 import Login from "./components/Auth/Login";
-
-import "./App.scss";
 import Dashboard from "./components/User/Dashboard";
 import PrivateRoutes from "./components/Auth/PrivateRoutes";
+import AppProvider from "./components/Context/AppProvider";
 
+import "./App.scss";
 function App() {
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "light"
@@ -40,32 +40,34 @@ function App() {
 
   return (
     <div className="App">
-      <SkeletonTheme baseColor="#ddd" highlightColor="#eee">
-        <BrowserRouter>
-          <Navigation handleThemeChange={handleThemeChange} theme={theme} />
-          <Routes>
-            <Route path="*" element={<NoPage />} />
-            <Route path="/" element={<Home />} exact />
-            <Route path="/alergens" element={<Alergens />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cake/:id" element={<CakeDetail />} />
-            <Route path="/post/:id" element={<MainPostDetail />} />
-            <Route path="/category/:id" element={<Category />} />
-            <Route path="/tag/:id" element={<Tags />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogPostDetail />} />
-            <Route path="/login" element={<Login />} />
-            <Route element={<PrivateRoutes />}>
-              <Route path="/dashboard/:username" element={<Dashboard />} />
-            </Route>
-          </Routes>
+      <AppProvider>
+        <SkeletonTheme baseColor="#ddd" highlightColor="#eee">
+          <BrowserRouter>
+            <Navigation handleThemeChange={handleThemeChange} theme={theme} />
+            <Routes>
+              <Route path="*" element={<NoPage />} />
+              <Route path="/" element={<Home />} exact />
+              <Route path="/alergens" element={<Alergens />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cake/:id" element={<CakeDetail />} />
+              <Route path="/post/:id" element={<MainPostDetail />} />
+              <Route path="/category/:id" element={<Category />} />
+              <Route path="/tag/:id" element={<Tags />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPostDetail />} />
+              <Route path="/login" element={<Login />} />
+              <Route element={<PrivateRoutes />}>
+                <Route path="/dashboard/:username" element={<Dashboard />} />
+              </Route>
+            </Routes>
 
-          <Footer />
-          <ScrollTo />
-          <ControlledPopup />
-        </BrowserRouter>
-      </SkeletonTheme>
+            <Footer />
+            <ScrollTo />
+            <ControlledPopup />
+          </BrowserRouter>
+        </SkeletonTheme>
+      </AppProvider>
     </div>
   );
 }

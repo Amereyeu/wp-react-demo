@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GiSun, GiMoon } from "react-icons/gi";
+import AppContext from "./Context/AppContext";
 
 function Navigation({ handleThemeChange, theme }) {
+  const [store, setStore] = useContext(AppContext);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNavigation = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  useEffect(() => {
+    console.log("store changed");
+  }, [store]);
+
+  console.log(store);
 
   return (
     <div className="navigation-container">
@@ -41,13 +49,30 @@ function Navigation({ handleThemeChange, theme }) {
             onClick={toggleNavigation}>
             <button aria-label="Contact">Contact</button>
           </Link>
-          
+
+          {store.userName !== null ? (
+            <Link
+              to={`/dashboard/${store.userName}`}
+              className="navigation__menu__item"
+              onClick={toggleNavigation}>
+              <button aria-label="Login">{store.userName}</button>
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="navigation__menu__item"
+              onClick={toggleNavigation}>
+              <button aria-label="Login">Login</button>
+            </Link>
+          )}
+
+          {/* 
           <Link
             to="/login"
             className="navigation__menu__item"
             onClick={toggleNavigation}>
             <button aria-label="Login">Login</button>
-          </Link>
+          </Link> */}
 
           <div className="navigation__menu__item" onClick={toggleNavigation}>
             <button onClick={handleThemeChange} aria-label="Theme Switch">
