@@ -1,20 +1,37 @@
-import React from "react";
+import { useContext, useEffect } from "react";
 import CreatePost from "./CreatePost";
-import { getUserName } from "../Auth/Token";
+import AppContext from "../Context/AppContext";
 
 function Dashboard() {
+  const [store, setStore] = useContext(AppContext);
+
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+
+    setStore({
+      ...store,
+      token: "",
+      userName: "",
+    });
+
     window.location.href = "/";
   };
 
-const userName = getUserName() ? getUserName() : "";
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userName = localStorage.getItem("userName");
+
+    setStore({ ...store, token, userName });
+
+    console.log("stored item:", store);
+  }, []);
 
   return (
     <>
       <div className="post-wrap">
         <div className="posts">
-          <div>{userName ? <h2>Welcome {userName}!!</h2> : ""}</div>
+          <div>{store.userName ? <h2>Welcome {store.userName}!!</h2> : ""}</div>
         </div>
       </div>
 
@@ -28,8 +45,5 @@ const userName = getUserName() ? getUserName() : "";
 }
 
 export default Dashboard;
-
-
-
 
 

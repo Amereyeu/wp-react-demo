@@ -11,12 +11,6 @@ function Navigation({ handleThemeChange, theme }) {
     setIsNavOpen(!isNavOpen);
   };
 
-  useEffect(() => {
-    console.log("store changed");
-  }, [store]);
-
-  console.log(store);
-
   return (
     <div className="navigation-container">
       <div className="navigation">
@@ -65,14 +59,6 @@ function Navigation({ handleThemeChange, theme }) {
               <button aria-label="Login">Login</button>
             </Link>
           )}
-
-          {/* 
-          <Link
-            to="/login"
-            className="navigation__menu__item"
-            onClick={toggleNavigation}>
-            <button aria-label="Login">Login</button>
-          </Link> */}
 
           <div className="navigation__menu__item" onClick={toggleNavigation}>
             <button onClick={handleThemeChange} aria-label="Theme Switch">
