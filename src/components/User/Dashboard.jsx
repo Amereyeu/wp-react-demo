@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import AppContext from "../Context/AppContext";
 import DashboardNavigation from "./DashboardNavigation";
+import DashboardHeader from "./DashboardHeader";
 
 function Dashboard() {
   const [store, setStore] = useContext(AppContext);
@@ -28,34 +29,13 @@ function Dashboard() {
   }, []);
 
   return (
-    <>
-      <div className="dashboard-wrap">
-        <div className="dashboard">
-          <div className="dashboard__header">
-            <div className="dashboard__header__left">
-              {store.userName ? (
-                <h2 className="dashboard__header__left__user">
-                  Welcome {store.userName}
-                </h2>
-              ) : (
-                ""
-              )}
-            </div>
+    <div className="dashboard-wrap">
+      <div className="dashboard">
+        <DashboardHeader store={store} handleLogout={handleLogout} />
 
-            <div className="dashboard__header__right">
-              <button
-                className="dashboard__header__right__logout"
-                onClick={handleLogout}>
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
-          <div className="dashboard__navigation">
-            <DashboardNavigation />
-          </div>
-        </div>
+        <DashboardNavigation />
       </div>
-    </>
+    </div>
   );
 }
 

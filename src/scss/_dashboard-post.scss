@@ -1,0 +1,17 @@
+  .back__button {
+    background: var(--bg);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--text);
+    text-decoration: none;
+    color: var(--text);
+    text-transform: uppercase;
+    cursor: pointer;
+    margin: 0 auto 4rem;
+    display: inherit;
+    transition: all 0.6s;
+
+    &:hover {
+      background: var(--text);
+      color: var(--bg);
+    }
+  }

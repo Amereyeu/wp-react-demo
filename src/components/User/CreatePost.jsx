@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const [title, setTitle] = useState("");
@@ -8,6 +9,8 @@ function CreatePost() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   function onSubmit(e) {
     e.preventDefault();
@@ -97,6 +100,17 @@ function CreatePost() {
               </div>
             </div>
           </form>
+
+          {isPostCreated ? (
+            <button
+              className="back__button"
+              onClick={() => navigate(-1)}
+              aria-label="Back to articles">
+              Back to dashboard
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

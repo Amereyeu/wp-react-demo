@@ -9,20 +9,20 @@
     max-width: 1000px;
     margin: 0 auto;
     display: block;
-
-    &__placeholder {
-      display: grid;
-      place-content: center;
-      height: calc(100vh - 358px);
-    }
+    min-height: calc(100vh - 354px);
 
     &__header {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: space-between;
       padding: 1rem;
       margin: 2rem 2rem 0;
       border-bottom: 1px solid #000;
+
+      @include break($small) {
+        flex-direction: row;
+      }
 
       &__left {
         &__user {
@@ -42,6 +42,11 @@
           text-transform: uppercase;
           cursor: pointer;
           transition: all 0.6s;
+          margin-top: 1rem;
+
+          @include break($small) {
+            margin-top: 0;
+          }
 
           &:hover {
             background: var(--text);
@@ -58,17 +63,23 @@
 
       ul {
         list-style: none;
-        display: flex;justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        @include break($medium) {
+          flex-direction: row;
+        }
       }
 
       &__item {
         color: var(--text);
         font-size: 1.2rem;
-        padding: .5rem 1rem;
+        padding: 1rem;
         text-decoration: none;
-        transition: all .6s;
+        transition: all 0.6s;
 
         &:hover {
           text-decoration: underline;
