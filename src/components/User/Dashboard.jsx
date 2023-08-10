@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
-import CreatePost from "./CreatePost";
 import AppContext from "../Context/AppContext";
+import DashboardNavigation from "./DashboardNavigation";
 
 function Dashboard() {
   const [store, setStore] = useContext(AppContext);
@@ -29,21 +29,35 @@ function Dashboard() {
 
   return (
     <>
-      <div className="post-wrap">
-        <div className="posts">
-          <div>{store.userName ? <h2>Welcome {store.userName}!!</h2> : ""}</div>
+      <div className="dashboard-wrap">
+        <div className="dashboard">
+          <div className="dashboard__header">
+            <div className="dashboard__header__left">
+              {store.userName ? (
+                <h2 className="dashboard__header__left__user">
+                  Welcome {store.userName}
+                </h2>
+              ) : (
+                ""
+              )}
+            </div>
+
+            <div className="dashboard__header__right">
+              <button
+                className="dashboard__header__right__logout"
+                onClick={handleLogout}>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+          <div className="dashboard__navigation">
+            <DashboardNavigation />
+          </div>
         </div>
       </div>
-
-      <CreatePost />
-
-      <button className="navigation__menu__item" onClick={handleLogout}>
-        <span>Logout</span>
-      </button>
     </>
   );
 }
 
 export default Dashboard;
-
 

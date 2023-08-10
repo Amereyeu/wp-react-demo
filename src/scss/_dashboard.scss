@@ -1,0 +1,80 @@
+.dashboard-wrap {
+  margin: 5rem 0 3rem 0;
+
+  @include break($medium) {
+    margin: 7rem 0 3rem 0;
+  }
+
+  .dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+
+    &__placeholder {
+      display: grid;
+      place-content: center;
+      height: calc(100vh - 358px);
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      margin: 2rem 2rem 0;
+      border-bottom: 1px solid #000;
+
+      &__left {
+        &__user {
+          font-size: 1.4rem;
+          text-transform: uppercase;
+          font-family: $heading;
+        }
+      }
+
+      &__right {
+        &__logout {
+          background: var(--bg);
+          padding: 0.5rem 1rem;
+          border: 1px solid var(--text);
+          text-decoration: none;
+          color: var(--text);
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.6s;
+
+          &:hover {
+            background: var(--text);
+            color: var(--bg);
+          }
+        }
+      }
+    }
+
+    &__navigation {
+      padding: 1rem;
+      margin: 0 2rem 2rem;
+      border-bottom: 1px solid var(--text);
+
+      ul {
+        list-style: none;
+        display: flex;justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+      }
+
+      &__item {
+        color: var(--text);
+        font-size: 1.2rem;
+        padding: .5rem 1rem;
+        text-decoration: none;
+        transition: all .6s;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+

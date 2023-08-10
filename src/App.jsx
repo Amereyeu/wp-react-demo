@@ -24,6 +24,7 @@ import PrivateRoutes from "./components/Auth/PrivateRoutes";
 import AppProvider from "./components/Context/AppProvider";
 
 import "./App.scss";
+import CreatePost from "./components/User/CreatePost";
 function App() {
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "light"
@@ -59,6 +60,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/dashboard/:username" element={<Dashboard />} />
+                <Route path="/dashboard/create-post" element={<CreatePost />} />
               </Route>
             </Routes>
 
