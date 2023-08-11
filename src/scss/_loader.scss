@@ -1,4 +1,16 @@
 // page loader
+.loading__placeholder {
+  display: grid;
+  place-content: center;
+}
+
+.posts__placeholder,
+.category__placeholder {
+  display: grid;
+  place-content: center;
+  height: calc(100vh - 358px);
+}
+
 .circle {
   --size: 48px;
   --color: var(--text);
@@ -67,3 +79,4 @@
     transform: rotate(360deg);
   }
 }
+

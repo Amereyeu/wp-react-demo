@@ -1,6 +1,6 @@
+import Logout from "../Auth/Logout";
 
-
-function DashboardHeader({ store, handleLogout }) {
+function DashboardHeader({ store }) {
   return (
     <div className="dashboard__header">
       <div className="dashboard__header__left">
@@ -14,15 +14,11 @@ function DashboardHeader({ store, handleLogout }) {
       </div>
 
       <div className="dashboard__header__right">
-        <button
-          className="dashboard__header__right__logout"
-          onClick={handleLogout}>
-          <span>Logout</span>
-        </button>
+        <Logout />
       </div>
     </div>
   );
 }
 
-export default DashboardHeader
+export default DashboardHeader;
 

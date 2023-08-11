@@ -1,22 +1,29 @@
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 import { FiAlertTriangle, FiCheck } from "react-icons/fi";
+import AppContext from "../Context/AppContext";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [message, setMessage] = useState("");
+  const [store, setStore] = useContext(AppContext);
+
+  const [loginFields, setLoginFields] = useState({
+    username: "",
+    password: "",
+    userNiceName: "",
+    message: "",
+    loading: false,
+  });
 
   function onSubmit(e) {
     e.preventDefault();
 
     const loginData = {
-      username: username,
-      password: password,
+      username: loginFields.username,
+      password: loginFields.password,
     };
+
+    setLoginFields({ ...loginFields, loading: true });
 
     axios
       .post(
@@ -25,8 +32,12 @@ function Login() {
       )
       .then((response) => {
         if (undefined === response.data.token) {
-          setMessage(err.response.data.message);
-          setIsLoaded(true);
+          setLoginFields({
+            ...loginFields,
+            message: err.response.data.message,
+            loading: false,
+          });
+
           return;
         }
 
@@ -35,21 +46,41 @@ function Login() {
         localStorage.setItem("token", token);
         localStorage.setItem("userName", user_nicename);
 
-        setLoggedIn(true);
-        setIsLoaded(true);
+        setStore({
+          ...store,
+          userName: user_nicename,
+          token: token,
+        });
 
-        // console.log(response.data);
+        setLoginFields({
+          ...loginFields,
+          loading: false,
+          token: token,
+          userNiceName: user_nicename,
+        });
       })
       .catch((err) => {
-        setMessage(err.response.data.message);
+        setLoginFields({
+          ...loginFields,
+          message: err.response.data.message,
+          loading: false,
+        });
       });
   }
+
+  console.log(store);
+
+  const onChange = (e) => {
+    setLoginFields({ ...loginFields, [e.target.name]: e.target.value });
+  };
 
   const createMarkup = (data) => ({
     __html: data,
   });
 
-  if (loggedIn || localStorage.getItem("token")) {
+  const { username, password, userNiceName, message, loading } = loginFields;
+
+  if (store.token) {
     return <Navigate to={`/dashboard/${username}`} />;
   } else {
     return (
@@ -81,7 +112,7 @@ function Login() {
                     name="username"
                     className="login__input__border"
                     value={username}
-                    onChange={(e) => setUsername(e.currentTarget.value)}
+                    onChange={onChange}
                   />
                   <span className="bb"></span>
                 </div>
@@ -93,7 +124,7 @@ function Login() {
                     name="password"
                     className="login__input__border"
                     value={password}
-                    onChange={(e) => setPassword(e.currentTarget.value)}
+                    onChange={onChange}
                   />
                   <span className="bb"></span>
                 </div>
@@ -105,6 +136,12 @@ function Login() {
                 </div>
               </div>
             </form>
+
+            {loading && (
+              <div className="loading__placeholder">
+                <div className="circle"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
