@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function CreatePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [featured_media, setFeatured_media] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [message, setMessage] = useState("");
@@ -18,6 +19,7 @@ function CreatePost() {
     const formData = {
       title: title,
       content: content,
+      featured_media: featured_media,
       status: "publish",
     };
 
@@ -35,6 +37,7 @@ function CreatePost() {
         setIsPostCreated(!!response.data.id);
         setTitle("");
         setContent("");
+        setFeatured_media("");
         setIsLoaded(true);
         // console.log(response.data);
       })
@@ -42,6 +45,8 @@ function CreatePost() {
         setMessage(err.response.data.message);
       });
   }
+
+
 
   const createMarkup = (data) => ({
     __html: data,
@@ -78,6 +83,18 @@ function CreatePost() {
                   value={title}
                   className="form-control"
                   id="post-title"
+                />
+              </div>
+          
+              <div className="login__input">
+                <label htmlFor="post-image">Featured Image</label>
+                <input
+                  type="text"
+                  name="featured_image"
+                  onChange={(e) => setFeatured_media(e.currentTarget.value)}
+                  value={featured_media}
+                  className="form-control"
+                  id="post-image"
                 />
               </div>
 
@@ -118,4 +135,5 @@ function CreatePost() {
 }
 
 export default CreatePost;
+
 

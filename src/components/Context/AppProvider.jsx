@@ -5,14 +5,18 @@ const AppProvider = (props) => {
   const [store, setStore] = useState({
     userName: "",
     token: "",
+    email: "",
   });
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userName = localStorage.getItem("userName");
+    const email = localStorage.getItem("email");
 
-    setStore({ ...store, token, userName });
+    setStore({ ...store, token, userName, email });
   }, []);
+
+  // console.log(store);
 
   return (
     <AppContext.Provider value={[store, setStore]}>

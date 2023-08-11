@@ -1,39 +1,34 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MainPost from "./MainPost";
-import Pagination from "../Pagination";
-import CategoryList from "../Category/CategoryList";
-import { SearchBar } from "../Search/Search";
+import Post from "./Post";
+import Pagination from "../../Pagination";
+import { useContext } from "react";
+import AppContext from "../../Context/AppContext";
 
-function MainPosts() {
+function Posts() {
+  const [store] = useContext(AppContext);
+
   const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
   function getEvents() {
-    const getPosts = axios.get(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/wp-json/wp/v2/posts?_embed=1&per_page=99`
-    );
-
-    const getCategories = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
-    );
-
-    Promise.all([getPosts, getCategories])
-      .then((res) => {
-        setPosts(res[0].data);
-        setCategories(res[1].data);
-
+    axios
+      .get(
+        `${
+          import.meta.env.VITE_BASE_URL
+        }/wp-json/wp/v2/posts?_embed=1&per_page=99`
+      )
+      .then((response) => response.data)
+      .then((data) => {
+        setPosts(data);
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
   }
 
-  console.log("posts:", posts);
+  console.log("dashboard posts:", posts);
 
   useEffect(() => {
     getEvents();
@@ -52,11 +47,7 @@ function MainPosts() {
   if (isLoaded) {
     return (
       <div className="posts">
-        <SearchBar />
-
-        <CategoryList categories={categories} />
-
-        <MainPost posts={currentPosts} isLoaded={isLoaded} />
+        <Post posts={currentPosts} isLoaded={isLoaded} store={store} />
 
         <Pagination
           postsPerPage={postsPerPage}
@@ -77,5 +68,5 @@ function MainPosts() {
   );
 }
 
-export default MainPosts;
+export default Posts;
 

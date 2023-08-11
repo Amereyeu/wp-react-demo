@@ -14,11 +14,13 @@ function Logout() {
 
     localStorage.removeItem("token");
     localStorage.removeItem("userName");
+    localStorage.removeItem("email");
 
     setStore({
       ...store,
       token: "",
       userName: "",
+      email: "",
       loading: false,
     });
 
@@ -27,29 +29,22 @@ function Logout() {
 
   const { loading } = loginFields;
 
-  console.log(store);
-
   return (
     <>
-     
-      {!loading && (
+      {loading ? (
+        <div className="loading__placeholder">
+          <div className="circle"></div>
+        </div>
+      ) : (
         <button
           className="dashboard__header__right__logout"
           onClick={handleLogout}>
           <span>Logout</span>
         </button>
       )}
-      
-      {loading && (
-        <div className="loading__placeholder">
-          <div className="circle"></div>
-        </div>
-      )}
     </>
   );
 }
 
 export default Logout;
-
-
 

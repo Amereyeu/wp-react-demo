@@ -8,11 +8,12 @@ function Login() {
   const [store, setStore] = useContext(AppContext);
 
   const [loginFields, setLoginFields] = useState({
+    email: "",
     username: "",
     password: "",
-    userNiceName: "",
     message: "",
     loading: false,
+    loggedIn: false,
   });
 
   function onSubmit(e) {
@@ -41,22 +42,26 @@ function Login() {
           return;
         }
 
-        const { token, user_nicename } = response.data;
+        const { token, user_display_name, user_email } = response.data;
 
         localStorage.setItem("token", token);
-        localStorage.setItem("userName", user_nicename);
+        localStorage.setItem("userName", user_display_name);
+        localStorage.setItem("email", user_email);
+
+        console.log(response.data);
 
         setStore({
           ...store,
-          userName: user_nicename,
+          userName: user_display_name,
           token: token,
+          loggedIn: true,
+          email: user_email,
         });
 
         setLoginFields({
           ...loginFields,
           loading: false,
           token: token,
-          userNiceName: user_nicename,
         });
       })
       .catch((err) => {
@@ -78,7 +83,7 @@ function Login() {
     __html: data,
   });
 
-  const { username, password, userNiceName, message, loading } = loginFields;
+  const { username, password, message, loading, loggedIn } = loginFields;
 
   if (store.token) {
     return <Navigate to={`/dashboard/${username}`} />;
@@ -129,19 +134,19 @@ function Login() {
                   <span className="bb"></span>
                 </div>
 
-                <div className="login__button">
-                  <button className="login__button__send" type="submit">
-                    Login
-                  </button>
-                </div>
+                {loading ? (
+                  <div className="loading__placeholder">
+                    <div className="circle"></div>
+                  </div>
+                ) : (
+                  <div className="login__button">
+                    <button className="login__button__send" type="submit">
+                      Login
+                    </button>
+                  </div>
+                )}
               </div>
             </form>
-
-            {loading && (
-              <div className="loading__placeholder">
-                <div className="circle"></div>
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -1,19 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AppContext from "../Context/AppContext";
 import DashboardNavigation from "./DashboardNavigation";
 import DashboardHeader from "./DashboardHeader";
+import Posts from "./Posts/Posts";
 
 function Dashboard() {
-  const [store, setStore] = useContext(AppContext);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const userName = localStorage.getItem("userName");
-
-  //   setStore({ ...store, token, userName });
-
-  //   console.log("stored item:", store);
-  // }, []);
+  const [store] = useContext(AppContext);
 
   return (
     <div className="dashboard-wrap">
@@ -21,6 +13,8 @@ function Dashboard() {
         <DashboardHeader store={store} />
 
         <DashboardNavigation />
+
+        <Posts />
       </div>
     </div>
   );

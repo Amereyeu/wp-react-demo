@@ -80,3 +80,116 @@
   }
 }
 
+.loader-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .loader {
+    width: 300px;
+    height: 200px;
+
+    #grey {
+      fill: #ddd;
+    }
+
+    #blue {
+      fill: $color-primary;
+      stroke: $color-primary;
+      animation: blue-line 0.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes blue-line {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.square-move-2 {
+  --size: 36px;
+  --color: #fff;
+  --animation-timing-function: linear;
+  --animation-duration: 2s;
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+}
+
+.square-move-2::before,
+.square-move-2::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: var(--color);
+}
+
+.square-move-2::before {
+  top: 0;
+  left: 0;
+  transform: translate(0%, 0%);
+  animation: var(--animation-timing-function) var(--animation-duration) infinite
+    square-move-2-animation-before;
+  background-color: $color-primary;
+}
+
+.square-move-2::after {
+  right: 0;
+  bottom: 0;
+  transform: translate(0%, 0%);
+  animation: var(--animation-timing-function) var(--animation-duration) infinite
+    square-move-2-animation-after;
+}
+
+@keyframes square-move-2-animation-before {
+  0% {
+    transform: translate(0%, 0%);
+  }
+
+  25% {
+    transform: translate(100%, 0%);
+  }
+
+  50% {
+    transform: translate(100%, 100%);
+  }
+
+  75% {
+    transform: translate(0%, 100%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes square-move-2-animation-after {
+  0% {
+    transform: translate(0%, 0%);
+  }
+
+  25% {
+    transform: translate(-100%, 0%);
+  }
+
+  50% {
+    transform: translate(-100%, -100%);
+  }
+
+  75% {
+    transform: translate(0%, -100%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
