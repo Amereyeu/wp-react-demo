@@ -25,6 +25,7 @@ import AppProvider from "./components/Context/AppProvider";
 
 import "./App.scss";
 import CreatePost from "./components/User/CreatePost";
+import DeletePost from "./components/User/DeletePost";
 function App() {
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "light"
@@ -55,12 +56,13 @@ function App() {
               <Route path="/post/:id" element={<MainPostDetail />} />
               <Route path="/category/:id" element={<Category />} />
               <Route path="/tag/:id" element={<Tags />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPostDetail />} />
+              {/* <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPostDetail />} /> */}
               <Route path="/login" element={<Login />} />
               <Route element={<PrivateRoutes />}>
                 <Route path="/dashboard/:username" element={<Dashboard />} />
                 <Route path="/dashboard/create-post" element={<CreatePost />} />
+                <Route path="/dashboard/delete-post/:id" element={<DeletePost />} />
               </Route>
             </Routes>
 

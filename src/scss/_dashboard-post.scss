@@ -38,8 +38,38 @@
     }
   }
 
-  &__author {
-    font-size: 15px;
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__edit,
+    &__delete {
+      padding: 0.5rem 2rem;
+      border: 1px solid var(--text);
+      cursor: pointer;
+      margin: 2px 3px;
+      color: $color-white;
+      transition: all 0.6s;
+
+      &:hover {
+        background: var(--text);
+        color: var(--bg);
+      }
+
+      a {
+        text-decoration: none;
+        color: $color-white;
+      }
+    }
+
+    &--red {
+      background: #f44336;
+    }
+
+    &--blue {
+      background: #2196f3;
+    }
   }
 }
 

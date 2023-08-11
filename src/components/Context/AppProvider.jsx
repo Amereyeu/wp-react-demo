@@ -16,7 +16,7 @@ const AppProvider = (props) => {
     setStore({ ...store, token, userName, email });
   }, []);
 
-  // console.log(store);
+  console.log(store);
 
   return (
     <AppContext.Provider value={[store, setStore]}>

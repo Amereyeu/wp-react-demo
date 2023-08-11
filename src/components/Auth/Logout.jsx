@@ -9,7 +9,7 @@ function Logout() {
     loading: false,
   });
 
-  const handleLogout = () => {
+  const onLogout = () => {
     setLoginFields({ ...loginFields, loading: true });
 
     localStorage.removeItem("token");
@@ -38,7 +38,7 @@ function Logout() {
       ) : (
         <button
           className="dashboard__header__right__logout"
-          onClick={handleLogout}>
+          onClick={onLogout}>
           <span>Logout</span>
         </button>
       )}
