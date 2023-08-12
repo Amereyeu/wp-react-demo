@@ -25,55 +25,59 @@ function Posts() {
       .then((response) => response.data)
       .then((data) => {
         setPosts(data);
+
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
   };
 
-  console.log("filtered posts:", filteredPosts);
-  console.log("dashboard posts:", posts);
-
-  useEffect(() => {
-    getEvents();  
-
-    const fp = posts.filter((post) => {
-      return post._embedded.author[0].name === store.userName;
-    });
-
-    setFilteredPosts(fp);
-    setIsLoaded(true);
-  }, []);
-
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // const nextPage = () => setCurrentPage(currentPage + 1);
-
-  // const previousPage = () => setCurrentPage(currentPage - 1);
+  const fp = posts.filter((post) => {
+    return post._embedded.author[0].name === store.userName;
+  });
 
   if (isLoaded) {
+    setFilteredPosts(fp);
+    setIsLoaded(false);
+  }
+
+  // console.log("fp:", fp);
+  console.log("filtered posts:", filteredPosts);
+  // console.log("dashboard posts:", posts);
+
+  useEffect(() => {
+    getEvents();
+  }, []);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const nextPage = () => setCurrentPage(currentPage + 1);
+
+  const previousPage = () => setCurrentPage(currentPage - 1);
+
+  if (filteredPosts.length !== 0) {
     return (
       <div className="posts">
-        <Post posts={filteredPosts} isLoaded={isLoaded} store={store} />
+        <Post posts={currentPosts} />
 
-        {/* <Pagination
+        <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          totalPosts={filteredPosts.length}
           paginate={paginate}
           nextPage={nextPage}
           previousPage={previousPage}
           currentPage={currentPage}
-        /> */}
+        />
       </div>
     );
   }
 
   return (
-    <div className="posts__placeholder">
-      <div className="circle"></div>
+    <div className="dashboard__nopost">
+      <h2 className="dashboard__nopost__title">No posts!</h2>
     </div>
   );
 }

@@ -14,6 +14,18 @@ export const Pagination = ({
 
   return (
     <div className="pagination-wrap">
+      {/* <select>
+        {pageNumbers.map((number) => (
+          <option
+            className={`page-item `}
+            value={number}
+            key={number}
+            onClick={() => paginate(number)}>
+            {number}
+          </option>
+        ))}
+      </select> */}
+
       <ul className="pagination">
         {currentPage >= 2 ? (
           <li className="page-item" onClick={() => previousPage()}>
@@ -25,7 +37,9 @@ export const Pagination = ({
 
         {pageNumbers.map((number) => (
           <li
-            className={`page-item ${currentPage == number ? "page-item--current" : ""}`}
+            className={`page-item ${
+              currentPage === number ? "page-item--current" : ""
+            }`}
             key={number}
             onClick={() => paginate(number)}>
             <span className="page-link">{number}</span>

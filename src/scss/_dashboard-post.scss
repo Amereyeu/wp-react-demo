@@ -73,3 +73,16 @@
   }
 }
 
+.dashboard__nopost {
+  &__title {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+
+    color: var(--text);
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: inset 0 -1px 0 0 var(--text) f;
+  }
+}
+
