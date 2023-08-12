@@ -13,6 +13,8 @@ function Posts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
   const getEvents = () => {
     axios
       .get(
@@ -28,10 +30,18 @@ function Posts() {
       .catch((err) => console.log(err));
   };
 
+  console.log("filtered posts:", filteredPosts);
   console.log("dashboard posts:", posts);
 
   useEffect(() => {
-    getEvents();
+    getEvents();  
+
+    const fp = posts.filter((post) => {
+      return post._embedded.author[0].name === store.userName;
+    });
+
+    setFilteredPosts(fp);
+    setIsLoaded(true);
   }, []);
 
   // const indexOfLastPost = currentPage * postsPerPage;
@@ -47,13 +57,7 @@ function Posts() {
   if (isLoaded) {
     return (
       <div className="posts">
-        <Post
-          posts={posts}
-          setPosts={setPosts}
-          isLoaded={isLoaded}
-          store={store}
-        
-        />
+        <Post posts={filteredPosts} isLoaded={isLoaded} store={store} />
 
         {/* <Pagination
           postsPerPage={postsPerPage}

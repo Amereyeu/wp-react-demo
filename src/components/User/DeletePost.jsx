@@ -10,10 +10,6 @@ function DeletePost() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [loginFields, setLoginFields] = useState({
-    loading: false,
-  });
-
   function getEvents() {
     axios
       .get(
@@ -34,8 +30,6 @@ function DeletePost() {
   }, []);
 
   const onDelete = (id) => {
-    setLoginFields({ ...loginFields, loading: true });
-
     const confirm = window.confirm("Are you sure?");
 
     if (confirm) {
@@ -44,14 +38,9 @@ function DeletePost() {
       axios
         .delete(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}`, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           },
         })
-        .then((res) => {
-          setLoginFields({ ...loginFields, loading: false });
-        })
-        .then(console.log("Deleted"))
         .then((res) => {
           navigate(-1);
         })
