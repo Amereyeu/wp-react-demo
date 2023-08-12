@@ -65,14 +65,21 @@
 
   &__content {
     width: 100%;
-    min-height: 300px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     padding: 1em;
     overflow-y: auto;
     background-color: var(--bg);
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
-    z-index: 11;
+    z-index: 111;
+    // position: absolute;
+    // top: 34px;
+
+    @include break($medium) {
+      min-height: 300px;
+    }
+    
 
     &__warning {
       color: var(--text);
