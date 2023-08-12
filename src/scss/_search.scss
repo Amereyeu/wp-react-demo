@@ -72,6 +72,7 @@
     overflow-y: auto;
     background-color: var(--bg);
     box-shadow: 0px 2px 12px 3px rgba(0, 0, 0, 0.14);
+    z-index: 11;
 
     &__warning {
       color: var(--text);
