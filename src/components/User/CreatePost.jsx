@@ -1,155 +1,108 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { Formik, Form, ErrorMessage, Field } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
-import { FiAlertTriangle, FiCheck } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-
-import Select from "react-select";
-import FeaturedImage from "./FeaturedImage";
 
 function CreatePost() {
-  const [inputField, setInputField] = useState({
-    title: "",
-    content: "",
-  });
-
-  const [categories, setCategories] = useState([]);
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPostCreated, setIsPostCreated] = useState(false);
-  const [message, setMessage] = useState("");
 
-  const navigate = useNavigate();
+  const initialValues = {
+    title: "",
+    content: "",
+    featured_image: "",
+  };
 
-  function onSubmit(e) {
-    e.preventDefault();
+  const validationSchema = Yup.object({
+    title: Yup.string().required(),
+    content: Yup.string().required(),
+    featured_image: Yup.mixed().required(),
+  });
 
-    const formData = {
-      title: inputField.title,
-      content: inputField.content,
-      categories: categories.value,
-      status: "publish",
-    };
-
+  function onSubmit(data) {
     const authToken = localStorage.getItem("token");
 
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("content", data.content);
+    formData.append("featured_img", data.featured_image);
+
     axios
-      .post(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts`, formData, {
+      .post(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authToken}`,
         },
       })
       .then((response) => {
-        setMessage(response.data.id ? "New post created" : "");
         setIsPostCreated(!!response.data.id);
-
-        setInputField({
-          ...inputField,
-          title: "",
-          // featured_media: "",
-          content: "",
-        });
-
         setIsLoaded(true);
-        // console.log(response.data);
+
+        console.log(response);
       })
-      .catch((err) => {
-        setMessage(err.response.data.message);
+      .catch((error) => {
+        console.log(error.response.data.error);
       });
   }
-
-  const inputsHandler = (e) => {
-    setInputField((inputField) => ({
-      ...inputField,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const createMarkup = (data) => ({
-    __html: data,
-  });
-
-  console.log(categories.value);
 
   return (
     <div className="post-wrap">
       <div className="posts">
         <div className="container">
-          <form onSubmit={onSubmit}>
-            <div className="login">
-              {message ? (
-                <div
-                  className={`alert ${
-                    isPostCreated ? "alert--success" : "alert--danger"
-                  }`}>
-                  <div className="alert__icon">
-                    {isPostCreated ? <FiCheck /> : <FiAlertTriangle />}
+          <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}>
+            {() => (
+              <Form>
+                <div className="login">
+                  <div className="login__input">
+                    <Field
+                      name="title"
+                      placeholder="title"
+                      type="text"
+                      className="login__input__border"
+                    />
+
+                    <div className="error">
+                      <ErrorMessage name="title" component="span" />
+                    </div>
                   </div>
-                  <div
-                    className="alert__message"
-                    dangerouslySetInnerHTML={createMarkup(message)}></div>
+
+                  <div className="login__input">
+                    <Field
+                      name="content"
+                      placeholder="content"
+                      type="text"
+                      className="login__input__border"
+                    />
+
+                    <div className="error">
+                      <ErrorMessage name="content" component="span" />
+                    </div>
+                  </div>
+
+                  <div className="login__input">
+                    <Field
+                      type="file"
+                      name="featured_image"
+                      className="login__input__border"
+                    />
+
+                    <div className="error">
+                      <ErrorMessage name="featured_image" component="span" />
+                    </div>
+                  </div>
+
+                  <div className="login__button">
+                    <button className="login__button__send" type="submit">
+                      Create Post
+                    </button>
+                  </div>
                 </div>
-              ) : (
-                ""
-              )}
-
-              <div className="login__input">
-                <label htmlFor="post-title">Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  onChange={inputsHandler}
-                  value={inputField.title}
-                  className="form-control"
-                  id="post-title"
-                />
-              </div>
-
-              <div className="login__input">
-                <label htmlFor="post-content">Content</label>
-                <textarea
-                  name="content"
-                  className="form-control"
-                  id="post-content"
-                  onChange={inputsHandler}
-                  value={inputField.content}
-                  rows="10"
-                />
-              </div>
-
-              <h2>Select your categories</h2>
-              <Select
-                onChange={(selectedValue) => setCategories(selectedValue)}
-                isMulti
-                isSearchable
-                options={[
-                  { value: "1", label: "windows" },
-                  { value: "6", label: "pc" },
-                  { value: "7", label: "tech" },
-                  { value: "8", label: "linux" },
-                  { value: "9", label: "macos" },
-                  { value: "10", label: "misc" },
-                ]}
-                className="basic"></Select>
-
-              <div className="login__button">
-                <button className="login__button__send" type="submit">
-                  Create Post
-                </button>
-              </div>
-            </div>
-          </form>
-
-          {isPostCreated ? (
-            <button
-              className="back__button"
-              onClick={() => navigate(-1)}
-              aria-label="Back to articles">
-              Back to dashboard
-            </button>
-          ) : (
-            ""
-          )}
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </div>
