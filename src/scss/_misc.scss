@@ -1,0 +1,29 @@
+blockquote {
+  border-left: 1px solid var(--text);
+  margin: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  color: #fff;
+
+  &:before {
+    color: var(--text);
+    content: open-quote;
+    font-size: 8em;
+    line-height: 1px;
+    // margin-right: 0.25em;
+    vertical-align: 30px;
+    opacity: 0.6;
+  }
+
+  p {
+    display: inline;
+    color: var(--text);
+  }
+
+  cite {
+    color: var(--text);
+    padding: 0.5rem 0 24px;
+    font-size: 1.1rem;
+    display: block;
+  }
+}
+
