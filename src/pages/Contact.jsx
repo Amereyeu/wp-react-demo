@@ -11,7 +11,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
-import Faqs from "../components/Faqs";
+import Faqs from "../components/Faq/Faqs";
 
 function Contact() {
   const [single, setSingle] = useState([]);
