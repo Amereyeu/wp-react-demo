@@ -41,7 +41,7 @@ function Posts() {
   }
 
   // console.log("fp:", fp);
-  console.log("filtered posts:", filteredPosts);
+  // console.log("filtered posts:", filteredPosts);
   // console.log("dashboard posts:", posts);
 
   useEffect(() => {
@@ -62,6 +62,7 @@ function Posts() {
     return (
       <div className="posts">
         <Post posts={currentPosts} />
+        
 
         <Pagination
           postsPerPage={postsPerPage}

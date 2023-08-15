@@ -1,19 +1,35 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CreatableSelect from "react-select/creatable";
+import makeAnimated from "react-select/animated";
 
 function CreatePost() {
+  const [categories, setCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [newcat, setNewcat] = useState([]);
   const [isPostCreated, setIsPostCreated] = useState(false);
   const navigate = useNavigate();
   const imgUpload = useRef(null);
+
+  const cx = selectedCategories.map((category) => {
+    category.id;
+    console.log("id", category.id);
+    // setNewcat(cx);
+  });
+
+  console.log(cx[0]);
+  console.log(selectedCategories);
+  console.log("new cat", newcat);
 
   const formik = useFormik({
     initialValues: {
       title: "",
       content: "",
       featured_image: "",
+      categories: [selectedCategories],
     },
 
     validationSchema: Yup.object({
@@ -21,6 +37,10 @@ function CreatePost() {
       content: Yup.string().required(),
       featured_image: Yup.mixed().required(),
     }),
+
+    // onSubmit: (initialValues) => {
+    //   console.log(initialValues);
+    // },
 
     onSubmit: async (data) => {
       const token = localStorage.getItem("token");
@@ -51,6 +71,8 @@ function CreatePost() {
         title: data.title,
         content: data.content,
         status: "publish",
+        categories: data.categories[0].id,
+        // categories: ["8", "6"],
       };
 
       if (featuredMediaId) {
@@ -58,15 +80,11 @@ function CreatePost() {
       }
 
       axios
-        .post(
-          `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/`,
-          post,
-          {
-            headers: headers,
-          }
-        )
+        .post(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/`, post, {
+          headers: headers,
+        })
         .then((response) => {
-          console.log("res", response);
+          console.log("new post", response);
         })
         .catch((error) => {
           console.log(error.response.data.error);
@@ -84,6 +102,29 @@ function CreatePost() {
       setImg(oFREvent.target.result);
     };
   }
+
+  function getEvents() {
+    const getCategories = axios.get(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
+    );
+
+    Promise.all([getCategories])
+      .then((res) => {
+        setCategories(res[0].data);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  const handleChange = (selectedOption, actionMeta) => {
+    // console.log("handleChange", selectedOption, actionMeta);
+    setSelectedCategories(selectedOption);
+  };
+
+  // console.log("sel", selectedCategories);
+
+  useEffect(() => {
+    getEvents();
+  }, []);
 
   return (
     <div className="post-wrap">
@@ -133,6 +174,15 @@ function CreatePost() {
                   }}
                 />
               </div>
+
+              <CreatableSelect
+                components={makeAnimated()}
+                options={categories}
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.id}
+                onChange={handleChange}
+                isMulti
+              />
 
               <div className="login__button">
                 <button className="login__button__send" type="submit">
