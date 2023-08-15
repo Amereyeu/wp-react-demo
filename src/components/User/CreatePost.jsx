@@ -1,108 +1,157 @@
-import { useState } from "react";
-import { Formik, Form, ErrorMessage, Field } from "formik";
+import { useState, useRef } from "react";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [isPostCreated, setIsPostCreated] = useState(false);
+  const navigate = useNavigate();
+  const imgUpload = useRef(null);
 
-  const initialValues = {
-    title: "",
-    content: "",
-    featured_image: "",
-  };
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      content: "",
+      featured_image: "",
+    },
 
-  const validationSchema = Yup.object({
-    title: Yup.string().required(),
-    content: Yup.string().required(),
-    featured_image: Yup.mixed().required(),
+    validationSchema: Yup.object({
+      title: Yup.string().required(),
+      content: Yup.string().required(),
+      featured_image: Yup.mixed().required(),
+    }),
+
+    onSubmit: async (data) => {
+      const token = localStorage.getItem("token");
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      let featuredMediaId = 0;
+
+      if (data.featured_image) {
+        const formData = new FormData();
+        formData.append("file", data.featured_image);
+
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/media/`,
+          formData,
+          {
+            headers: headers,
+            "Content-Type": "multipart/form-data",
+          }
+        );
+
+        featuredMediaId = response.data.id;
+      }
+
+      const post = {
+        title: data.title,
+        content: data.content,
+        status: "publish",
+      };
+
+      if (featuredMediaId) {
+        post.featured_media = featuredMediaId;
+      }
+
+      axios
+        .post(
+          `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/`,
+          post,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {
+          console.log("res", response);
+        })
+        .catch((error) => {
+          console.log(error.response.data.error);
+        });
+
+      setIsPostCreated(true);
+    },
   });
 
-  function onSubmit(data) {
-    const authToken = localStorage.getItem("token");
-
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("content", data.content);
-    formData.append("featured_img", data.featured_image);
-
-    axios
-      .post(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-      .then((response) => {
-        setIsPostCreated(!!response.data.id);
-        setIsLoaded(true);
-
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error.response.data.error);
-      });
+  const [img, setImg] = useState("");
+  function previewImage() {
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(imgUpload.current.files[0]);
+    oFReader.onload = function (oFREvent) {
+      setImg(oFREvent.target.result);
+    };
   }
 
   return (
     <div className="post-wrap">
       <div className="posts">
         <div className="container">
-          <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}>
-            {() => (
-              <Form>
-                <div className="login">
-                  <div className="login__input">
-                    <Field
-                      name="title"
-                      placeholder="title"
-                      type="text"
-                      className="login__input__border"
-                    />
+          <form onSubmit={formik.handleSubmit}>
+            <div className="login">
+              <div className="login__input">
+                <input
+                  className="login__input__border"
+                  type="text"
+                  placeholder="Enter post title"
+                  name="title"
+                  value={formik.values.title}
+                  onChange={formik.handleChange}
+                />
+              </div>
 
-                    <div className="error">
-                      <ErrorMessage name="title" component="span" />
-                    </div>
-                  </div>
+              <div className="login__input">
+                <textarea
+                  className="login__input__border"
+                  name="content"
+                  placeholder="Enter post content"
+                  onChange={formik.handleChange}
+                  value={formik.values.content}></textarea>
+              </div>
 
-                  <div className="login__input">
-                    <Field
-                      name="content"
-                      placeholder="content"
-                      type="text"
-                      className="login__input__border"
-                    />
+              <div className="login__input">
+                {(() => {
+                  if (img) {
+                    return (
+                      <img src={img} alt="image" width={100} height={100} />
+                    );
+                  }
+                })()}
 
-                    <div className="error">
-                      <ErrorMessage name="content" component="span" />
-                    </div>
-                  </div>
+                <input
+                  className="login__input__border"
+                  type="file"
+                  name="featured_image"
+                  ref={imgUpload}
+                  // onChange={previewImage}
+                  // value={formik.values.featured_image}
+                  onChange={(e) => {
+                    formik.setFieldValue("featured_image", e.target.files[0]);
+                    previewImage();
+                  }}
+                />
+              </div>
 
-                  <div className="login__input">
-                    <Field
-                      type="file"
-                      name="featured_image"
-                      className="login__input__border"
-                    />
+              <div className="login__button">
+                <button className="login__button__send" type="submit">
+                  Create Post
+                </button>
+              </div>
+            </div>
+          </form>
 
-                    <div className="error">
-                      <ErrorMessage name="featured_image" component="span" />
-                    </div>
-                  </div>
-
-                  <div className="login__button">
-                    <button className="login__button__send" type="submit">
-                      Create Post
-                    </button>
-                  </div>
-                </div>
-              </Form>
-            )}
-          </Formik>
+          {isPostCreated ? (
+            <button
+              className="back__button"
+              onClick={() => navigate(-1)}
+              aria-label="Back to articles">
+              Back to dashboard
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
