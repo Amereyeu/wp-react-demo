@@ -14,6 +14,18 @@ function CreatePost() {
   const navigate = useNavigate();
   const imgUpload = useRef(null);
 
+  function getEvents() {
+    const getCategories = axios.get(
+      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
+    );
+
+    Promise.all([getCategories])
+      .then((res) => {
+        setCategories(res[0].data);
+      })
+      .catch((err) => console.log(err));
+  }
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -81,6 +93,7 @@ function CreatePost() {
   });
 
   const [img, setImg] = useState("");
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   function previewImage() {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(imgUpload.current.files[0]);
@@ -89,17 +102,9 @@ function CreatePost() {
     };
   }
 
-  function getEvents() {
-    const getCategories = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
-    );
-
-    Promise.all([getCategories])
-      .then((res) => {
-        setCategories(res[0].data);
-      })
-      .catch((err) => console.log(err));
-  }
+  const toggleImage = () => {
+    setImg("");
+  };
 
   const handleChange = (selectedOption, actionMeta) => {
     // console.log("handleChange", selectedOption, actionMeta);
@@ -124,63 +129,89 @@ function CreatePost() {
       <div className="posts">
         <div className="container">
           <form onSubmit={formik.handleSubmit}>
-            <div className="login">
-              <div className="login__input">
-                <input
-                  className="login__input__border"
-                  type="text"
-                  placeholder="Enter post title"
-                  name="title"
-                  value={formik.values.title}
-                  onChange={formik.handleChange}
-                />
+            <div className="create">
+              <div className="row">
+                <div className="create__left">
+                  {(() => {
+                    if (img) {
+                      return (
+                        <img
+                          src={img}
+                          alt="image"
+                          className="create__left__image"
+                          onClick={toggleImage}
+                        />
+                      );
+                    }
+                  })()}
+
+                  {(() => {
+                    if (!img) {
+                      return (
+                        <div
+                          className={`create__left__input ${
+                            isImageLoaded ? "show" : ""
+                          }`}>
+                          <input
+                            type="file"
+                            name="featured_image"
+                            ref={imgUpload}
+                            // onChange={previewImage}
+                            // value={formik.values.featured_image}
+                            onChange={(e) => {
+                              formik.setFieldValue(
+                                "featured_image",
+                                e.target.files[0]
+                              );
+                              previewImage();
+                            }}
+                          />
+                        </div>
+                      );
+                    }
+                  })()}
+
+                  <div className="create__left__select">
+                    <label htmlFor="category">Category:</label>
+                    <CreatableSelect
+                      components={makeAnimated()}
+                      options={categories}
+                      getOptionLabel={(option) => option.name}
+                      getOptionValue={(option) => option.id}
+                      onChange={handleChange}
+                      isMulti
+                    />
+                  </div>
+                </div>
+
+                <div className="create__right">
+                  <div className="create__right__input">
+                    <input
+                      type="text"
+                      placeholder="Enter post title"
+                      name="title"
+                      value={formik.values.title}
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+
+                  <div className="create__right__input">
+                    <textarea
+                      name="content"
+                      placeholder="Enter post content"
+                      onChange={formik.handleChange}
+                      value={formik.values.content}
+                      rows={10}></textarea>
+                  </div>
+                </div>
               </div>
 
-              <div className="login__input">
-                <textarea
-                  className="login__input__border"
-                  name="content"
-                  placeholder="Enter post content"
-                  onChange={formik.handleChange}
-                  value={formik.values.content}></textarea>
-              </div>
-
-              <div className="login__input">
-                {(() => {
-                  if (img) {
-                    return (
-                      <img src={img} alt="image" width={100} height={100} />
-                    );
-                  }
-                })()}
-
-                <input
-                  className="login__input__border"
-                  type="file"
-                  name="featured_image"
-                  ref={imgUpload}
-                  // onChange={previewImage}
-                  // value={formik.values.featured_image}
-                  onChange={(e) => {
-                    formik.setFieldValue("featured_image", e.target.files[0]);
-                    previewImage();
-                  }}
-                />
-              </div>
-
-              <CreatableSelect
-                components={makeAnimated()}
-                options={categories}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.id}
-                onChange={handleChange}
-                isMulti
-              />
-
-              <div className="login__button">
-                <button className="login__button__send" type="submit">
-                  Create Post
-                </button>
+              <div className="row">
+                <div className="create__button">
+                  <button className="create__button__send" type="submit">
+                    Create Post
+                  </button>
+                </div>
               </div>
             </div>
           </form>
