@@ -13,7 +13,7 @@ function MainPost({ posts, isLoaded }) {
                 <img
                   src={
                     post._embedded["wp:featuredmedia"][0].media_details.sizes
-                      .medium.source_url
+                      .full.source_url
                   }
                   alt={post._embedded["wp:featuredmedia"][0].title.rendered}
                   width="300" height="225"

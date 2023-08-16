@@ -14,16 +14,6 @@ function CreatePost() {
   const navigate = useNavigate();
   const imgUpload = useRef(null);
 
-  const cx = selectedCategories.map((category) => {
-    category.id;
-    console.log("id", category.id);
-    // setNewcat(cx);
-  });
-
-  console.log(cx[0]);
-  console.log(selectedCategories);
-  console.log("new cat", newcat);
-
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -36,11 +26,8 @@ function CreatePost() {
       title: Yup.string().required(),
       content: Yup.string().required(),
       featured_image: Yup.mixed().required(),
+      categories: Yup.mixed().required(),
     }),
-
-    // onSubmit: (initialValues) => {
-    //   console.log(initialValues);
-    // },
 
     onSubmit: async (data) => {
       const token = localStorage.getItem("token");
@@ -71,8 +58,7 @@ function CreatePost() {
         title: data.title,
         content: data.content,
         status: "publish",
-        categories: data.categories[0].id,
-        // categories: ["8", "6"],
+        categories: newcat,
       };
 
       if (featuredMediaId) {
@@ -120,11 +106,18 @@ function CreatePost() {
     setSelectedCategories(selectedOption);
   };
 
-  // console.log("sel", selectedCategories);
+  // console.log("selected", selectedCategories);
+  // console.log("new cat", newcat);
 
   useEffect(() => {
     getEvents();
-  }, []);
+
+    const id = selectedCategories.map((cat) => {
+      return cat.id;
+    });
+
+    setNewcat(id);
+  }, [selectedCategories]);
 
   return (
     <div className="post-wrap">
