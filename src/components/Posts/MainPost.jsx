@@ -16,7 +16,8 @@ function MainPost({ posts, isLoaded }) {
                       .medium.source_url
                   }
                   alt={post._embedded["wp:featuredmedia"][0].title.rendered}
-                  width="300" height="225"
+                  width="300"
+                  height="225"
                 />
               </div>
             )}
@@ -31,39 +32,45 @@ function MainPost({ posts, isLoaded }) {
                   {post._embedded.author[0].name}
                 </h3>
 
-                <div className="post__text__category">
+                {post.categories.length !== 0 && (
+                  <div className="post__text__category">
+                    <ul>
+                      {post._embedded["wp:term"][0].map((cat) => (
+                        <li key={cat.id}>
+                          <Link
+                            className="post__text__category__pill"
+                            to={`/category/${cat.id}`}>
+                            {cat.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              <div
+                className="post__text__excerpt"
+                dangerouslySetInnerHTML={{
+                  __html: post.excerpt.rendered,
+                }}></div>
+
+              {post.categories.length !== 0 && (
+                <div className="post__text__tag">
                   <ul>
-                    {post._embedded["wp:term"][0].map((cat) => (
-                      <li key={cat.id}>
+                    <li>tags:</li>
+                    {post._embedded["wp:term"][1].map((tag) => (
+                      <li key={tag.id}>
                         <Link
-                          className="post__text__category__pill"
-                          to={`/category/${cat.id}`}>
-                          {cat.name}
+                          className="post__text__tag__pill"
+                          to={`/tag/${tag.id}`}>
+                          {tag.name}
                         </Link>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
-
-              <div
-              className="post__text__excerpt"
-                dangerouslySetInnerHTML={{
-                  __html: post.excerpt.rendered,
-                }}></div>
-
-              <div className="post__text__tag">
-                <ul>
-                  <li>tags:</li>
-                  {post._embedded["wp:term"][1].map((tag) => (
-                    <li key={tag.id}>
-                      <Link className="post__text__tag__pill" to={`/tag/${tag.id}`}>
-                        {tag.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              )}
             </div>
           </div>
         ))}

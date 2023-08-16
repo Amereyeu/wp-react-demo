@@ -92,22 +92,24 @@ function MainPostDetail() {
           </div>
 
           <div className="detail__info__right">
-            <div className="detail__info__right__category">
-              <ul>
-                <li>
-                  <span>Categories:</span>
-                </li>
-                {post._embedded["wp:term"][0].map((cat) => (
-                  <li key={cat.id}>
-                    <Link
-                      className="detail__info__right__category__pill"
-                      to={`/category/${cat.id}`}>
-                      {cat.name}
-                    </Link>
+            {post.categories.length !== 0 && (
+              <div className="detail__info__right__category">
+                <ul>
+                  <li>
+                    <span>Categories:</span>
                   </li>
-                ))}
-              </ul>
-            </div>
+                  {post._embedded["wp:term"][0].map((cat) => (
+                    <li key={cat.id}>
+                      <Link
+                        className="detail__info__right__category__pill"
+                        to={`/category/${cat.id}`}>
+                        {cat.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
 
