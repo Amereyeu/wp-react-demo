@@ -33,7 +33,7 @@ function MainPosts() {
       .catch((err) => console.log(err));
   }
 
-  // console.log("posts:", posts);
+  console.log("posts:", posts);
 
   useEffect(() => {
     getEvents();
