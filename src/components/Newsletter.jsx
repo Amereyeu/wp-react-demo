@@ -26,7 +26,7 @@ function Newsletter() {
       })
       .catch((err) => console.log(err));
 
-    toast.success("You just subscribed to our newsletter", {
+    toast.success("You just subscribed to our newsletter. Thank you.", {
       position: "top-center",
       autoClose: 4000,
       hideProgressBar: false,
