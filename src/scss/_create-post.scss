@@ -20,6 +20,12 @@
     &__input {
       margin-bottom: 1rem;
       height: 190px;
+
+      &__error {
+        color: #f00;
+        display: block;
+        margin: 4px 0 0 4px;
+      }
     }
 
     &__select {
@@ -27,6 +33,12 @@
       label {
         margin-bottom: 0.5rem;
         text-transform: uppercase;
+      }
+
+      &__error {
+        color: #f00;
+        display: block;
+        margin: 4px 0 0 4px;
       }
     }
   }
@@ -36,7 +48,7 @@
     padding: 0 1rem;
 
     &__input {
-      margin: 24px 0 8px;
+      margin: 24px 0 0;
       position: relative;
 
       input[type="text"],
@@ -51,6 +63,12 @@
         font-size: 1rem;
         font-family: $primary;
         color: var(--text);
+      }
+
+      &__error {
+        color: #f00;
+        display: block;
+        margin: 4px 0 0 4px;
       }
     }
   }
