@@ -101,7 +101,7 @@
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       letter-spacing: 2px;
       text-transform: uppercase;
-      width: 250px;
+      width: 220px;
       font-size: 1rem;
       padding: 8px 20px;
       font-weight: 900;
@@ -112,6 +112,7 @@
       display: block;
       background: var(--text);
       color: var(--bg);
+      font-family: $heading;
 
       @include break($medium) {
         padding: 1rem 2rem;
