@@ -36,7 +36,7 @@ function Newsletter() {
       progress: undefined,
     });
 
-    console.log("email:", email);
+    // console.log("email:", email);
 
     reset();
   }
