@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 function CategoryList({ categories }) {
   return (
-    <div className="categorylist-wrap" id="catlist">
+    <div className="categorylist-wrap">
       <ul className="categorylist">
         <li className="categorylist__item">
-          <Link className="categorylist__item__link" to="/">
+          <HashLink smooth  className="categorylist__item__link" to="/#posts">
             ALL
-          </Link>
+          </HashLink>
         </li>
 
         {categories.map((category) => (
