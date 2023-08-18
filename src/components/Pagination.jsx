@@ -12,6 +12,10 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
+  const totalPages = Math.ceil(totalPosts / postsPerPage)
+
+  console.log(totalPages);
+
   return (
     <div className="pagination-wrap">
       <ul className="pagination">
@@ -23,14 +27,23 @@ export const Pagination = ({
           ""
         )}
 
-        {pageNumbers.map((number) => (
+        {/* {pageNumbers.map((number) => (
           <li
             className={`page-item ${currentPage == number ? "page-item--current" : ""}`}
             key={number}
             onClick={() => paginate(number)}>
             <span className="page-link">{number}</span>
           </li>
-        ))}
+        ))} */}
+
+
+        {currentPage >= 0 ? (
+          <li className="page-item no-hover">
+            <span className="">{currentPage} / {totalPages}</span>
+          </li>
+        ) : (
+          ""
+        )}
 
         {currentPage < pageNumbers.length ? (
           <li className="page-item" onClick={() => nextPage()}>
@@ -41,7 +54,7 @@ export const Pagination = ({
         )}
 
         <li className="page-item">
-          <div className="page-link">Total: {totalPosts}</div>
+          <div className="page-link">Total Posts: {totalPosts}</div>
         </li>
       </ul>
     </div>
@@ -49,5 +62,9 @@ export const Pagination = ({
 };
 
 export default Pagination;
+
+
+
+
 
 

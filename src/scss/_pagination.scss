@@ -33,6 +33,12 @@
         color: var(--bg);
       }
     }
+
+    .no-hover:hover {
+      color: unset;
+      background: unset;
+      cursor: auto;
+    }
   }
 }
 
