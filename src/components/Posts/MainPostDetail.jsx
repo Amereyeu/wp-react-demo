@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
-import { FaRegComments, FaRegClock } from "react-icons/fa";
+import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
@@ -72,22 +72,25 @@ function MainPostDetail() {
 
         <div className="detail__info">
           <div className="detail__info__left">
-            <img
+            {/* <img
               className="detail__info__left__image"
               src={post._embedded.author[0].avatar_urls["24"]}
               alt={post._embedded.author[0].name}
-            />
+            /> */}
 
             <div className="detail__info__left__author">
-              {post._embedded.author[0].name}
+              <FaRegUser />
+              <span>{post._embedded.author[0].name}</span>
             </div>
 
             <div className="detail__info__left__date">
-              <FaRegClock /> {post.date.slice(0, 10)}
+              <FaRegClock />
+              <span>{post.date.slice(0, 10)}</span>
             </div>
 
             <div className="detail__info__left__comments">
-              <FaRegComments /> <span>Comments: </span> {comments.length}
+              <FaRegComments /> <span>Comments: </span>
+              <span>{comments.length}</span>
             </div>
           </div>
 
@@ -141,4 +144,6 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
+
 

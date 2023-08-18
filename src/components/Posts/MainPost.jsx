@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaRegComments, FaRegClock } from "react-icons/fa";
+import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 
-
-function MainPost({ posts, comments, isLoaded }) {
+function MainPost({ posts, isLoaded }) {
   if (isLoaded) {
     return (
       <>
@@ -30,30 +29,24 @@ function MainPost({ posts, comments, isLoaded }) {
               </h2>
 
               <div className="row">
-                {/* <h3 className="post__text__author">
-                  {post._embedded.author[0].name}
-                </h3> */}
-
                 <div className="detail__info__left">
                   <div className="detail__info__left__author">
-                    <FaRegClock />
-                    <span>
-                     {post._embedded.author[0].name}
-
-                    </span>
+                    <FaRegUser />
+                    <span>{post._embedded.author[0].name}</span>
                   </div>
 
                   <div className="detail__info__left__date">
-                    <FaRegClock /> 
-                    <span>
-                    {post.date.slice(0, 10)}
-
-                    </span>
+                    <FaRegClock />
+                    <span>{post.date.slice(0, 10)}</span>
                   </div>
 
                   <div className="detail__info__left__comments">
                     <FaRegComments /> <span>Comments: </span>
-                    <span>{comments.length}</span>
+                    {post._embedded.replies !== undefined ? (
+                      <span>{post._embedded.replies[0].length}</span>
+                    ) : (
+                      <span>0</span>
+                    )}
                   </div>
                 </div>
 
@@ -107,9 +100,4 @@ function MainPost({ posts, comments, isLoaded }) {
 }
 
 export default MainPost;
-
-
-
-
-
 
