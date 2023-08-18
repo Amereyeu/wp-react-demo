@@ -86,7 +86,7 @@ function MainPostDetail() {
 
             <div className="detail__info__left__date">
               <FaRegClock />
-              <span>{format(new Date(post.date), "MM.dd.yyyy")}</span>
+              <span>{format(new Date(post.date), "dd.MM.yyyy")}</span>
             </div>
 
             <div className="detail__info__left__comments">

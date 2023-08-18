@@ -42,12 +42,15 @@ function MainPosts() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const nextPage = () => setCurrentPage(currentPage + 1);
-
   const previousPage = () => setCurrentPage(currentPage - 1);
+  const firstPage = () => setCurrentPage(1);
+  const lastPage = () => setCurrentPage(totalPages);
+
 
   if (isLoaded) {
     return (
@@ -56,10 +59,7 @@ function MainPosts() {
 
         <CategoryList categories={categories} />
 
-        <MainPost
-          posts={currentPosts}
-          isLoaded={isLoaded}
-        />
+        <MainPost posts={currentPosts} isLoaded={isLoaded} />
 
         <Pagination
           postsPerPage={postsPerPage}
@@ -68,6 +68,9 @@ function MainPosts() {
           nextPage={nextPage}
           previousPage={previousPage}
           currentPage={currentPage}
+          firstPage={firstPage}
+          lastPage={lastPage}
+          totalPages={totalPages}
         />
       </div>
     );
@@ -81,4 +84,5 @@ function MainPosts() {
 }
 
 export default MainPosts;
+
 

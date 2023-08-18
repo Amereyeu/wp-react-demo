@@ -5,6 +5,9 @@ export const Pagination = ({
   nextPage,
   previousPage,
   currentPage,
+  firstPage,
+  lastPage,
+  totalPages
 }) => {
   const pageNumbers = [];
 
@@ -12,7 +15,8 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
-  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+ 
 
   return (
     <>
@@ -56,12 +60,21 @@ export const Pagination = ({
       <div className="pagination-wrap2">
         <ul className="pagination">
           {currentPage >= 2 ? (
+            <li className="page-item" onClick={() => firstPage()}>
+              <span className="page-link">First</span>
+            </li>
+          ) : (
+            ""
+          )}
+
+          {currentPage >= 2 ? (
             <li className="page-item" onClick={() => previousPage()}>
               <span className="page-link">Previous</span>
             </li>
           ) : (
             ""
           )}
+
           {currentPage >= 0 ? (
             <li className="page-item no-hover">
               <span className="">
@@ -75,6 +88,14 @@ export const Pagination = ({
           {currentPage < pageNumbers.length ? (
             <li className="page-item" onClick={() => nextPage()}>
               <span className="page-link">Next</span>
+            </li>
+          ) : (
+            ""
+          )}
+
+          {currentPage < pageNumbers.length ? (
+            <li className="page-item" onClick={() => lastPage()}>
+              <span className="page-link">Last</span>
             </li>
           ) : (
             ""
