@@ -14,8 +14,6 @@ export const Pagination = ({
 
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
-  console.log(totalPages);
-
   return (
     <>
       {/* display all page numbers */}
@@ -92,5 +90,4 @@ export const Pagination = ({
 };
 
 export default Pagination;
-
 

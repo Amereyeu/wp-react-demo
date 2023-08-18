@@ -30,31 +30,32 @@ function MainPost({ posts, comments, isLoaded }) {
               </h2>
 
               <div className="row">
-                <h3 className="post__text__author">
+                {/* <h3 className="post__text__author">
                   {post._embedded.author[0].name}
-                </h3>
-                
-                <div className="detail__info__left">
-                  <img
-                    className="detail__info__left__image"
-                    src={post._embedded.author[0].avatar_urls["24"]}
-                    alt={post._embedded.author[0].name}
-                  />
+                </h3> */}
 
+                <div className="detail__info__left">
                   <div className="detail__info__left__author">
-                    {post._embedded.author[0].name}
+                    <FaRegClock />
+                    <span>
+                     {post._embedded.author[0].name}
+
+                    </span>
                   </div>
 
                   <div className="detail__info__left__date">
-                    <FaRegClock /> {post.date.slice(0, 10)}
+                    <FaRegClock /> 
+                    <span>
+                    {post.date.slice(0, 10)}
+
+                    </span>
                   </div>
 
                   <div className="detail__info__left__comments">
-                    <FaRegComments /> <span>Comments: </span> {comments.length}
+                    <FaRegComments /> <span>Comments: </span>
+                    <span>{comments.length}</span>
                   </div>
                 </div>
-
-
 
                 {post.categories.length !== 0 && (
                   <div className="post__text__category">
@@ -106,6 +107,9 @@ function MainPost({ posts, comments, isLoaded }) {
 }
 
 export default MainPost;
+
+
+
 
 
 
