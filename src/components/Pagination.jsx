@@ -19,7 +19,7 @@ export const Pagination = ({
   return (
     <>
       {/* display all page numbers */}
-      <div className="pagination-wrap">
+      {/* <div className="pagination-wrap">
         <ul className="pagination">
           {currentPage >= 2 ? (
             <li className="page-item" onClick={() => previousPage()}>
@@ -52,7 +52,7 @@ export const Pagination = ({
             <div className="page-link">Total Posts: {totalPosts}</div>
           </li>
         </ul>
-      </div>
+      </div> */}
 
       {/* display page number and total pages only */}
       <div className="pagination-wrap2">
@@ -92,4 +92,5 @@ export const Pagination = ({
 };
 
 export default Pagination;
+
 
