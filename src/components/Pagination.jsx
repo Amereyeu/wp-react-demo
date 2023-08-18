@@ -12,59 +12,84 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
-  const totalPages = Math.ceil(totalPosts / postsPerPage)
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
 
   console.log(totalPages);
 
   return (
-    <div className="pagination-wrap">
-      <ul className="pagination">
-        {currentPage >= 2 ? (
-          <li className="page-item" onClick={() => previousPage()}>
-            <span className="page-link">Previous</span>
+    <>
+      {/* display all page numbers */}
+      <div className="pagination-wrap">
+        <ul className="pagination">
+          {currentPage >= 2 ? (
+            <li className="page-item" onClick={() => previousPage()}>
+              <span className="page-link">Previous</span>
+            </li>
+          ) : (
+            ""
+          )}
+
+          {pageNumbers.map((number) => (
+            <li
+              className={`page-item ${
+                currentPage == number ? "page-item--current" : ""
+              }`}
+              key={number}
+              onClick={() => paginate(number)}>
+              <span className="page-link">{number}</span>
+            </li>
+          ))}
+
+          {currentPage < pageNumbers.length ? (
+            <li className="page-item" onClick={() => nextPage()}>
+              <span className="page-link">Next</span>
+            </li>
+          ) : (
+            ""
+          )}
+
+          <li className="page-item">
+            <div className="page-link">Total Posts: {totalPosts}</div>
           </li>
-        ) : (
-          ""
-        )}
+        </ul>
+      </div>
 
-        {/* {pageNumbers.map((number) => (
-          <li
-            className={`page-item ${currentPage == number ? "page-item--current" : ""}`}
-            key={number}
-            onClick={() => paginate(number)}>
-            <span className="page-link">{number}</span>
-          </li>
-        ))} */}
+      {/* display page number and total pages only */}
+      <div className="pagination-wrap2">
+        <ul className="pagination">
+          {currentPage >= 2 ? (
+            <li className="page-item" onClick={() => previousPage()}>
+              <span className="page-link">Previous</span>
+            </li>
+          ) : (
+            ""
+          )}
+          {currentPage >= 0 ? (
+            <li className="page-item no-hover">
+              <span className="">
+                {currentPage} / {totalPages}
+              </span>
+            </li>
+          ) : (
+            ""
+          )}
 
+          {currentPage < pageNumbers.length ? (
+            <li className="page-item" onClick={() => nextPage()}>
+              <span className="page-link">Next</span>
+            </li>
+          ) : (
+            ""
+          )}
+        </ul>
 
-        {currentPage >= 0 ? (
-          <li className="page-item no-hover">
-            <span className="">{currentPage} / {totalPages}</span>
-          </li>
-        ) : (
-          ""
-        )}
-
-        {currentPage < pageNumbers.length ? (
-          <li className="page-item" onClick={() => nextPage()}>
-            <span className="page-link">Next</span>
-          </li>
-        ) : (
-          ""
-        )}
-
-        <li className="page-item">
-          <div className="page-link">Total Posts: {totalPosts}</div>
-        </li>
-      </ul>
-    </div>
+        <div className="total">
+          <div className="page-item">Total Posts: {totalPosts}</div>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default Pagination;
-
-
-
-
-
 
