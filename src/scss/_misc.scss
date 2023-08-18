@@ -27,3 +27,76 @@ blockquote {
   }
 }
 
+.wp-block-image {
+  margin-bottom: 1rem;
+
+  figure {
+    position: relative;
+
+    img {
+      border: 5px solid white;
+      -webkit-box-shadow: 0 0 4px $color-primary;
+      box-shadow: 0 0 4px $color-primary;
+      width: 100% !important;
+      height: auto !important;
+
+      @include break($medium) {
+        width: initial !important;
+        height: initial !important;
+      }
+    }
+
+    figcaption {
+      text-transform: uppercase;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    &.alignleft {
+      text-align: center;
+
+      @include break($medium) {
+        margin-right: 1rem;
+        float: left;
+        text-align: left;
+      }
+    }
+
+    &.aligncenter {
+      text-align: center;
+    }
+
+    &.alignright {
+      text-align: center;
+
+      @include break($medium) {
+        float: right;
+        margin-left: 1rem;
+        text-align: right;
+      }
+    }
+  }
+}
+
+// .detail__content {
+//   p {
+//     border: 1px solid red;
+//   }
+// }
+
+// .wp-block-image:has(.alignright) {
+//   float: right;
+
+//   &:after {
+//     clear: right;
+//   }
+
+//   + p {
+//     border: 1px solid blue;
+
+//     &:after {
+//       clear: both;
+//     }
+//   }
+// }
+
