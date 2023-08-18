@@ -8,10 +8,10 @@ import { SearchBar } from "../Search/Search";
 function MainPosts() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [comments, setComments] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-
 
   function getEvents() {
     const getPosts = axios.get(
@@ -24,10 +24,17 @@ function MainPosts() {
       `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/categories`
     );
 
-    Promise.all([getPosts, getCategories])
+    const getComments = axios.get(
+      `${
+        import.meta.env.VITE_BASE_URL
+      }/wp-json/wp/v2/comments`
+    );
+
+    Promise.all([getPosts, getCategories, getComments])
       .then((res) => {
         setPosts(res[0].data);
         setCategories(res[1].data);
+        setComments(res[2].data);
 
         setIsLoaded(true);
       })
@@ -57,7 +64,7 @@ function MainPosts() {
 
         <CategoryList categories={categories} />
 
-        <MainPost posts={currentPosts} isLoaded={isLoaded} />
+        <MainPost posts={currentPosts} comments={comments} isLoaded={isLoaded} />
 
         <Pagination
           postsPerPage={postsPerPage}
@@ -79,5 +86,4 @@ function MainPosts() {
 }
 
 export default MainPosts;
-
 
