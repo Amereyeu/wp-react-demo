@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
+import { format } from "date-fns";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
@@ -85,7 +86,7 @@ function MainPostDetail() {
 
             <div className="detail__info__left__date">
               <FaRegClock />
-              <span>{post.date.slice(0, 10)}</span>
+              <span>{format(new Date(post.date), "MM.dd.yyyy")}</span>
             </div>
 
             <div className="detail__info__left__comments">
@@ -144,6 +145,4 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
-
-
 
