@@ -33,10 +33,19 @@ function MainPosts() {
       .catch((err) => console.log(err));
   }
 
-  console.log("posts:", posts);
+  // console.log("posts:", posts);
 
   useEffect(() => {
     getEvents();
+
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    const href = window.location.href.substring(
+      window.location.href.lastIndexOf("#") + 1
+    );
+    if (window.location.href.lastIndexOf("#") > 0) {
+      document.getElementById(href)?.scrollIntoView();
+    }
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -50,7 +59,6 @@ function MainPosts() {
   const previousPage = () => setCurrentPage(currentPage - 1);
   const firstPage = () => setCurrentPage(1);
   const lastPage = () => setCurrentPage(totalPages);
-
 
   if (isLoaded) {
     return (
@@ -84,5 +92,4 @@ function MainPosts() {
 }
 
 export default MainPosts;
-
 

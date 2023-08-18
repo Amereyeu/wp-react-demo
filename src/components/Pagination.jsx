@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 export const Pagination = ({
   postsPerPage,
   totalPosts,
@@ -16,8 +14,6 @@ export const Pagination = ({
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
-
-  const [isSmall, setIsSmall] = useState(true);
 
   return (
     <>

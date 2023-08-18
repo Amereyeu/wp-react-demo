@@ -45,12 +45,14 @@ function Tags() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const nextPage = () => setCurrentPage(currentPage + 1);
-
   const previousPage = () => setCurrentPage(currentPage - 1);
+  const firstPage = () => setCurrentPage(1);
+  const lastPage = () => setCurrentPage(totalPages);
 
   if (isLoaded) {
     return (
@@ -69,6 +71,9 @@ function Tags() {
             nextPage={nextPage}
             previousPage={previousPage}
             currentPage={currentPage}
+            firstPage={firstPage}
+            lastPage={lastPage}
+            totalPages={totalPages}
           />
         </div>
       </div>
@@ -85,4 +90,6 @@ function Tags() {
 }
 
 export default Tags;
+
+
 

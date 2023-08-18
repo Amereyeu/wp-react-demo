@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CategoryList({ categories }) {
   return (
-    <div className="categorylist-wrap">
+    <div className="categorylist-wrap" id="catlist">
       <ul className="categorylist">
         <li className="categorylist__item">
           <Link className="categorylist__item__link" to="/">
