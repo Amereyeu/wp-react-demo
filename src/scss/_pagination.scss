@@ -74,6 +74,46 @@
       background: unset;
       cursor: auto;
     }
+
+    .first {
+      &:before {
+        content: "<<";
+
+        @include break($medium) {
+          content: "First";
+        }
+      }
+    }
+
+    .previous {
+      &:before {
+        content: "<";
+
+        @include break($medium) {
+          content: "Previous";
+        }
+      }
+    }
+
+    .next {
+      &:before {
+        content: ">";
+
+        @include break($medium) {
+          content: "Next";
+        }
+      }
+    }
+
+    .last {
+      &:before {
+        content: ">>";
+
+        @include break($medium) {
+          content: "Last";
+        }
+      }
+    }
   }
 
   .total {

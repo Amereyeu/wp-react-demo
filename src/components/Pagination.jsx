@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export const Pagination = ({
   postsPerPage,
   totalPosts,
@@ -7,7 +9,7 @@ export const Pagination = ({
   currentPage,
   firstPage,
   lastPage,
-  totalPages
+  totalPages,
 }) => {
   const pageNumbers = [];
 
@@ -15,8 +17,7 @@ export const Pagination = ({
     pageNumbers.push(i);
   }
 
-
- 
+  const [isSmall, setIsSmall] = useState(true);
 
   return (
     <>
@@ -60,16 +61,16 @@ export const Pagination = ({
       <div className="pagination-wrap2">
         <ul className="pagination">
           {currentPage >= 2 ? (
-            <li className="page-item" onClick={() => firstPage()}>
-              <span className="page-link">First</span>
+            <li className="page-item first" onClick={() => firstPage()}>
+              <span className="page-link"></span>
             </li>
           ) : (
             ""
           )}
 
           {currentPage >= 2 ? (
-            <li className="page-item" onClick={() => previousPage()}>
-              <span className="page-link">Previous</span>
+            <li className="page-item previous" onClick={() => previousPage()}>
+              <span className="page-link"></span>
             </li>
           ) : (
             ""
@@ -86,16 +87,16 @@ export const Pagination = ({
           )}
 
           {currentPage < pageNumbers.length ? (
-            <li className="page-item" onClick={() => nextPage()}>
-              <span className="page-link">Next</span>
+            <li className="page-item next" onClick={() => nextPage()}>
+              <span className="page-link"></span>
             </li>
           ) : (
             ""
           )}
 
           {currentPage < pageNumbers.length ? (
-            <li className="page-item" onClick={() => lastPage()}>
-              <span className="page-link">Last</span>
+            <li className="page-item last" onClick={() => lastPage()}>
+              <span className="page-link"></span>
             </li>
           ) : (
             ""
