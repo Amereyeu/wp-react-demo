@@ -149,13 +149,9 @@
 
   &__content {
     display: flow-root;
-    
+
     ul {
-      list-style: none;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--text);
-      max-width: 600px;
+      margin: 0 0 1rem 1.5rem;
     }
 
     p {
