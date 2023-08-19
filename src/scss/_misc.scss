@@ -110,14 +110,12 @@ blockquote {
   margin-bottom: 1rem;
 
   .wp-block-image {
-
     img {
       border: 5px solid $color-white;
       -webkit-box-shadow: 0 0 4px $color-primary;
       box-shadow: 0 0 4px $color-primary;
       width: 100% !important;
       height: auto !important;
-
     }
 
     figcaption {
@@ -126,30 +124,6 @@ blockquote {
       font-style: italic;
       padding: 0 8px;
     }
-
-    // &.alignleft {
-    //   text-align: center;
-
-    //   @include break($medium) {
-    //     margin-right: 1rem;
-    //     float: left;
-    //     text-align: left;
-    //   }
-    // }
-
-    // &.aligncenter {
-    //   text-align: center;
-    // }
-
-    // &.alignright {
-    //   text-align: center;
-
-    //   @include break($medium) {
-    //     float: right;
-    //     margin-left: 1rem;
-    //     text-align: right;
-    //   }
-    // }
   }
 }
 
