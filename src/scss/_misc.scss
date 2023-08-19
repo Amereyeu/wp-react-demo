@@ -141,12 +141,10 @@ blockquote {
     color: var(--text);
     border: 1px solid var(--text);
     border-collapse: collapse;
-    
+
     @include break($medium) {
       max-width: 1000px;
-      
     }
-    
 
     td,
     th {
@@ -179,30 +177,5 @@ blockquote {
     font-style: italic;
     padding: 0 8px;
   }
-
-    &.alignleft {
-      text-align: center;
-
-      @include break($medium) {
-        margin-right: 1rem;
-        float: left;
-        text-align: left;
-      }
-    }
-
-    &.aligncenter {
-      text-align: center;
-    }
-
-    &.alignright {
-      text-align: center;
-
-      @include break($medium) {
-        float: right;
-        margin-left: 1rem;
-        text-align: right;
-      }
-    }
-
 }
 

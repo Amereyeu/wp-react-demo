@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GiSun, GiMoon } from "react-icons/gi";
 
+import data from "../nav.json";
+
 function Navigation({ handleThemeChange, theme }) {
   const [isShrunk, setShrunk] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [navigationData] = useState(data);
 
   const toggleNavigation = () => {
     setIsNavOpen(!isNavOpen);
@@ -49,13 +52,17 @@ function Navigation({ handleThemeChange, theme }) {
         </div>
 
         <div className={`navigation__menu ${isNavOpen ? "collapse" : ""}`}>
-          <Link
-            to="/"
-            className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
-            onClick={toggleNavigation}>
-            <button aria-label="Home">Home</button>
-          </Link>
-
+          {navigationData.map((navItem, i) => (
+            <Link
+              to={navItem.to}
+              className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
+              onClick={toggleNavigation}>
+              <button aria-label={navItem.name}>
+                {navItem.name}
+              </button>
+            </Link>
+          ))}
+          {/* 
           <Link
             to="/gallery"
             className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
@@ -68,7 +75,7 @@ function Navigation({ handleThemeChange, theme }) {
             className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
             onClick={toggleNavigation}>
             <button aria-label="Contact">Contact</button>
-          </Link>
+          </Link> */}
 
           <div
             className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
