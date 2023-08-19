@@ -25,11 +25,13 @@ $xlarge: 1200px;
 :root {
   --text: #333;
   --bg: #fcfcfc;
+  --table: #eee
 }
 
 html[data-theme="dark"] {
   --bg: #2f2f2f;
   --text: #fcfcfc;
+  --table: #3d3d3d;
 }
 
 body {
