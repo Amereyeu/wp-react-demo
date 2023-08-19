@@ -79,4 +79,27 @@ blockquote {
   }
 }
 
+.wp-block-embed {
+  &.is-type-video {
+    height: auto;
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    max-width: 500px;
+
+    iframe {
+      margin: 0;
+      border: 5px solid $color-white;
+      -webkit-box-shadow: 0 0 4px $color-primary;
+      box-shadow: 0 0 4px $color-primary;
+    }
+
+    figcaption {
+      text-transform: uppercase;
+      font-size: 13px;
+      font-style: italic;
+      padding: 0 8px;
+    }
+  }
+}
 
