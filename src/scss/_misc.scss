@@ -34,7 +34,7 @@ blockquote {
     position: relative;
 
     img {
-      border: 5px solid white;
+      border: 5px solid $color-white;
       -webkit-box-shadow: 0 0 4px $color-primary;
       box-shadow: 0 0 4px $color-primary;
       width: 100% !important;
@@ -50,6 +50,7 @@ blockquote {
       text-transform: uppercase;
       font-size: 13px;
       font-style: italic;
+      padding: 0 8px;
     }
 
     &.alignleft {
