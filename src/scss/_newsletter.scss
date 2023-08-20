@@ -50,8 +50,8 @@
       font-size: 1.25rem;
 
       &::placeholder {
-        color: var(--text);      font-size: 1rem;
-
+        color: var(--text);
+        font-size: 1rem;
       }
     }
 
@@ -93,7 +93,7 @@
           position: absolute;
           right: 2rem;
           top: 16px;
-          background: url(../img/arrow.png);
+          background: url(../img/arrow.svg) no-repeat center center;
           z-index: 100;
           width: 39px;
           height: 27px;
