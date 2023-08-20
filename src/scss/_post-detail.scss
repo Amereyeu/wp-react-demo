@@ -179,7 +179,8 @@
       font-size: 1.313rem;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin: 0 0 1rem 1.5rem;
     }
 
@@ -190,19 +191,22 @@
 
   &__button {
     background: var(--bg);
-    padding: 0.5rem 1rem;
     border: 1px solid var(--text);
-    text-decoration: none;
-    color: var(--text);
-    text-transform: uppercase;
-    cursor: pointer;
     margin: 2rem auto 4rem;
     display: inherit;
-    transition: all 0.6s;
+    
+    a {
+      padding: 0.5rem 1rem;
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.6s;
 
-    &:hover {
-      background: var(--text);
-      color: var(--bg);
+      &:hover {
+        background: var(--text);
+        color: var(--bg);
+      }
     }
   }
 }

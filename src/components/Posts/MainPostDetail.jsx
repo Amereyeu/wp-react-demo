@@ -5,6 +5,7 @@ import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
+import { HashLink } from "react-router-hash-link";
 
 function MainPostDetail() {
   const [post, setPost] = useState("");
@@ -125,9 +126,11 @@ function MainPostDetail() {
 
         <button
           className="detail__button"
-          onClick={() => navigate(-1)}
+          // onClick={() => navigate(-1)}
           aria-label="Back to articles">
-          Back to articles
+          <HashLink smooth  to="/#posts">
+            Back to articles
+          </HashLink>
         </button>
 
         <Comments comments={comments} isLoaded={isLoaded} />
@@ -145,4 +148,8 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
+
+
+
 
