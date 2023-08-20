@@ -74,12 +74,12 @@
             outline: none;
             border: none;
             background-color: transparent;
-            color: white;
+            color: $color-white;
             letter-spacing: 0.2rem;
             font-size: 1.2em;
             text-transform: uppercase;
             cursor: pointer;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: $color-orange;
 
             svg {
               width: 2rem;

@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@600&Raleway:wght@400;700&&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@600&Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
 $color-primary: #000;
 $color-secondary: #9a9a9a;
@@ -26,7 +25,7 @@ $xlarge: 1200px;
 :root {
   --text: #333;
   --bg: #fcfcfc;
-  --table: #eee
+  --table: #eee;
 }
 
 html[data-theme="dark"] {
