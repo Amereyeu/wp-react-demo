@@ -1,69 +1,34 @@
-// page loader
 .circle {
-  --size: 48px;
-  --color: var(--text);
-  --animation-timing-function: linear;
-  --animation-duration: 2s;
-  width: var(--size);
-  height: var(--size);
-  mask-image: radial-gradient(
-    circle at 50% 50%,
-    transparent calc(var(--size) / 4),
-    black calc(var(--size) / 4)
-  );
-  background-image: conic-gradient(
-    from 0deg,
-    var(--color) 0deg,
-    var(--color) 10deg,
-    transparent 10deg,
-    transparent 30deg,
-    var(--color) 30deg,
-    var(--color) 50deg,
-    transparent 50deg,
-    transparent 70deg,
-    var(--color) 70deg,
-    var(--color) 90deg,
-    transparent 90deg,
-    transparent 110deg,
-    var(--color) 110deg,
-    var(--color) 130deg,
-    transparent 130deg,
-    transparent 150deg,
-    var(--color) 150deg,
-    var(--color) 170deg,
-    transparent 170deg,
-    transparent 190deg,
-    var(--color) 190deg,
-    var(--color) 210deg,
-    transparent 210deg,
-    transparent 230deg,
-    var(--color) 230deg,
-    var(--color) 250deg,
-    transparent 250deg,
-    transparent 270deg,
-    var(--color) 270deg,
-    var(--color) 290deg,
-    transparent 290deg,
-    transparent 310deg,
-    var(--color) 310deg,
-    var(--color) 330deg,
-    transparent 330deg,
-    transparent 350deg,
-    var(--color) 350deg,
-    var(--color) 360deg
-  );
-  border-radius: 50%;
-  transform: rotate(0deg);
-  animation: var(--animation-timing-function) var(--animation-duration) infinite
-    circle-spin-7-animation;
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  position: relative;
+}
+.circle::after,
+.circle::before {
+  content: "";
+  box-sizing: border-box;
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: animcircle 2s ease-in-out infinite;
+}
+.circle::after {
+  border-color: #ff3d00;
+  animation-delay: 1s;
 }
 
-@keyframes circle-spin-7-animation {
-  from {
-    transform: rotate(0deg);
+@keyframes animcircle {
+  0% {
+    transform: scale(0);
+    opacity: 1;
   }
-
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: scale(1);
+    opacity: 0;
   }
 }
+

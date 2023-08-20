@@ -57,25 +57,9 @@ function Navigation({ handleThemeChange, theme }) {
               to={navItem.to}
               className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
               onClick={toggleNavigation}>
-              <button aria-label={navItem.name}>
-                {navItem.name}
-              </button>
+              <button aria-label={navItem.name}>{navItem.name}</button>
             </Link>
           ))}
-          {/* 
-          <Link
-            to="/gallery"
-            className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
-            onClick={toggleNavigation}>
-            <button aria-label="Gallery">Gallery</button>
-          </Link>
-
-          <Link
-            to="/contact"
-            className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
-            onClick={toggleNavigation}>
-            <button aria-label="Contact">Contact</button>
-          </Link> */}
 
           <div
             className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
