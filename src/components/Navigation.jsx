@@ -55,6 +55,7 @@ function Navigation({ handleThemeChange, theme }) {
           {navigationData.map((navItem, i) => (
             <Link
               to={navItem.to}
+              key={i}
               className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
               onClick={toggleNavigation}>
               <button aria-label={navItem.name}>{navItem.name}</button>
