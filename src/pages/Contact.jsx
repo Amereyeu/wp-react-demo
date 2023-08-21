@@ -34,7 +34,7 @@ function Contact() {
 
   if (isLoaded) {
     return (
-      <>
+      <div className="contact-wrap">
         <div className="contact">
           <div className="contact__left">
             <ul className="contact-list">
@@ -131,7 +131,7 @@ function Contact() {
           referrerPolicy="no-referrer-when-downgrade"></iframe>
 
         <ToastContainer />
-      </>
+      </div>
     );
   }
 }
