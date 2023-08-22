@@ -46,8 +46,8 @@
   }
 
   &__animation {
-    animation: typewriter 6s steps(25) infinite both,
-      blinkingCursor 500ms steps(25) infinite;
+    animation: typewriter 6s steps(23) infinite both,
+      blinkingCursor 500ms steps(23) infinite;
   }
 
   @keyframes typewriter {
