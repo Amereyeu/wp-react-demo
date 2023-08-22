@@ -1,20 +1,65 @@
 .hero {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
   background: linear-gradient(to top, #151515ba, #484848cc),
     url(/img/hero.png) no-repeat center center;
 
-  h1 {
+  h1,
+  h2 {
     color: $color-white;
     font-family: $heading;
     font-size: 3.5rem;
     // text-shadow: 2px 2px $color-orange;
     text-align: center;
-    padding: 1rem;
+    padding: 0 1rem;
+  }
 
+  h1 {
     @include break($medium) {
       font-size: 7rem;
+    }
+  }
+
+  h2 {
+    @include break($medium) {
+      padding: 0;
+      border-right: 10px solid $color-orange;
+      max-width: 950px;
+      font-size: 5rem;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    @include break($large) {
+      font-size: 7rem;
+    }
+  }
+
+  &__animation {
+    @include break($medium) {
+      animation: typewriter 3s steps(35) infinite both,
+        blinkCursor 500ms steps(35) infinite;
+    }
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blinkCursor {
+    from {
+      border-right-color: $color-orange;
+    }
+    to {
+      border-right-color: transparent;
     }
   }
 }

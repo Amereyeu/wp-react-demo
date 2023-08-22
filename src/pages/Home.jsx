@@ -8,11 +8,13 @@ function Home() {
   return (
     <main>
       <Hero />
-     
-        <Post />
-     
+
+      <Post />
+
       <About />
+
       <Newsletter />
+
       <CustomPost />
     </main>
   );

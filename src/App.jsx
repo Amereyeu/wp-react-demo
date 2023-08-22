@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 import Home from "./pages/Home";
-import Alergens from "./pages/Alergens";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
@@ -43,7 +42,6 @@ function App() {
           <Routes>
             <Route path="*" element={<NoPage />} />
             <Route path="/" element={<Home />} exact />
-            <Route path="/alergens" element={<Alergens />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/cake/:id" element={<CakeDetail />} />
