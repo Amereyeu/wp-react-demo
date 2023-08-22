@@ -11,26 +11,14 @@
   h2 {
     color: $color-white;
     font-family: $heading;
-    font-size: 3.5rem;
-    // text-shadow: 2px 2px $color-orange;
+    font-size: 2.5rem;
     text-align: center;
     padding: 0 1rem;
   }
 
   h1 {
     @include break($medium) {
-      font-size: 7rem;
-    }
-  }
-
-  h2 {
-    @include break($medium) {
-      padding: 0;
-      border-right: 10px solid $color-orange;
-      max-width: 950px;
       font-size: 5rem;
-      white-space: nowrap;
-      overflow: hidden;
     }
 
     @include break($large) {
@@ -38,23 +26,44 @@
     }
   }
 
-  &__animation {
+  h2 {
+    border-right: 5px solid $color-orange;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    max-width: 340px;
+
     @include break($medium) {
-      animation: typewriter 3s steps(35) infinite both,
-        blinkCursor 500ms steps(35) infinite;
+      border-right: 10px solid $color-orange;
+      max-width: 680px;
+      font-size: 5rem;
+    }
+
+    @include break($large) {
+      max-width: 950px;
+      font-size: 7rem;
     }
   }
 
+  &__animation {
+    animation: typewriter 6s steps(25) infinite both,
+      blinkingCursor 500ms steps(25) infinite;
+  }
+
   @keyframes typewriter {
-    from {
-      width: 0%;
+    0% {
+      width: 0;
     }
-    to {
+
+    70% {
+      width: 100%;
+    }
+    100% {
       width: 100%;
     }
   }
 
-  @keyframes blinkCursor {
+  @keyframes blinkingCursor {
     from {
       border-right-color: $color-orange;
     }
