@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SingleFaq from "./SingleFaq";
-import data from "../../data.json";
+import data from "../../data/data.json";
 
 function Faqs() {
   const [faqs, setfaqs] = useState(data);
