@@ -16,9 +16,25 @@
     img {
       width: 100%;
       height: auto;
-      border: 5px solid white;
-      -webkit-box-shadow: 0 0 4px $color-primary;
-      box-shadow: 0 0 4px $color-primary;
+      $thickness: 3px;
+      $cornersize: 40px;
+      $gap: 8px;
+      $color: $color-orange;
+      padding: calc(2 * $thickness + $gap);
+      border: $thickness solid #0000;
+      background: conic-gradient(
+            at $cornersize calc(3 * $thickness),
+            #0000 75%,
+            $color 0
+          )
+          0 0 / calc(100% - $cornersize) calc(100% - 3 * $thickness) border-box,
+        conic-gradient(at calc(3 * $thickness) $cornersize, #0000 75%, $color 0)
+          0 0 / calc(100% - 3 * $thickness) calc(100% - $cornersize) border-box,
+        linear-gradient(0deg, $color calc(2 * $thickness), #0000 0) 50%
+          $thickness / calc(100% - 2 * ($cornersize + $gap)) 100% repeat-y
+          padding-box,
+        linear-gradient(-90deg, $color calc(2 * $thickness), #0000 0) $thickness
+          50%/100% calc(100% - 2 * ($cornersize + $gap)) repeat-x padding-box;
     }
   }
 
