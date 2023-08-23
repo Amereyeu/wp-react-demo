@@ -3,6 +3,7 @@ import Post from "./Post";
 import About from "./About";
 import CustomPost from "./CustomPost";
 import Newsletter from "../components/Newsletter";
+import ModalGallery from "../components/ModalGallery/ModalGallery";
 
 function Home() {
   return (
@@ -14,6 +15,8 @@ function Home() {
       <About />
 
       <Newsletter />
+
+      <ModalGallery />
 
       <CustomPost />
     </main>
