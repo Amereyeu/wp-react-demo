@@ -1,28 +1,33 @@
 .image-wrap {
   max-width: 1200px;
-  gap: 1rem;
-  border: 1px solid red;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 4rem auto 0;
-  padding: 1rem;
 
-  .image-box {
-    cursor: pointer;
+  .images {
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    padding: 1rem;
 
-    &__image {
-      width: 100%;
-      height: auto;
-      margin-bottom: 0.5rem;
-      border: 5px solid white;
-      -webkit-box-shadow: 0 0 4px $color-primary;
-      box-shadow: 0 0 4px $color-primary;
-    }
+    .image-box {
+      cursor: pointer;
 
-    &__text {
-      text-align: center;
-      text-transform: uppercase;
-      font-weight: 400;
+      &__image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 0.5rem;
+        border: 5px solid white;
+        -webkit-box-shadow: 0 0 4px $color-primary;
+        box-shadow: 0 0 4px $color-primary;
+      }
+
+      &__text {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
     }
   }
 }

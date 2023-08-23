@@ -21,11 +21,12 @@ const Modal = ({
 
         <div className="modal__inner">
           <img
-            src={clickedImg.link}
+            // src={clickedImg.link}
+            src={clickedImg}
             alt="img"
             className="modal__inner__image"
           />
-          <p className="modal__inner__text">{clickedImg.text}</p>
+          {/* <p className="modal__inner__text">{clickedImg.text}</p> */}
         </div>
 
         <FaArrowLeft
