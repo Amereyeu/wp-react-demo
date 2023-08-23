@@ -8,8 +8,8 @@ function ModalGallery() {
 
   const handleClick = (item, index) => {
     setCurrentIndex(index);
-    setClickedImg(item.link);
-    console.log(item.link);
+    setClickedImg(item);
+    console.log("ci:", clickedImg);
   };
 
 

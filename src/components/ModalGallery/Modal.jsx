@@ -13,37 +13,34 @@ const Modal = ({
   };
 
   return (
-    <>
-      <div className="modal-overlay dismiss" onClick={handleClick}>
-        <div className="modal">
-          <div className="modal__close dismiss" onClick={handleClick}>
-            <FaTimes />
-          </div>
-
-          <img src={clickedImg} alt="img" />
-
-          <div onClick={handelRotationLeft} className="overlay-arrows_left">
-            <div>
-              <FaArrowLeft />
-            </div>
-          </div>
-
-          <div onClick={handelRotationRight} className="overlay-arrows_right">
-            <div>
-              <FaArrowRight />
-            </div>
-          </div>
+    <div className="modal-overlay dismiss" onClick={handleClick}>
+      <div className="modal ">
+        <div className="modal__close dismiss" onClick={handleClick}>
+          <FaTimes />
         </div>
+
+        <div className="modal__inner">
+          <img
+            src={clickedImg.link}
+            alt="img"
+            className="modal__inner__image"
+          />
+          <p className="modal__inner__text">{clickedImg.text}</p>
+        </div>
+
+        <FaArrowLeft
+          onClick={handelRotationLeft}
+          className="modal__arrow-left"
+        />
+
+        <FaArrowRight
+          onClick={handelRotationRight}
+          className="modal__arrow-right"
+        />
       </div>
-    </>
+    </div>
   );
 };
 
 export default Modal;
-
-
-
-
-
-
 
