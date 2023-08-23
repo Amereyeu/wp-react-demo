@@ -3,8 +3,8 @@ import { FaArrowLeft, FaArrowRight, FaTimes } from "react-icons/fa";
 const Modal = ({
   clickedImg,
   setClickedImg,
-  handelRotationRight,
-  handelRotationLeft,
+  // handelRotationRight,
+  // handelRotationLeft,
 }) => {
   const handleClick = (e) => {
     if (e.target.classList.contains("dismiss")) {
@@ -21,15 +21,18 @@ const Modal = ({
 
         <div className="modal__inner">
           <img
-            // src={clickedImg.link}
-            src={clickedImg}
+            src={clickedImg.link}
+            // src={clickedImg}
             alt="img"
             className="modal__inner__image"
           />
-          {/* <p className="modal__inner__text">{clickedImg.text}</p> */}
+          <div>
+            <h2 className="modal__inner__title">{clickedImg.title}</h2>
+            <p className="modal__inner__text">{clickedImg.text}</p>
+          </div>
         </div>
 
-        <FaArrowLeft
+        {/* <FaArrowLeft
           onClick={handelRotationLeft}
           className="modal__arrow-left"
         />
@@ -37,7 +40,7 @@ const Modal = ({
         <FaArrowRight
           onClick={handelRotationRight}
           className="modal__arrow-right"
-        />
+        /> */}
       </div>
     </div>
   );
