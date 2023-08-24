@@ -62,7 +62,7 @@ function Navigation({ handleThemeChange, theme }) {
             </Link>
           ))}
 
-          <div onClick={toggleNavigation}>
+          <div className="switch-wrap" onClick={toggleNavigation}>
             <div
               onClick={handleThemeChange}
               aria-label="Theme Switch"

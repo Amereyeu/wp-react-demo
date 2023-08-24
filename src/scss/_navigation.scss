@@ -69,6 +69,7 @@
           text-decoration: none;
           width: 100%;
           text-align: center;
+          -webkit-tap-highlight-color: $color-orange;
 
           button {
             outline: none;
@@ -78,6 +79,27 @@
             letter-spacing: 0.2rem;
             font-size: 1.2em;
             text-transform: uppercase;
+            cursor: pointer;
+
+            svg {
+              width: 2rem;
+              height: 2rem;
+            }
+          }
+        }
+
+        .switch-wrap {
+          width: 100%;
+
+          .switch {
+            padding: 1.5rem 1rem;
+            color: $color-secondary;
+            text-transform: uppercase;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            background-color: transparent;
+            color: $color-white;
             cursor: pointer;
             -webkit-tap-highlight-color: $color-orange;
 
@@ -140,8 +162,6 @@
         padding: 2rem;
         text-decoration: none;
         transition: all 0.6s;
-        outline: none;
-        border: none;
         background-color: transparent;
         color: $color-secondary;
         // padding: 0.725em 0;
