@@ -128,7 +128,7 @@ function MainPostDetail() {
           className="detail__button"
           // onClick={() => navigate(-1)}
           aria-label="Back to articles">
-          <HashLink smooth  to="/#posts">
+          <HashLink smooth to="/#posts">
             Back to articles
           </HashLink>
         </button>
@@ -148,8 +148,4 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
-
-
-
-
 

@@ -191,21 +191,27 @@
 
   &__button {
     background: var(--bg);
-    border: 1px solid var(--text);
+    border: none;
     margin: 2rem auto 4rem;
     display: inherit;
-    
+
     a {
       padding: 0.5rem 1rem;
       display: block;
       color: var(--text);
       text-decoration: none;
       text-transform: uppercase;
-      transition: all 0.6s;
+      border: 0px solid;
+      outline: 1px solid;
+      outline-color: var(--text);
+      outline-offset: 0px;
+      transition: all 0.6s cubic-bezier(0.36, 0.63, 0.5, 0.73);
 
       &:hover {
-        background: var(--text);
-        color: var(--bg);
+        border: 1px solid $color-orange;
+        outline-color: rgba(255, 255, 255, 0);
+        outline-offset: 15px;
+        color: $color-orange;
       }
     }
   }
