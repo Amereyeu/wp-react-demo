@@ -62,12 +62,13 @@ function Navigation({ handleThemeChange, theme }) {
             </Link>
           ))}
 
-          <div
-            className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
-            onClick={toggleNavigation}>
-            <button onClick={handleThemeChange} aria-label="Theme Switch">
+          <div onClick={toggleNavigation}>
+            <div
+              onClick={handleThemeChange}
+              aria-label="Theme Switch"
+              className={`switch ${isShrunk ? "small" : ""}`}>
               {theme === "light" ? <GiMoon /> : <GiSun />}
-            </button>
+            </div>
           </div>
         </div>
       </div>
