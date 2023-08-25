@@ -168,7 +168,10 @@ function MainPostDetail() {
             </HashLink>
           </button>
 
-          <Comments comments={data?.post.comments} />
+          {data?.post.comments.nodes.length !== 0 && (
+            <Comments comments={data?.post.comments} />
+          )}
+          
         </div>
       )}
     </>
