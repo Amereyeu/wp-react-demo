@@ -18,7 +18,7 @@ function Home() {
 
       <ModalGallery />
 
-      <CustomPost />
+      {/* <CustomPost /> */}
     </main>
   );
 }

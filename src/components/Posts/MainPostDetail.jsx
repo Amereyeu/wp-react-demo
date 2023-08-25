@@ -6,144 +6,167 @@ import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
 import { HashLink } from "react-router-hash-link";
+import { gql, useQuery } from "@apollo/client";
+
+const GET_POST_BY_SLUG = gql`
+  query getPostBySlug($id: ID!) {
+    post(id: $id, idType: SLUG) {
+      id
+      slug
+      title
+      featuredImage {
+        node {
+          id
+          sourceUrl
+          altText
+          title
+        }
+      }
+      author {
+        node {
+          name
+          avatar {
+            url
+          }
+        }
+      }
+      excerpt
+      content
+      date
+      link
+      tags {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      categories {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+      comments {
+        nodes {
+          author {
+            node {
+              id
+              name
+            }
+          }
+          content
+        }
+      }
+    }
+  }
+`;
 
 function MainPostDetail() {
-  const [post, setPost] = useState("");
-  const [comments, setComments] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const { slug } = useParams();
 
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const { loading, error, data } = useQuery(GET_POST_BY_SLUG, {
+    variables: {
+      id: slug,
+    },
+  });
 
-  // function getEvents() {
-  //   axios
-  //     .get(
-  //       `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
-  //     )
-  //     .then((response) => response.data)
-  //     .then((data) => {
-  //       setPost(data);
-  //       setIsLoaded(true);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
+  const postFound = Boolean(data?.post);
 
-  function getEvents() {
-    const getPost = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}?_embed=1`
-    );
-
-    const getComments = axios.get(
-      `${
-        import.meta.env.VITE_BASE_URL
-      }/wp-json/wp/v2/comments?post=${id}&order=asc`
-    );
-
-    Promise.all([getPost, getComments])
-      .then((res) => {
-        setPost(res[0].data);
-        setComments(res[1].data);
-
-        setIsLoaded(true);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    getEvents();
-  }, []);
-
-  // console.log(post);
-  // console.log(comments);
-
-  if (isLoaded) {
-    return (
-      <div className="detail">
-        <div
-          className="detail__featured-image"
-          style={{
-            backgroundImage:
-              post.featured_media === 0
-                ? `url(${defaultImage})`
-                : `url(${post._embedded["wp:featuredmedia"][0].media_details.sizes.full.source_url})`,
-          }}>
-          <h3 className="detail__featured-image__title">
-            {post.title.rendered}
-          </h3>
-        </div>
-
-        <div className="detail__info">
-          <div className="detail__info__left">
-            {/* <img
-              className="detail__info__left__image"
-              src={post._embedded.author[0].avatar_urls["24"]}
-              alt={post._embedded.author[0].name}
-            /> */}
-
-            <div className="detail__info__left__author">
-              <FaRegUser />
-              <span>{post._embedded.author[0].name}</span>
-            </div>
-
-            <div className="detail__info__left__date">
-              <FaRegClock />
-              <span>{format(new Date(post.date), "dd.MM.yyyy")}</span>
-            </div>
-
-            <div className="detail__info__left__comments">
-              <FaRegComments /> <span>Comments: </span>
-              <span>{comments.length}</span>
-            </div>
-          </div>
-
-          <div className="detail__info__right">
-            {post.categories.length !== 0 && (
-              <div className="detail__info__right__category">
-                <ul>
-                  <li>
-                    <span>Categories:</span>
-                  </li>
-                  {post._embedded["wp:term"][0].map((cat) => (
-                    <li key={cat.id}>
-                      <Link
-                        className="detail__info__right__category__pill"
-                        to={`/category/${cat.id}`}>
-                        {cat.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div
-          className="detail__content"
-          dangerouslySetInnerHTML={{
-            __html: post.content.rendered,
-          }}></div>
-
-        <button
-          className="detail__button"
-          // onClick={() => navigate(-1)}
-          aria-label="Back to articles">
-          <HashLink smooth to="/#posts">
-            Back to articles
-          </HashLink>
-        </button>
-
-        <Comments comments={comments} isLoaded={isLoaded} />
-      </div>
-    );
-  }
+  console.log(data);
 
   return (
-    <div className="blog-wrap">
-      <div className="blog__placeholder">
-        <div className="circle"></div>
-      </div>
-    </div>
+    <>
+      {loading ? (
+        <div className="posts__placeholder">
+          <div className="circle"></div>
+        </div>
+      ) : error ? (
+        <div className="posts__placeholder">
+          <div>Error: {error.message}</div>
+        </div>
+      ) : !postFound ? (
+        <div className="posts__placeholder">
+          <div>Post could not be found.</div>
+        </div>
+      ) : (
+        <div className="detail">
+          <div
+            className="detail__featured-image"
+            style={{
+              backgroundImage:
+                data.post.featuredImage === null
+                  ? `url(${defaultImage})`
+                  : `url(${data.post.featuredImage.node.sourceUrl})`,
+            }}>
+            <h3 className="detail__featured-image__title">{data.post.title}</h3>
+          </div>
+
+          <div className="detail__info">
+            <div className="detail__info__left">
+              {/* <img
+                className="detail__info__left__image"
+                src={data.post.author.node.avatar.url}
+                alt={data.post.author.node.name}
+              /> */}
+
+              <div className="detail__info__left__author">
+                <FaRegUser />
+                <span>{data.post.author.node.name}</span>
+              </div>
+
+              <div className="detail__info__left__date">
+                <FaRegClock />
+                <span>{format(new Date(data.post.date), "dd.MM.yyyy")}</span>
+              </div>
+
+              <div className="detail__info__left__comments">
+                <FaRegComments /> <span>Comments: </span>
+                <span>{data.post.comments.nodes.length}</span>
+              </div>
+            </div>
+
+            <div className="detail__info__right">
+              {data.post.categories.edges.length !== 0 && (
+                <div className="detail__info__right__category">
+                  <ul>
+                    {data.post.categories.edges.map((cat) => (
+                      <li key={cat.node.id}>
+                        <Link
+                          className="detail__info__right__category__pill"
+                          to={`/category/${cat.node.id}`}>
+                          {cat.node.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div
+            className="detail__content"
+            dangerouslySetInnerHTML={{
+              __html: data.post.content,
+            }}></div>
+
+          <button
+            className="detail__button"
+            // onClick={() => navigate(-1)}
+            aria-label="Back to articles">
+            <HashLink smooth to="/#posts">
+              Back to articles
+            </HashLink>
+          </button>
+
+          {/* <Comments comments={comments} isLoaded={isLoaded} /> */}
+        </div>
+      )}
+    </>
   );
 }
 

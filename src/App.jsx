@@ -18,6 +18,9 @@ import Tags from "./components/Tag/Tags";
 import MainPostDetail from "./components/Posts/MainPostDetail";
 import ScrollTo from "./components/ScrollTo";
 
+import { ApolloProvider } from "@apollo/client/react";
+import client from "./lib/apollo";
+
 import "./App.scss";
 
 function App() {
@@ -37,25 +40,27 @@ function App() {
   return (
     <div className="App">
       <SkeletonTheme baseColor="#ddd" highlightColor="#eee">
-        <BrowserRouter>
-          <Navigation handleThemeChange={handleThemeChange} theme={theme} />
-          <Routes>
-            <Route path="*" element={<NoPage />} />
-            <Route path="/" element={<Home />} exact />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cake/:id" element={<CakeDetail />} />
-            <Route path="/post/:id" element={<MainPostDetail />} />
-            <Route path="/category/:id" element={<Category />} />
-            <Route path="/tag/:id" element={<Tags />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogPostDetail />} />
-          </Routes>
+        <ApolloProvider client={client}>
+          <BrowserRouter>
+            <Navigation handleThemeChange={handleThemeChange} theme={theme} />
+            <Routes>
+              <Route path="*" element={<NoPage />} />
+              <Route path="/" element={<Home />} exact />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cake/:id" element={<CakeDetail />} />
+              <Route path="/post/:slug" element={<MainPostDetail />} />
+              <Route path="/category/:id" element={<Category />} />
+              <Route path="/tag/:id" element={<Tags />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPostDetail />} />
+            </Routes>
 
-          <Footer />
-          <ScrollTo />
-          <ControlledPopup />
-        </BrowserRouter>
+            <Footer />
+            <ScrollTo />
+            <ControlledPopup />
+          </BrowserRouter>
+        </ApolloProvider>
       </SkeletonTheme>
     </div>
   );
