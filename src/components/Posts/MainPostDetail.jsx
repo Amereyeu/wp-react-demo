@@ -1,72 +1,12 @@
 import { useState, useEffect } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
 import { HashLink } from "react-router-hash-link";
-
-const GET_POST_BY_SLUG = gql`
-  query getPostBySlug($id: ID!) {
-    post(id: $id, idType: SLUG) {
-      id
-      slug
-      title
-      featuredImage {
-        node {
-          id
-          sourceUrl
-          altText
-          title
-        }
-      }
-      author {
-        node {
-          name
-          avatar {
-            url
-          }
-        }
-      }
-      excerpt
-      content
-      date
-      link
-      tags {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
-      categories {
-        edges {
-          node {
-            id
-            name
-          }
-        }
-      }
-      comments {
-        nodes {
-          id
-          author {
-            node {
-              id
-              name
-              avatar {
-                url
-              }
-            }
-          }
-          content
-        }
-      }
-    }
-  }
-`;
+import { GET_POST_BY_SLUG } from "../../gql/queries";
 
 function MainPostDetail() {
   const { slug } = useParams();
@@ -81,7 +21,7 @@ function MainPostDetail() {
 
   console.log(data);
 
-  console.log("comments:", data?.post.comments.nodes);
+  // console.log("comments:", data?.post.comments.nodes);
 
   return (
     <>
@@ -171,7 +111,6 @@ function MainPostDetail() {
           {data?.post.comments.nodes.length !== 0 && (
             <Comments comments={data?.post.comments} />
           )}
-          
         </div>
       )}
     </>
@@ -179,4 +118,6 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
+
 

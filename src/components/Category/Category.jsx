@@ -8,10 +8,9 @@ import CategoryList from "./CategoryList";
 import MainPost from "../Posts/MainPost";
 import { SearchBar } from "../Search/Search";
 
-
 const GET_ALL_POSTS = gql`
-  query getAllPosts {
-    posts(first: 5) {
+  query getAllPosts($id: ID!) {
+    posts(first: 5, id: $id, idType: SLUG) {
       nodes {
         id
         slug
@@ -36,6 +35,7 @@ const GET_ALL_POSTS = gql`
         tags {
           edges {
             node {
+              slug
               id
               name
             }
@@ -44,6 +44,7 @@ const GET_ALL_POSTS = gql`
         categories {
           edges {
             node {
+              slug
               id
               name
             }
@@ -61,12 +62,6 @@ const GET_ALL_POSTS = gql`
           }
         }
       }
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
-      }
     }
     categories {
       nodes {
@@ -78,11 +73,10 @@ const GET_ALL_POSTS = gql`
   }
 `;
 
-
 function Category() {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
@@ -116,100 +110,82 @@ function Category() {
   //   getEvents();
   // }, [id]);
 
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  // const totalPages = Math.ceil(posts.length / postsPerPage);
+  const { slug } = useParams();
 
-  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const { loading, error, data } = useQuery(GET_ALL_POSTS, {
+    variables: {
+      id: slug,
+    },
+  });
 
-  // const nextPage = () => setCurrentPage(currentPage + 1);
-  // const previousPage = () => setCurrentPage(currentPage - 1);
-  // const firstPage = () => setCurrentPage(1);
-  // const lastPage = () => setCurrentPage(totalPages);
+  const cp = data?.posts?.nodes;
 
-  // if (isLoaded) {
-  //   return (
-  //     <div className="post-wrap">
-  //       <div className="posts">
-  //         <SearchBar />
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = cp.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(data?.posts.nodes.length / postsPerPage);
 
-  //         <CategoryList categories={categories} />
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  //         <MainPost posts={currentPosts} isLoaded={isLoaded} />
+  const nextPage = () => setCurrentPage(currentPage + 1);
+  const previousPage = () => setCurrentPage(currentPage - 1);
+  const firstPage = () => setCurrentPage(1);
+  const lastPage = () => setCurrentPage(totalPages);
 
-  //         <Pagination
-  //           postsPerPage={postsPerPage}
-  //           totalPosts={posts.length}
-  //           paginate={paginate}
-  //           nextPage={nextPage}
-  //           previousPage={previousPage}
-  //           currentPage={currentPage}
-  //           firstPage={firstPage}
-  //           lastPage={lastPage}
-  //           totalPages={totalPages}
-  //         />
-  //       </div>
-  //     </div>
-  //   );
+  if (loading) {
+    return (
+      <div className="posts__placeholder">
+        <div className="circle"></div>
+      </div>
+    );
+  }
 
-
-    const { loading, error, data } = useQuery(GET_ALL_POSTS);
-
-    if (loading) {
-      return (
-        <div className="posts__placeholder">
-          <div className="circle"></div>
+  if (error) {
+    return (
+      <div className="posts__placeholder">
+        <div>
+          <p>Error loading posts!</p>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    if (error) {
-      return (
-        <div className="posts__placeholder">
-          <div>Error loading posts!</div>
+  const postsFound = Boolean(data?.posts.nodes.length);
+
+  if (!postsFound) {
+    return (
+      <div className="posts__placeholder">
+        <div>
+          <p>No posts found!</p>
         </div>
-      );
-    }
+      </div>
+    );
+  }
 
-    const postsFound = Boolean(data?.posts.nodes.length);
+  return (
+    <div className="post-wrap">
+      <div className="posts">
+        <SearchBar />
 
-    if (!postsFound) {
-      return (
-        <div className="posts__placeholder">
-          <div>No posts found!</div>
-        </div>
-      );
-    }
+        <CategoryList categories={data.categories} />
 
-      return (
-        <div className="post-wrap">
-          <div className="posts">
-            <SearchBar />
+        <MainPost data={currentPosts} />
 
-            <CategoryList categories={data.categories} />
-
-            <MainPost data={data} />
-
-            {/* <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={data?.posts.nodes.length}
-        paginate={paginate}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        currentPage={currentPage}
-        firstPage={firstPage}
-        lastPage={lastPage}
-        totalPages={totalPages}
-      /> */}
-          </div>
-        </div>
-      );
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={data?.posts.nodes.length}
+          paginate={paginate}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          currentPage={currentPage}
+          firstPage={firstPage}
+          lastPage={lastPage}
+          totalPages={totalPages}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default Category;
-
-
-
-
 

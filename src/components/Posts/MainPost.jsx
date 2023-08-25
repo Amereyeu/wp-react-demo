@@ -5,7 +5,7 @@ import { format } from "date-fns";
 function MainPost({ data }) {
   return (
     <>
-      {data.posts.nodes.map((post, id) => (
+      {data.map((post, id) => (
         <div
           className={`post ${post.featuredImage === null ? "post--full" : ""}`}
           key={post.id}>
@@ -50,7 +50,7 @@ function MainPost({ data }) {
                       <li key={cat.node.id}>
                         <Link
                           className="post__text__category__pill"
-                          to={`/category/${cat.node.id}`}>
+                          to={`/category/${cat.node.slug}`}>
                           {cat.node.name}
                         </Link>
                       </li>
@@ -90,5 +90,4 @@ function MainPost({ data }) {
 }
 
 export default MainPost;
-
 

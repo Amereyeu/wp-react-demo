@@ -17,8 +17,10 @@
       place-content: center;
       height: calc(100vh - 358px);
 
-      + div {
-        color: $color-orange;
+      > div {
+        p {
+          color: $color-orange;
+        }
       }
     }
   }

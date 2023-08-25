@@ -1,82 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import MainPost from "./MainPost";
 import Pagination from "../Pagination";
 import CategoryList from "../Category/CategoryList";
 import { SearchBar } from "../Search/Search";
-
-const GET_ALL_POSTS = gql`
-  query getAllPosts {
-    posts(first: 5) {
-      nodes {
-        id
-        slug
-        title
-        featuredImage {
-          node {
-            id
-            sourceUrl
-            altText
-            title
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
-        excerpt
-        content
-        date
-        link
-        tags {
-          edges {
-            node {
-              id
-              name
-            }
-          }
-        }
-        categories {
-          edges {
-            node {
-              id
-              name
-            }
-          }
-        }
-        comments {
-          nodes {
-            author {
-              node {
-                id
-                name
-              }
-            }
-            content
-          }
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
-      }
-    }
-    categories {
-      nodes {
-        id
-        name
-        slug
-      }
-    }
-  }
-`;
+import { GET_ALL_POSTS } from "../../gql/queries";
 
 function MainPosts() {
-  const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
@@ -93,7 +23,9 @@ function MainPosts() {
   if (error) {
     return (
       <div className="posts__placeholder">
-        <div>Error loading posts!</div>
+        <div>
+          <p>Error loading posts!</p>
+        </div>
       </div>
     );
   }
@@ -103,7 +35,9 @@ function MainPosts() {
   if (!postsFound) {
     return (
       <div className="posts__placeholder">
-        <div>No posts found!</div>
+        <div>
+          <p>No posts found!</p>
+        </div>
       </div>
     );
   }
@@ -119,10 +53,12 @@ function MainPosts() {
   //   }
   // }, []);
 
+  const cp = data?.posts.nodes;
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(data.posts.nodes.length / postsPerPage);
+  const currentPosts = cp.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(data?.posts.nodes.length / postsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -132,7 +68,7 @@ function MainPosts() {
   const lastPage = () => setCurrentPage(totalPages);
 
   console.log("mainPosts:", data);
-  console.log("categories:", data.categories);
+  // console.log("categories:", data.categories);
 
   return (
     <div className="posts">
@@ -140,9 +76,9 @@ function MainPosts() {
 
       <CategoryList categories={data.categories} />
 
-      <MainPost data={data} />
+      <MainPost data={currentPosts} />
 
-      {/* <Pagination
+      <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data?.posts.nodes.length}
         paginate={paginate}
@@ -152,7 +88,7 @@ function MainPosts() {
         firstPage={firstPage}
         lastPage={lastPage}
         totalPages={totalPages}
-      /> */}
+      />
     </div>
   );
 }
