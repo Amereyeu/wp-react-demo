@@ -7,7 +7,7 @@ import { gql, useQuery } from "@apollo/client";
 
 const GET_ALL_POSTS = gql`
   query getAllPosts {
-    posts(first: 100) {
+    posts(first: 5) {
       nodes {
         id
         slug
@@ -56,6 +56,12 @@ const GET_ALL_POSTS = gql`
             content
           }
         }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+        startCursor
       }
     }
   }
@@ -142,7 +148,7 @@ function MainPosts() {
   //   );
   // }
 
-  console.log(data);
+  console.log("mainPosts:",data);
 
   return (
     <div className="posts">
@@ -170,4 +176,5 @@ function MainPosts() {
 }
 
 export default MainPosts;
+
 
