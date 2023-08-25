@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { gql, useQuery } from "@apollo/client";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
 import { HashLink } from "react-router-hash-link";
-import { gql, useQuery } from "@apollo/client";
 
 const GET_POST_BY_SLUG = gql`
   query getPostBySlug($id: ID!) {
@@ -52,10 +51,14 @@ const GET_POST_BY_SLUG = gql`
       }
       comments {
         nodes {
+          id
           author {
             node {
               id
               name
+              avatar {
+                url
+              }
             }
           }
           content
@@ -77,6 +80,8 @@ function MainPostDetail() {
   const postFound = Boolean(data?.post);
 
   console.log(data);
+
+  console.log("comments:", data?.post.comments.nodes);
 
   return (
     <>
@@ -163,7 +168,7 @@ function MainPostDetail() {
             </HashLink>
           </button>
 
-          {/* <Comments comments={comments} isLoaded={isLoaded} /> */}
+          <Comments comments={data?.post.comments} />
         </div>
       )}
     </>

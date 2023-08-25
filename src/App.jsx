@@ -50,7 +50,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/cake/:id" element={<CakeDetail />} />
               <Route path="/post/:slug" element={<MainPostDetail />} />
-              <Route path="/category/:id" element={<Category />} />
+              <Route path="/category/:slug" element={<Category />} />
               <Route path="/tag/:id" element={<Tags />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPostDetail />} />

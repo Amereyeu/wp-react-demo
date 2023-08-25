@@ -4,7 +4,6 @@
   @include break($medium) {
     margin: 7rem 0 3rem 0;
   }
-  
 
   .posts,
   .category {
@@ -17,6 +16,10 @@
       display: grid;
       place-content: center;
       height: calc(100vh - 358px);
+
+      + div {
+        color: $color-orange;
+      }
     }
   }
 }

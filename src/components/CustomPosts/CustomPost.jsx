@@ -1,8 +1,8 @@
-function CustomPost({ posts }) {
+function CustomPost({ data }) {
   return (
     <>
       <ol className="custom-list">
-        {posts.customPosts.nodes.map((post, id) => (
+        {data.customPosts.nodes.map((post, id) => (
           <li className="custom-list__item" key={post.id}>
             <h3>{post.title}</h3>
 

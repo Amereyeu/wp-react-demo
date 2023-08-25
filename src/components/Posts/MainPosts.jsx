@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
+import { gql, useQuery } from "@apollo/client";
 import MainPost from "./MainPost";
 import Pagination from "../Pagination";
 import CategoryList from "../Category/CategoryList";
 import { SearchBar } from "../Search/Search";
-import { gql, useQuery } from "@apollo/client";
 
 const GET_ALL_POSTS = gql`
   query getAllPosts {
@@ -62,6 +62,13 @@ const GET_ALL_POSTS = gql`
         hasNextPage
         hasPreviousPage
         startCursor
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+        slug
       }
     }
   }
@@ -124,43 +131,18 @@ function MainPosts() {
   const firstPage = () => setCurrentPage(1);
   const lastPage = () => setCurrentPage(totalPages);
 
-  // if (isLoaded) {
-  //   return (
-  //     <div className="posts">
-  //       <SearchBar />
-
-  //       <CategoryList categories={categories} />
-
-  //       {/* <MainPost posts={currentPosts} isLoaded={isLoaded} /> */}
-
-  //       <Pagination
-  //         postsPerPage={postsPerPage}
-  //         totalPosts={posts.length}
-  //         paginate={paginate}
-  //         nextPage={nextPage}
-  //         previousPage={previousPage}
-  //         currentPage={currentPage}
-  //         firstPage={firstPage}
-  //         lastPage={lastPage}
-  //         totalPages={totalPages}
-  //       />
-  //     </div>
-  //   );
-  // }
-
-  console.log("mainPosts:",data);
+  console.log("mainPosts:", data);
+  console.log("categories:", data.categories);
 
   return (
     <div className="posts">
       <SearchBar />
 
-      <CategoryList categories={categories} />
+      <CategoryList categories={data.categories} />
 
-      {data.posts.nodes.map((post, id) => (
-        <MainPost post={post} key={id} />
-      ))}
+      <MainPost data={data} />
 
-      <Pagination
+      {/* <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data?.posts.nodes.length}
         paginate={paginate}
@@ -170,11 +152,10 @@ function MainPosts() {
         firstPage={firstPage}
         lastPage={lastPage}
         totalPages={totalPages}
-      />
+      /> */}
     </div>
   );
 }
 
 export default MainPosts;
-
 

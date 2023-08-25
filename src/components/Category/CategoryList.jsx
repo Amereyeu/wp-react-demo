@@ -11,11 +11,11 @@ function CategoryList({ categories }) {
           </HashLink>
         </li>
 
-        {categories.map((category) => (
+        {categories.nodes.map((category) => (
           <li className="categorylist__item" key={category.id}>
             <Link
               className="categorylist__item__link"
-              to={`/category/${category.id}`}>
+              to={`/category/${category.slug}`}>
               {category.name}
             </Link>
           </li>
