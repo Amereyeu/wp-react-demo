@@ -6,20 +6,13 @@ import CategoryList from "../Category/CategoryList";
 import { SearchBar } from "../Search/Search";
 import { GET_ALL_POSTS } from "../../gql/queries";
 
-function MainPosts() {
+function MainPosts({ lg }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
-  const [lg, setlg] = useState("EN")
 
-  const lang = document
-    .querySelector("html")
-    .getAttribute("lang")
-    .toUpperCase();
 
-  console.log("l:", lang);
-
-  const { loading, error, data, refetch } = useQuery(GET_ALL_POSTS, {
+  const { loading, error, data } = useQuery(GET_ALL_POSTS, {
     variables: {
       language: lg,
     },
@@ -87,8 +80,7 @@ function MainPosts() {
 
   return (
     <div className="posts">
-      <button onClick={() => setlg("EN")}>EN</button>
-      <button onClick={() => setlg("CS")}>CS</button>
+    
 
 
 

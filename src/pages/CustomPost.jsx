@@ -1,12 +1,14 @@
 import CustomPosts from "../components/CustomPosts/CustomPosts";
 
-function CustomPost() {
+function CustomPost({ lg }) {
   return (
     <div className="custom-wrap">
-      <CustomPosts />
+      <CustomPosts lg={lg} />
     </div>
   );
 }
 
 export default CustomPost;
+
+
 

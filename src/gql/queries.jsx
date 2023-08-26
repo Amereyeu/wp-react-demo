@@ -293,10 +293,61 @@ const GET_ALL_POSTS_FROM_TAG = gql`
   }
 `;
 
+// show all custom posts on the page
+const GET_ALL_CUSTOM_POSTS = gql`
+  query getAllCustomPosts($language: LanguageCodeFilterEnum!) {
+    customPosts(first: 3, where: { language: $language }) {
+      nodes {
+        id
+        slug
+        title
+        featuredImage {
+          node {
+            id
+            sourceUrl
+            altText
+            title
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+        excerpt
+        content
+        date
+        link
+      }
+    }
+  }
+`;
+
+// show single page
+const GET_SINGLE_PAGE = gql`
+  query singlePage {
+    pages(where: { id: 21 }) {
+      nodes {
+        id
+        title
+        content
+        acfpages {
+          pageVisible
+          image {
+            sourceUrl
+          }
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_POST_BY_SLUG,
   GET_ALL_POSTS_FROM_CATEGORY,
   GET_ALL_POSTS_FROM_TAG,
+  GET_ALL_CUSTOM_POSTS,
+  GET_SINGLE_PAGE,
 };
 

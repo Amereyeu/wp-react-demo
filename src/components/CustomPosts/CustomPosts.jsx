@@ -1,37 +1,13 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import CustomPost from "./CustomPost";
+import { GET_ALL_CUSTOM_POSTS } from "../../gql/queries";
 
-const GET_ALL_CUSTOM_POSTS = gql`
-  query getAllCustomPosts {
-    customPosts(first: 3) {
-      nodes {
-        id
-        slug
-        title
-        featuredImage {
-          node {
-            id
-            sourceUrl
-            altText
-            title
-          }
-        }
-        author {
-          node {
-            name
-          }
-        }
-        excerpt
-        content
-        date
-        link
-      }
-    }
-  }
-`;
-
-function CustomPosts() {
-  const { loading, error, data } = useQuery(GET_ALL_CUSTOM_POSTS);
+function CustomPosts({ lg }) {
+  const { loading, error, data } = useQuery(GET_ALL_CUSTOM_POSTS, {
+    variables: {
+      language: lg,
+    },
+  });
 
   if (loading) {
     return (
@@ -44,7 +20,9 @@ function CustomPosts() {
   if (error) {
     return (
       <div className="posts__placeholder">
-        <div>Error loading posts!</div>
+        <div>
+          <p>Error loading posts!</p>
+        </div>
       </div>
     );
   }
@@ -54,7 +32,9 @@ function CustomPosts() {
   if (!customPostsFound) {
     return (
       <div className="posts__placeholder">
-        <div>No posts found!</div>
+        <div>
+          <p>No posts found!</p>
+        </div>
       </div>
     );
   }

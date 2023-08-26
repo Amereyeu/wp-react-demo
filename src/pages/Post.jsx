@@ -1,9 +1,9 @@
 import MainPosts from "../components/Posts/MainPosts";
 
-function Post() {
+function Post({ lg }) {
   return (
     <div className="post-wrap"id="posts">
-      <MainPosts />
+      <MainPosts lg={lg} />
     </div>
   );
 }
