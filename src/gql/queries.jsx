@@ -1,11 +1,8 @@
 import { gql } from "@apollo/client";
 
-
-// main post page
+// show all posts on the post page
 const GET_ALL_POSTS = gql`
   query getAllPosts {
-    # query getAllPosts($after: String) {
-    # posts(first: 5, after: $after) {
     posts(first: 100) {
       nodes {
         id
@@ -69,7 +66,7 @@ const GET_ALL_POSTS = gql`
   }
 `;
 
-// main post - detail page
+// single post - detail page
 const GET_POST_BY_SLUG = gql`
   query getPostBySlug($id: ID!) {
     post(id: $id, idType: SLUG) {
@@ -109,6 +106,7 @@ const GET_POST_BY_SLUG = gql`
           node {
             id
             name
+            slug
           }
         }
       }
@@ -138,6 +136,168 @@ const GET_POST_BY_SLUG = gql`
   }
 `;
 
-export { GET_ALL_POSTS, GET_POST_BY_SLUG };
+//filter posts by category
+const GET_ALL_POSTS_FROM_CATEGORY = gql`
+  query getPostsFromCategory($after: String, $id: ID!) {
+    category(id: $id, idType: SLUG) {
+      name
+      id
+      posts(first: 5, after: $after) {
+        nodes {
+          id
+          slug
+          title
+          featuredImage {
+            node {
+              id
+              sourceUrl
+              altText
+              title
+            }
+          }
+          author {
+            node {
+              name
+            }
+          }
+          excerpt
+          content
+          date
+          link
+          tags {
+            edges {
+              node {
+                slug
+                id
+                name
+              }
+            }
+          }
+          categories {
+            edges {
+              node {
+                slug
+                id
+                name
+              }
+            }
+          }
+          comments {
+            nodes {
+              author {
+                node {
+                  id
+                  name
+                }
+              }
+              content
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+    categories {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
+//filter posts by tag
+const GET_ALL_POSTS_FROM_TAG = gql`
+  query getPostsFromTag($after: String, $id: ID!) {
+    tag(id: $id, idType: SLUG) {
+      name
+      id
+      posts(first: 5, after: $after) {
+        nodes {
+          id
+          slug
+          title
+          featuredImage {
+            node {
+              id
+              sourceUrl
+              altText
+              title
+            }
+          }
+          author {
+            node {
+              name
+            }
+          }
+          excerpt
+          content
+          date
+          link
+          tags {
+            edges {
+              node {
+                slug
+                id
+                name
+              }
+            }
+          }
+          categories {
+            edges {
+              node {
+                slug
+                id
+                name
+              }
+            }
+          }
+          comments {
+            nodes {
+              author {
+                node {
+                  id
+                  name
+                }
+              }
+              content
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+    tags {
+      edges {
+        node {
+          id
+          name
+          slug
+        }
+      }
+    }
+  }
+`;
+
+export {
+  GET_ALL_POSTS,
+  GET_POST_BY_SLUG,
+  GET_ALL_POSTS_FROM_CATEGORY,
+  GET_ALL_POSTS_FROM_TAG,
+};
+
+
+
+
+
+
+
 
 

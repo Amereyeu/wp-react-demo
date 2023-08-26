@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import {  useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
@@ -31,11 +30,15 @@ function MainPostDetail() {
         </div>
       ) : error ? (
         <div className="posts__placeholder">
-          <div>Error: {error.message}</div>
+          <div>
+            <p>Error loading posts!</p>
+          </div>
         </div>
       ) : !postFound ? (
         <div className="posts__placeholder">
-          <div>Post could not be found.</div>
+          <div>
+            <p>Post could not be found!</p>
+          </div>
         </div>
       ) : (
         <div className="detail">
@@ -82,7 +85,7 @@ function MainPostDetail() {
                       <li key={cat.node.id}>
                         <Link
                           className="detail__info__right__category__pill"
-                          to={`/category/${cat.node.id}`}>
+                          to={`/category/${cat.node.slug}`}>
                           {cat.node.name}
                         </Link>
                       </li>
@@ -118,6 +121,8 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
+
 
 
 

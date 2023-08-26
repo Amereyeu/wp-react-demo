@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
-function CategoryList({ tags }) {
+function taglist({ tags }) {
   return (
-    <div className="categorylist-wrap">
-      <ul className="categorylist">
-        <li className="categorylist__item">
-          <HashLink smooth className="categorylist__item__link" to="/#posts">
+    <div className="taglist-wrap">
+      <ul className="taglist">
+        <li className="taglist__item">
+          <HashLink smooth className="taglist__item__link" to="/#posts">
             ALL
           </HashLink>
         </li>
 
-        {tags.map((tag) => (
-          <li className="categorylist__item" key={tag.id}>
-            <Link className="categorylist__item__link" to={`/tag/${tag.id}`}>
-              {tag.name}
+        {tags.edges.map((tag) => (
+          <li className="taglist__item" key={tag.node.id}>
+            <Link className="taglist__item__link" to={`/tag/${tag.node.slug}`}>
+              {tag.node.name}
             </Link>
           </li>
         ))}
@@ -23,5 +23,5 @@ function CategoryList({ tags }) {
   );
 }
 
-export default CategoryList;
+export default taglist;
 

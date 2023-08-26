@@ -1,95 +1,94 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import MainPost from "../Posts/MainPost";
-import Pagination from "../Pagination";
-import TagList from "./TagList";
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
 import { SearchBar } from "../Search/Search";
+import TagList from "./TagList";
+import TagPost from "../Posts/MainPost";
+import { GET_ALL_POSTS_FROM_TAG } from "../../gql/queries";
 
 function Tags() {
-  const [posts, setPosts] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const { slug } = useParams();
 
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const { loading, error, data, fetchMore } = useQuery(GET_ALL_POSTS_FROM_TAG, {
+    variables: {
+      id: slug,
+      after: null,
+    },
+  });
 
-  function getEvents() {
-    const getPosts = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts?_embed=1&tags=${id}`
-    );
+  console.log("tag:", data);
 
-    const getTags = axios.get(
-      `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/tags`
-    );
-
-    Promise.all([getPosts, getTags])
-      .then((res) => {
-        setPosts(res[0].data);
-        setTags(res[1].data);
-
-        setIsLoaded(true);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  // console.log(posts);
-  // console.log(tags);
-
-  useEffect(() => {
-    getEvents();
-  }, [id]);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(posts.length / postsPerPage);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const previousPage = () => setCurrentPage(currentPage - 1);
-  const firstPage = () => setCurrentPage(1);
-  const lastPage = () => setCurrentPage(totalPages);
-
-  if (isLoaded) {
+  if (loading) {
     return (
       <div className="post-wrap">
-        <div className="posts">
-          <SearchBar />
-
-          <TagList tags={tags} />
-
-          <MainPost posts={currentPosts} isLoaded={isLoaded} />
-
-          <Pagination
-            postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-            nextPage={nextPage}
-            previousPage={previousPage}
-            currentPage={currentPage}
-            firstPage={firstPage}
-            lastPage={lastPage}
-            totalPages={totalPages}
-          />
+        <div className="posts__placeholder">
+          <div className="circle"></div>
         </div>
       </div>
     );
   }
 
+  if (error) {
+    return (
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div>
+            <p>Error loading posts!</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const tagFound = Boolean(data?.tag?.posts?.nodes.length);
+
+  if (!tagFound) {
+    return (
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div>
+            <p>No posts found!</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+console.log("tt:", data.tags);
+
   return (
     <div className="post-wrap">
-      <div className="posts__placeholder">
-        <div className="circle"></div>
+      <div className="posts">
+        <SearchBar />
+
+        <TagList tags={data.tags} />
+
+        {/* <TagPost posts={data} /> */}
+
+        {data.tag.posts.pageInfo.hasNextPage === true && (
+          <button
+            className="load-more__button"
+            onClick={() => {
+              const { endCursor } = data.tag.posts.pageInfo;
+
+              fetchMore({
+                variables: { after: endCursor },
+                updateQuery: (prevResult, { fetchMoreResult }) => {
+                  fetchMoreResult.tag.posts.nodes = [
+                    ...prevResult.tag.posts.nodes,
+                    ...fetchMoreResult.tag.posts.nodes,
+                  ];
+                  return fetchMoreResult;
+                },
+              });
+            }}>
+            <a>Load more posts</a>
+          </button>
+        )}
       </div>
     </div>
   );
 }
 
 export default Tags;
-
 
 

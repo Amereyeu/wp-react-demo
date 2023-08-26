@@ -51,7 +51,7 @@ function App() {
               <Route path="/cake/:id" element={<CakeDetail />} />
               <Route path="/post/:slug" element={<MainPostDetail />} />
               <Route path="/category/:slug" element={<Category />} />
-              <Route path="/tag/:id" element={<Tags />} />
+              <Route path="/tag/:slug" element={<Tags />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPostDetail />} />
             </Routes>

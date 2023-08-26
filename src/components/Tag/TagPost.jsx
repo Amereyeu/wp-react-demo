@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
 
-function MainPost({ data }) {
+function TagPost({ data }) {
   return (
     <>
-      {data.map((post) => (
+      {data.category.posts.nodes.map((post) => (
         <div
           className={`post ${post.featuredImage === null ? "post--full" : ""}`}
           key={post.id}>
@@ -89,5 +89,5 @@ function MainPost({ data }) {
   );
 }
 
-export default MainPost;
+export default TagPost;
 
