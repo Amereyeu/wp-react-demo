@@ -24,6 +24,8 @@ import client from "./lib/apollo";
 import "./App.scss";
 
 function App() {
+  const [lg, setlg] = useState("EN");
+
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "light"
   );
@@ -42,10 +44,15 @@ function App() {
       <SkeletonTheme baseColor="#ddd" highlightColor="#eee">
         <ApolloProvider client={client}>
           <BrowserRouter>
-            <Navigation handleThemeChange={handleThemeChange} theme={theme} />
+            <Navigation
+              handleThemeChange={handleThemeChange}
+              theme={theme}
+              lg={lg}
+              setlg={setlg}
+            />
             <Routes>
               <Route path="*" element={<NoPage />} />
-              <Route path="/" element={<Home />} exact />
+              <Route path="/" element={<Home lg={lg} />} exact />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/cake/:id" element={<CakeDetail />} />

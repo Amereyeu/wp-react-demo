@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PAGE } from "../gql/queries";
 
-function About() {
+function About({ lg }) {
   const { loading, error, data } = useQuery(GET_SINGLE_PAGE, {
     variables: {
-      // language: lg,
+      language: lg,
     },
   });
 
@@ -61,11 +61,19 @@ function About() {
           </picture>
 
           <div className="about__text">
-            <h2>{data.pages.nodes[0].title}</h2>
+            <h2>
+              {lg === "EN"
+                ? data.pages.nodes[0].title
+                : data.pages.nodes[0].translation.title}
+            </h2>
 
             <div
               dangerouslySetInnerHTML={{
-                __html: data.pages.nodes[0].content,
+                __html: `${
+                  lg === "EN"
+                    ? data.pages.nodes[0].content
+                    : data.pages.nodes[0].translation.content
+                }`,
               }}></div>
           </div>
         </div>

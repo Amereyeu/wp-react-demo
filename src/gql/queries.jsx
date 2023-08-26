@@ -325,17 +325,21 @@ const GET_ALL_CUSTOM_POSTS = gql`
 
 // show single page
 const GET_SINGLE_PAGE = gql`
-  query singlePage {
-    pages(where: { id: 21 }) {
+  query singlePage($id: Int = 21, $language: LanguageCodeEnum!) {
+    pages(where: { id: $id }) {
       nodes {
-        id
         title
+        id
         content
         acfpages {
           pageVisible
           image {
             sourceUrl
           }
+        }
+        translation(language: $language) {
+          content
+          title
         }
       }
     }
@@ -350,4 +354,6 @@ export {
   GET_ALL_CUSTOM_POSTS,
   GET_SINGLE_PAGE,
 };
+
+
 

@@ -7,13 +7,10 @@ import Newsletter from "../components/Newsletter";
 import ModalGallery from "../components/ModalGallery/ModalGallery";
 import CustomPost from "./CustomPost";
 
-function Home() {
-  const [lg, setlg] = useState("EN");
+function Home({ lg }) {
+  // const [lg, setlg] = useState("EN");
 
-  // const lang = document
-  //   .querySelector("html")
-  //   .getAttribute("lang")
-  //   .toUpperCase();
+
 
   console.log("l:", lg);
 
@@ -21,12 +18,12 @@ function Home() {
     <main>
       <Hero />
 
-      <button onClick={() => setlg("EN")}>EN</button>
-      <button onClick={() => setlg("CS")}>CS</button>
+      {/* <button onClick={() => setlg("EN")}>EN</button>
+      <button onClick={() => setlg("CS")}>CS</button> */}
 
       <Post lg={lg} />
 
-      <About />
+      <About lg={lg} />
 
       <Newsletter />
 

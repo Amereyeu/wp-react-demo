@@ -4,24 +4,16 @@ import { GiSun, GiMoon } from "react-icons/gi";
 
 import data from "../nav.json";
 
-function Navigation({ handleThemeChange, theme }) {
+function Navigation({ handleThemeChange, theme, lg, setlg }) {
   const [isShrunk, setShrunk] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navigationData] = useState(data);
-
-
 
   const toggleNavigation = () => {
     setIsNavOpen(!isNavOpen);
   };
 
-  const languageSwitch = (language) => {
-    // i18n.changeLanguage(language);
-    document.documentElement.setAttribute("lang", language);
-    // window.location.reload(false);
-  };
-
-  const [isCzech, setIsCzech] = useState(true);
+  const [isCzech, setIsCzech] = useState(false);
 
   const toggleLang = () => {
     setIsCzech(!isCzech);
@@ -70,11 +62,33 @@ function Navigation({ handleThemeChange, theme }) {
             <Link
               to={navItem.to}
               key={i}
-              className={`navigation__menu__item ${isShrunk ? "small" : ""}`}
+              className="navigation__menu__item"
               onClick={toggleNavigation}>
-              <button aria-label={navItem.name}>{navItem.name}</button>
+              <button
+                className={`switch ${isShrunk ? "small" : ""}`}
+                aria-label={navItem.name}>
+                {navItem.name}
+              </button>
             </Link>
           ))}
+
+          <div onClick={toggleLang} className="navigation__menu__item">
+            {isCzech ? (
+              <button
+                className={`switch ${isShrunk ? "small" : ""}`}
+                aria-label="Language Switch"
+                onClick={() => setlg("EN")}>
+                EN
+              </button>
+            ) : (
+              <button
+                className={`switch ${isShrunk ? "small" : ""}`}
+                aria-label="Language Switch"
+                onClick={() => setlg("CS")}>
+                CS
+              </button>
+            )}
+          </div>
 
           <div className="switch-wrap" onClick={toggleNavigation}>
             <div
@@ -82,16 +96,6 @@ function Navigation({ handleThemeChange, theme }) {
               aria-label="Theme Switch"
               className={`switch ${isShrunk ? "small" : ""}`}>
               {theme === "light" ? <GiMoon /> : <GiSun />}
-            </div>
-          </div>
-
-          <div className="navigation__menu__item">
-            <div onClick={toggleLang}>
-              {isCzech ? (
-                <button onClick={() => languageSwitch("EN")}>EN</button>
-              ) : (
-                <button onClick={() => languageSwitch("CS")}>CS</button>
-              )}
             </div>
           </div>
         </div>
