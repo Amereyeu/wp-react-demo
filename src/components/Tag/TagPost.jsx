@@ -5,7 +5,7 @@ import { format } from "date-fns";
 function TagPost({ data }) {
   return (
     <>
-      {data.category.posts.nodes.map((post) => (
+      {data.tag.posts.nodes.map((post) => (
         <div
           className={`post ${post.featuredImage === null ? "post--full" : ""}`}
           key={post.id}>

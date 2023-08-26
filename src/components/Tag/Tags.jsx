@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { SearchBar } from "../Search/Search";
 import TagList from "./TagList";
-import TagPost from "../Posts/MainPost";
+import TagPost from "./TagPost";
 import { GET_ALL_POSTS_FROM_TAG } from "../../gql/queries";
 
 function Tags() {
@@ -53,7 +53,7 @@ function Tags() {
     );
   }
 
-console.log("tt:", data.tags);
+
 
   return (
     <div className="post-wrap">
@@ -62,9 +62,9 @@ console.log("tt:", data.tags);
 
         <TagList tags={data.tags} />
 
-        {/* <TagPost posts={data} /> */}
+        <TagPost data={data} />
 
-        {data.tag.posts.pageInfo.hasNextPage === true && (
+        {/* {data.tag.posts.pageInfo.hasNextPage === true && (
           <button
             className="load-more__button"
             onClick={() => {
@@ -83,7 +83,7 @@ console.log("tt:", data.tags);
             }}>
             <a>Load more posts</a>
           </button>
-        )}
+        )} */}
       </div>
     </div>
   );
