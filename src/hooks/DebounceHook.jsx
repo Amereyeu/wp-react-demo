@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-
 export function useDebounce(value, timeout, callback) {
   const [timer, setTimer] = useState(null);
 
@@ -17,3 +16,4 @@ export function useDebounce(value, timeout, callback) {
     }
   }, [value]);
 }
+

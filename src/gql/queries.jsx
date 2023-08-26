@@ -2,9 +2,16 @@ import { gql } from "@apollo/client";
 
 // show all posts on the post page
 const GET_ALL_POSTS = gql`
-  query getAllPosts {
-    posts(first: 100) {
+  query getAllPosts($language: LanguageCodeFilterEnum!) {
+    posts(first: 100, where: { language: $language }) {
       nodes {
+        language {
+          code
+          locale
+          slug
+          name
+          id
+        }
         id
         slug
         title
@@ -292,12 +299,4 @@ export {
   GET_ALL_POSTS_FROM_CATEGORY,
   GET_ALL_POSTS_FROM_TAG,
 };
-
-
-
-
-
-
-
-
 

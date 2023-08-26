@@ -9,8 +9,22 @@ function Navigation({ handleThemeChange, theme }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [navigationData] = useState(data);
 
+
+
   const toggleNavigation = () => {
     setIsNavOpen(!isNavOpen);
+  };
+
+  const languageSwitch = (language) => {
+    // i18n.changeLanguage(language);
+    document.documentElement.setAttribute("lang", language);
+    // window.location.reload(false);
+  };
+
+  const [isCzech, setIsCzech] = useState(true);
+
+  const toggleLang = () => {
+    setIsCzech(!isCzech);
   };
 
   useEffect(() => {
@@ -68,6 +82,16 @@ function Navigation({ handleThemeChange, theme }) {
               aria-label="Theme Switch"
               className={`switch ${isShrunk ? "small" : ""}`}>
               {theme === "light" ? <GiMoon /> : <GiSun />}
+            </div>
+          </div>
+
+          <div className="navigation__menu__item">
+            <div onClick={toggleLang}>
+              {isCzech ? (
+                <button onClick={() => languageSwitch("EN")}>EN</button>
+              ) : (
+                <button onClick={() => languageSwitch("CS")}>CS</button>
+              )}
             </div>
           </div>
         </div>

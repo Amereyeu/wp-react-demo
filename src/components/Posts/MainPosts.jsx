@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import MainPost from "./MainPost";
 import Pagination from "../Pagination";
@@ -10,7 +10,20 @@ function MainPosts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
-  const { loading, error, data } = useQuery(GET_ALL_POSTS);
+  const [lg, setlg] = useState("EN")
+
+  const lang = document
+    .querySelector("html")
+    .getAttribute("lang")
+    .toUpperCase();
+
+  console.log("l:", lang);
+
+  const { loading, error, data, refetch } = useQuery(GET_ALL_POSTS, {
+    variables: {
+      language: lg,
+    },
+  });
 
   if (loading) {
     return (
@@ -42,6 +55,8 @@ function MainPosts() {
     );
   }
 
+
+
   // useEffect(() => {
   //   window.scrollTo(0, 0);
   //   document.body.scrollTop = 0;
@@ -72,12 +87,14 @@ function MainPosts() {
 
   return (
     <div className="posts">
+      <button onClick={() => setlg("EN")}>EN</button>
+      <button onClick={() => setlg("CS")}>CS</button>
+
+
+
       <SearchBar />
-
       <CategoryList categories={data.categories} />
-
       <MainPost data={currentPosts} />
-
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data?.posts.nodes.length}
@@ -94,4 +111,6 @@ function MainPosts() {
 }
 
 export default MainPosts;
+
+
 

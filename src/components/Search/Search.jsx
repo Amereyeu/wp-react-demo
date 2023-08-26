@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useClickOutside } from "react-click-outside-hook";
 import { useDebounce } from "../../hooks/DebounceHook";
 import { IoClose, IoSearch } from "react-icons/io5";
+import { GET_ALL_POSTS } from "../../gql/queries";
+import { useQuery } from "@apollo/client";
 
 export function SearchBar(props) {
   const [isExpanded, setExpanded] = useState(false);
@@ -46,12 +48,22 @@ export function SearchBar(props) {
     }
   }, [isClickedOutside]);
 
+  const { slug } = useParams();
+
+  const { loading, error, data } = useQuery(GET_ALL_POSTS, {
+    variables: {
+      id: slug,
+      // title: searchQuery,
+    },
+  });
+
   const prepareSearchQuery = (query) => {
     const url = `${
       import.meta.env.VITE_BASE_URL
     }/wp-json/wp/v2/posts?_embed&search=${query}&per_page=99`;
 
     return encodeURI(url);
+
   };
 
   const searchArticles = async () => {
@@ -137,7 +149,7 @@ export function SearchBar(props) {
                 {articles.map((post, i) => (
                   <div className="search__content__item" key={i}>
                     <h3 className="search__content__item__title">
-                      <Link to={`/post/${post.id}`}>{post.title.rendered}</Link>
+                      <Link to={`/post/${post.slug}`}>{post.title.rendered}</Link>
                     </h3>
                   </div>
                 ))}

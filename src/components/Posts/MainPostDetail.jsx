@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import {  useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Comments from "./Comments";
 import defaultImage from "/img/hero.png";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
@@ -25,19 +25,25 @@ function MainPostDetail() {
   return (
     <>
       {loading ? (
-        <div className="posts__placeholder">
-          <div className="circle"></div>
+        <div className="post-wrap">
+          <div className="posts__placeholder">
+            <div className="circle"></div>
+          </div>
         </div>
       ) : error ? (
-        <div className="posts__placeholder">
-          <div>
-            <p>Error loading posts!</p>
+        <div className="post-wrap">
+          <div className="posts__placeholder">
+            <div>
+              <p>Error loading posts!</p>
+            </div>
           </div>
         </div>
       ) : !postFound ? (
-        <div className="posts__placeholder">
-          <div>
-            <p>Post could not be found!</p>
+        <div className="post-wrap">
+          <div className="posts__placeholder">
+            <div>
+              <p>Post could not be found!</p>
+            </div>
           </div>
         </div>
       ) : (
@@ -121,8 +127,4 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
-
-
-
-
 
