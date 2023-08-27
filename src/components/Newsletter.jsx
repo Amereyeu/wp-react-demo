@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import emailjs from "emailjs-com";
 
-function Newsletter() {
+function Newsletter({ lg }) {
   const [email, setEmail] = useState("");
   const {
     register,
@@ -43,11 +43,13 @@ function Newsletter() {
 
   return (
     <div className="news">
-      <h2 className="news__title">STAY IN TOUCH</h2>
+      <h2 className="news__title">
+        {lg === "EN" ? "STAY IN TOUCH" : "Nenechte si nic ujít!"}
+      </h2>
       <p className="news__text">
-        Inventore quia dolores consequatur aliquam est debitis vitae ducimus.
-        Voluptatum maxime tenetur officiis cum est doloribus. Sapiente odio quia
-        tempora ipsa non sed.
+        {lg === "EN"
+          ? "Inventore quia dolores consequatur aliquam est debitis vitae ducimus.Voluptatum maxime tenetur officiis cum est doloribus. Sapiente odio qui tempora ipsa non sed."
+          : "Vyplňte Vaši e-mailovou adresu a nechte si zasílat akční nabídky a novinky."}
       </p>
       <form
         className="news__form"
@@ -73,9 +75,9 @@ function Newsletter() {
           </div>
         )}
         <button type="submit" className="news__form__button">
-          Subscribe
+          {lg === "EN" ? "Subscribe" : "Odebírat"}
         </button>
-      </form>{" "}
+      </form>
       <ToastContainer />
     </div>
   );

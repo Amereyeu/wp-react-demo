@@ -1,14 +1,17 @@
 [
   {
     "to": "/",
-    "name": "Home"
+    "name": "Home",
+    "translation": "Úvod"
   },
   {
     "to": "/gallery",
-    "name": "Gallery"
+    "name": "Gallery",
+    "translation": "Galerie"
   },
   {
     "to": "/contact",
-    "name": "Contact"
+    "name": "Contact",
+    "translation": "kontakt"
   }
 ]

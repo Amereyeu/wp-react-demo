@@ -67,7 +67,7 @@ function Navigation({ handleThemeChange, theme, lg, setlg }) {
               <button
                 className={`switch ${isShrunk ? "small" : ""}`}
                 aria-label={navItem.name}>
-                {navItem.name}
+                {lg === "EN" ? navItem.name : navItem.translation}
               </button>
             </Link>
           ))}

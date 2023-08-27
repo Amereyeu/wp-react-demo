@@ -25,7 +25,7 @@ function Home({ lg }) {
 
       <About lg={lg} />
 
-      <Newsletter />
+      <Newsletter lg={lg} />
 
       <ModalGallery />
 
@@ -35,4 +35,5 @@ function Home({ lg }) {
 }
 
 export default Home;
+
 
