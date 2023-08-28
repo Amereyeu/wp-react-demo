@@ -51,7 +51,7 @@ function ContactInfo({ lg }) {
     );
   }
 
-  console.log("contact:", data);
+  // console.log("contactInfo:", data);
 
   return (
     <>

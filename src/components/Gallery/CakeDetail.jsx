@@ -25,6 +25,8 @@ function CakeDetail() {
     getEvents();
   }, []);
 
+  // console.log("cake:", cake);
+
   if (isLoaded) {
     return (
       <div className="detail">
@@ -33,7 +35,7 @@ function CakeDetail() {
         {cake.acf.image !== null && (
           <ImageGallery
             autoPlay={true}
-            items={cake.acf.image.map((img) => ({
+            items={cake.acf.image_gallery.map((img) => ({
               original: img.full_image_url,
               thumbnail: img.thumbnail_image_url,
             }))}
@@ -45,7 +47,11 @@ function CakeDetail() {
     );
   }
 
-  return <div>loading...</div>;
+  return (
+    <div className="posts__placeholder">
+      <div className="circle"></div>
+    </div>
+  );
 }
 
 export default CakeDetail;

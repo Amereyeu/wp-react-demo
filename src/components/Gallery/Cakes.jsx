@@ -22,6 +22,8 @@ function Cakes() {
     getEvents();
   }, []);
 
+  console.log("cakes:", cakes);
+
   if (isLoaded) {
     return (
       <div className="gallery" id="gallery">
