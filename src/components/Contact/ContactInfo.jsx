@@ -19,8 +19,10 @@ function ContactInfo({ lg }) {
 
   if (loading) {
     return (
-      <div className="posts__placeholder">
-        <div className="circle"></div>
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div className="circle"></div>
+        </div>
       </div>
     );
   }
@@ -30,7 +32,7 @@ function ContactInfo({ lg }) {
       <div className="post-wrap">
         <div className="posts__placeholder">
           <div>
-            <p>Error loading page!</p>
+            <p>Error loading informations!</p>
           </div>
         </div>
       </div>
@@ -44,7 +46,7 @@ function ContactInfo({ lg }) {
       <div className="post-wrap">
         <div className="posts__placeholder">
           <div>
-            <p>Page not found!</p>
+            <p>Informations not found!</p>
           </div>
         </div>
       </div>
@@ -141,4 +143,5 @@ function ContactInfo({ lg }) {
 }
 
 export default ContactInfo;
+
 
