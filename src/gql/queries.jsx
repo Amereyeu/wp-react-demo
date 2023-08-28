@@ -346,7 +346,7 @@ const GET_SINGLE_PAGE = gql`
   }
 `;
 
-// show contact page
+// show contact info on page
 const GET_CONTACT_PAGE = gql`
   query singlePage($id: Int = 77, $language: LanguageCodeEnum!) {
     pages(where: { id: $id }) {

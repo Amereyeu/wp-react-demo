@@ -2,7 +2,7 @@ import { useState } from "react";
 import SingleFaq from "./SingleFaq";
 import data from "../../data/data.json";
 
-function Faqs() {
+function Faqs({ lg }) {
   const [faqs, setfaqs] = useState(data);
 
   const toggleFAQ = (index) => {
@@ -22,7 +22,7 @@ function Faqs() {
   return (
     <div className="faqs">
       {faqs.map((faq, i) => (
-        <SingleFaq faq={faq} index={i} toggleFAQ={toggleFAQ} key={i} />
+        <SingleFaq faq={faq} index={i} toggleFAQ={toggleFAQ} key={i} lg={lg} />
       ))}
     </div>
   );

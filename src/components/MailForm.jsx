@@ -3,7 +3,7 @@ import emailjs from "emailjs-com";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-function MailForm(props) {
+function MailForm({ lg }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [text, setText] = useState("");
@@ -43,14 +43,14 @@ function MailForm(props) {
 
   return (
     <>
-      <h2 className="contact__title">Contact</h2>
+      <h2 className="contact__title"> {lg === "EN" ? "Contact" : "Kontakt"}</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} id="contact-form">
         <div className="contact__input__wrap">
           <input
             type="text"
             name="name"
-            placeholder="Name"
+            placeholder={lg === "EN" ? "Name" : "Jméno"}
             className="border1"
             onChange={(e) => setName(e.currentTarget.value)}
             {...register("name", {
@@ -75,7 +75,7 @@ function MailForm(props) {
           <input
             type="email"
             name="email"
-            placeholder="Email"
+            placeholder={lg === "EN" ? "Email" : "E-mail"}
             className="border1"
             onChange={(e) => setEmail(e.currentTarget.value)}
             {...register("email", {
@@ -99,10 +99,9 @@ function MailForm(props) {
           <textarea
             className="border1"
             name="message"
-            placeholder="Your message"
+            placeholder={lg === "EN" ? "Your message" : "Vaše zpráva"}
             onChange={(e) => setText(e.currentTarget.value)}
-            {...register("message", { required: true })}
-          ></textarea>
+            {...register("message", { required: true })}></textarea>
           <span className="bb"></span>
         </div>
         {errors.message && errors.message.type === "required" && (
@@ -111,7 +110,7 @@ function MailForm(props) {
 
         <div className="contact__button">
           <button className="contact__button__send" type="submit">
-            Send
+            {lg === "EN" ? "Send" : "Odeslat"}
           </button>
         </div>
       </form>
@@ -120,6 +119,7 @@ function MailForm(props) {
 }
 
 export default MailForm;
+
 
 
 
