@@ -346,6 +346,36 @@ const GET_SINGLE_PAGE = gql`
   }
 `;
 
+// show contact page
+const GET_CONTACT_PAGE = gql`
+  query singlePage($id: Int = 77, $language: LanguageCodeEnum!) {
+    pages(where: { id: $id }) {
+      nodes {
+        title
+        id
+        content
+        acfContactInfo {
+          address
+          email
+          facebook
+          ico
+          info1
+          info2
+          instagram
+          phone
+        }
+        translation(language: $language) {
+          content
+          title
+        }
+        acfpages {
+          pageVisible
+        }
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_POST_BY_SLUG,
@@ -353,7 +383,12 @@ export {
   GET_ALL_POSTS_FROM_TAG,
   GET_ALL_CUSTOM_POSTS,
   GET_SINGLE_PAGE,
+  GET_CONTACT_PAGE,
 };
+
+
+
+
 
 
 

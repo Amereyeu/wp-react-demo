@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 import Hero from "../components/Hero";
 import Post from "./Post";
 import About from "./About";
@@ -8,18 +6,9 @@ import ModalGallery from "../components/ModalGallery/ModalGallery";
 import CustomPost from "./CustomPost";
 
 function Home({ lg }) {
-  // const [lg, setlg] = useState("EN");
-
-
-
-  console.log("l:", lg);
-
   return (
     <main>
       <Hero />
-
-      {/* <button onClick={() => setlg("EN")}>EN</button>
-      <button onClick={() => setlg("CS")}>CS</button> */}
 
       <Post lg={lg} />
 
@@ -35,5 +24,4 @@ function Home({ lg }) {
 }
 
 export default Home;
-
 

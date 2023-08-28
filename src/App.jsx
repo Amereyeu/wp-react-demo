@@ -54,7 +54,7 @@ function App() {
               <Route path="*" element={<NoPage />} />
               <Route path="/" element={<Home lg={lg} />} exact />
               <Route path="/gallery" element={<Gallery />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact lg={lg} />} />
               <Route path="/cake/:id" element={<CakeDetail />} />
               <Route path="/post/:slug" element={<MainPostDetail />} />
               <Route path="/category/:slug" element={<Category />} />
@@ -74,4 +74,5 @@ function App() {
 }
 
 export default App;
+
 

@@ -77,7 +77,7 @@ function About({ lg }) {
               }}></div>
           </div>
         </div>
-      )}
+       )} 
     </>
   );
 }
