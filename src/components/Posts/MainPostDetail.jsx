@@ -80,7 +80,7 @@ function MainPostDetail({ lg }) {
 
               <div className="detail__info__left__comments">
                 <FaRegComments /> <span>Comments: </span>
-                {/* <span>{data.post.comments.nodes.length}</span> */}
+                <span>{data.post.comments.edges.length}</span>
               </div>
             </div>
 
@@ -118,9 +118,7 @@ function MainPostDetail({ lg }) {
             </HashLink>
           </button>
 
-          {/* {data?.post.comments.nodes.length !== 0 && ( */}
-            <Comments comments={data?.post.comments.edges} />
-          {/* )} */}
+          <Comments comments={data?.post.comments.edges} />
         </div>
       )}
     </>
@@ -128,5 +126,4 @@ function MainPostDetail({ lg }) {
 }
 
 export default MainPostDetail;
-
 

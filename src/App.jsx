@@ -24,7 +24,9 @@ import client from "./lib/apollo";
 import "./App.scss";
 
 function App() {
-  const [lg, setlg] = useState("EN");
+  const [lg, setlg] = useState(
+    JSON.parse(localStorage.getItem("language")) || "EN"
+  );
 
   const [theme, setTheme] = useState(
     JSON.parse(localStorage.getItem("theme")) || "light"
@@ -37,7 +39,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(theme));
     document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+
+    localStorage.setItem("language", JSON.stringify(lg));
+    document.documentElement.setAttribute("data-language", lg);
+  }, [theme, lg]);
 
   return (
     <div className="App">
@@ -74,5 +79,4 @@ function App() {
 }
 
 export default App;
-
 
