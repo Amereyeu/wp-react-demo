@@ -7,12 +7,13 @@ import { format } from "date-fns";
 import { HashLink } from "react-router-hash-link";
 import { GET_POST_BY_SLUG } from "../../gql/queries";
 
-function MainPostDetail() {
+function MainPostDetail({ lg }) {
   const { slug } = useParams();
 
   const { loading, error, data } = useQuery(GET_POST_BY_SLUG, {
     variables: {
       id: slug,
+      language: lg,
     },
   });
 
@@ -79,7 +80,7 @@ function MainPostDetail() {
 
               <div className="detail__info__left__comments">
                 <FaRegComments /> <span>Comments: </span>
-                <span>{data.post.comments.nodes.length}</span>
+                {/* <span>{data.post.comments.nodes.length}</span> */}
               </div>
             </div>
 
@@ -117,9 +118,9 @@ function MainPostDetail() {
             </HashLink>
           </button>
 
-          {data?.post.comments.nodes.length !== 0 && (
-            <Comments comments={data?.post.comments} />
-          )}
+          {/* {data?.post.comments.nodes.length !== 0 && ( */}
+            <Comments comments={data?.post.comments.edges} />
+          {/* )} */}
         </div>
       )}
     </>
@@ -127,4 +128,5 @@ function MainPostDetail() {
 }
 
 export default MainPostDetail;
+
 

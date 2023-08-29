@@ -10,8 +10,6 @@ function MainPosts({ lg }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
-
-
   const { loading, error, data } = useQuery(GET_ALL_POSTS, {
     variables: {
       language: lg,
@@ -48,8 +46,6 @@ function MainPosts({ lg }) {
     );
   }
 
-
-
   // useEffect(() => {
   //   window.scrollTo(0, 0);
   //   document.body.scrollTop = 0;
@@ -80,13 +76,12 @@ function MainPosts({ lg }) {
 
   return (
     <div className="posts">
-    
-
-
-
       <SearchBar />
+
       <CategoryList categories={data.categories} />
-      <MainPost data={currentPosts} />
+
+      <MainPost data={currentPosts} lg={lg} />
+
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={data?.posts.nodes.length}
@@ -103,6 +98,4 @@ function MainPosts({ lg }) {
 }
 
 export default MainPosts;
-
-
 

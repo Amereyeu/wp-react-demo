@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaRegComments, FaRegClock, FaRegUser } from "react-icons/fa";
 import { format } from "date-fns";
 
-function MainPost({ data }) {
+function MainPost({ data, lg }) {
   return (
     <>
       {data.map((post) => (

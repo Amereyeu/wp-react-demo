@@ -75,7 +75,7 @@ const GET_ALL_POSTS = gql`
 
 // single post - detail page
 const GET_POST_BY_SLUG = gql`
-  query getPostBySlug($id: ID!) {
+  query getPostBySlug($id: ID!, $language: LanguageCodeEnum = CS) {
     post(id: $id, idType: SLUG) {
       id
       slug
@@ -117,23 +117,62 @@ const GET_POST_BY_SLUG = gql`
           }
         }
       }
-      comments(where: { orderby: COMMENT_DATE }) {
-        nodes {
-          id
-          author {
-            node {
-              id
-              name
-              avatar {
-                url
+      translation(language: $language) {
+        id
+        slug
+        title
+        excerpt
+        content
+      }
+      comments(where: { order: ASC }) {
+        edges {
+          node {
+            id
+            author {
+              node {
+                avatar {
+                  url
+                }
+                name
               }
             }
-          }
-          content
-          replies {
-            edges {
+            content
+            parent {
               node {
-                id
+                parentId
+              }
+            }
+            replies(where: { order: ASC }) {
+              edges {
+                node {
+                  id
+                  content
+                  author {
+                    node {
+                      avatar {
+                        url
+                      }
+                      name
+                    }
+                  }
+                  parentId
+                  replies(where: { order: ASC }) {
+                    edges {
+                      node {
+                        id
+                        content
+                        author {
+                          node {
+                            avatar {
+                              url
+                            }
+                            name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -385,10 +424,6 @@ export {
   GET_SINGLE_PAGE,
   GET_CONTACT_PAGE,
 };
-
-
-
-
 
 
 

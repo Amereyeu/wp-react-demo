@@ -7,9 +7,8 @@ function Contact({ lg }) {
   return (
     <div className="contact-wrap">
       <div className="contact">
-    
-          <ContactInfo lg={lg} />
-     
+        <ContactInfo lg={lg} />
+
         <div className="contact__right">
           <MailForm lg={lg} />
         </div>
