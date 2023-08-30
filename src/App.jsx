@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import NoPage from "./pages/NoPage";
 
-import CakeDetail from "./components/Gallery/CakeDetail";
+import GalleryDetail from "./components/Gallery/GalleryDetail";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import ControlledPopup from "./components/Popup";
@@ -60,7 +60,7 @@ function App() {
               <Route path="/" element={<Home lg={lg} />} exact />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact lg={lg} />} />
-              <Route path="/cake/:id" element={<CakeDetail />} />
+              <Route path="/gallery/:id" element={<GalleryDetail />} />
               <Route path="/post/:slug" element={<MainPostDetail />} />
               <Route path="/category/:slug" element={<Category />} />
               <Route path="/tag/:slug" element={<Tags />} />

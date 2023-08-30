@@ -25,7 +25,7 @@ function GalleryDetail() {
     getEvents();
   }, []);
 
-  console.log("one gallery:", gallery);
+  // console.log("one gallery:", gallery);
   
 
   if (isLoaded) {

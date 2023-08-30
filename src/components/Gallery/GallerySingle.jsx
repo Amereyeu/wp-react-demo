@@ -29,7 +29,7 @@ function GallerySingle({ gallery }) {
       <figure
         className="gallery__item"
         style={{ backgroundImage: `url(${media})` }}>
-        <Link to={`/cake/${gallery.id}`}>
+        <Link to={`/gallery/${gallery.id}`}>
           <figcaption>
             <h2> {gallery.title.rendered}</h2>
           </figcaption>

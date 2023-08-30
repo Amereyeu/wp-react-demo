@@ -32,7 +32,7 @@ function CategoryList({ lg }) {
     );
   }
 
-  const categoriesFound = Boolean(data?.categories.nodes.length);
+  const categoriesFound = Boolean(data?.categories?.nodes?.length);
 
   if (!categoriesFound) {
     return (
