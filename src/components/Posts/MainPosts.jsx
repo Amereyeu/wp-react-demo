@@ -78,7 +78,7 @@ function MainPosts({ lg }) {
     <div className="posts">
       <SearchBar />
 
-      <CategoryList categories={data.categories} />
+      <CategoryList lg={lg}/>
 
       <MainPost data={currentPosts} lg={lg} />
 

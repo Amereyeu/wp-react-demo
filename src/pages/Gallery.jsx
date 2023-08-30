@@ -1,9 +1,9 @@
-import Cakes from "../components/Gallery/Cakes";
+import GalleryAll from "../components/Gallery/GalleryAll";
 
 function Gallery() {
   return (
     <div className="gallery-wrap">
-      <Cakes />
+      <GalleryAll />
     </div>
   );
 }

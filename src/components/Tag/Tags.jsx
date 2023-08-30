@@ -53,8 +53,6 @@ function Tags() {
     );
   }
 
-
-
   return (
     <div className="post-wrap">
       <div className="posts">
@@ -90,5 +88,4 @@ function Tags() {
 }
 
 export default Tags;
-
 

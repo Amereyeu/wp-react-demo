@@ -415,6 +415,19 @@ const GET_CONTACT_PAGE = gql`
   }
 `;
 
+//show all categories based on language
+const GET_ALL_CATEGORIES = gql`
+  query allCategories($language: LanguageCodeFilterEnum!) {
+    categories(where: { language: $language }) {
+      nodes {
+        id
+        name
+        slug
+      }
+    }
+  }
+`;
+
 export {
   GET_ALL_POSTS,
   GET_POST_BY_SLUG,
@@ -423,7 +436,6 @@ export {
   GET_ALL_CUSTOM_POSTS,
   GET_SINGLE_PAGE,
   GET_CONTACT_PAGE,
+  GET_ALL_CATEGORIES,
 };
-
-
 

@@ -5,7 +5,7 @@ import CategoryPost from "./CategoryPost";
 import { SearchBar } from "../Search/Search";
 import { GET_ALL_POSTS_FROM_CATEGORY } from "../../gql/queries";
 
-function Category() {
+function Category({ lg }) {
   const { slug } = useParams();
 
   const { loading, error, data, fetchMore } = useQuery(
@@ -14,6 +14,7 @@ function Category() {
       variables: {
         id: slug,
         after: null,
+        language: lg,
       },
     }
   );
@@ -61,9 +62,9 @@ function Category() {
       <div className="posts">
         <SearchBar />
 
-        <CategoryList categories={data.categories} />
+        <CategoryList lg={lg} />
 
-        <CategoryPost data={data} />
+        <CategoryPost data={data} lg={lg} />
 
         {data.category.posts.pageInfo.hasNextPage === true && (
           <button

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Cake({ cake }) {
+function GallerySingle({ gallery }) {
   const [media, setMedia] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -10,7 +10,7 @@ function Cake({ cake }) {
     axios
       .get(
         `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/media/${
-          cake.featured_media
+          gallery.featured_media
         }`
       )
       .then((res) => {
@@ -29,9 +29,9 @@ function Cake({ cake }) {
       <figure
         className="gallery__item"
         style={{ backgroundImage: `url(${media})` }}>
-        <Link to={`/cake/${cake.id}`}>
+        <Link to={`/cake/${gallery.id}`}>
           <figcaption>
-            <h2> {cake.title.rendered}</h2>
+            <h2> {gallery.title.rendered}</h2>
           </figcaption>
         </Link>
       </figure>
@@ -41,5 +41,7 @@ function Cake({ cake }) {
   return null;
 }
 
-export default Cake;
+export default GallerySingle;
+
+
 

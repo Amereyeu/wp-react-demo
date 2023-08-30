@@ -44,7 +44,7 @@ function About({ lg }) {
     );
   }
 
-  console.log("page:", data);
+  // console.log("page:", data);
 
   // single page
   return (

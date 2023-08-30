@@ -1,6 +1,6 @@
 import Skeleton from "react-loading-skeleton";
 
-function CakeSkeleton({ cards }) {
+function GallerySkeleton({ cards }) {
   return Array(cards)
     .fill(0)
     .map((_, i) => (
@@ -10,5 +10,5 @@ function CakeSkeleton({ cards }) {
     ));
 }
 
-export default CakeSkeleton;
+export default GallerySkeleton;
 

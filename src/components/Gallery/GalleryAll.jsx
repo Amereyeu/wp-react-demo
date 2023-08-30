@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Cake from "./Cake";
-import CakeSkeleton from "./CakeSkeleton";
+import GallerySingle from "./GallerySingle";
+import GallerySkeleton from "./GallerySkeleton";
 
-function Cakes() {
-  const [cakes, setCakes] = useState([]);
+function GalleryAll() {
+  const [gallery, setGallery] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   function getEvents() {
@@ -12,7 +12,7 @@ function Cakes() {
       .get(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/photos`)
       .then((response) => response.data)
       .then((data) => {
-        setCakes(data);
+        setGallery(data);
         setIsLoaded(true);
       })
       .catch((err) => console.log(err));
@@ -22,13 +22,13 @@ function Cakes() {
     getEvents();
   }, []);
 
-  console.log("cakes:", cakes);
+  console.log("gallery:", gallery);
 
   if (isLoaded) {
     return (
       <div className="gallery" id="gallery">
-        {cakes.map((cake) => (
-          <Cake key={cake.id} cake={cake} />
+        {gallery.map((galleryItem) => (
+          <GallerySingle key={galleryItem.id} gallery={galleryItem} />
         ))}
       </div>
     );
@@ -36,10 +36,10 @@ function Cakes() {
 
   return (
     <div className="gallery" id="gallery">
-      <CakeSkeleton cards={8} />
+      <GallerySkeleton cards={8} />
     </div>
   );
 }
 
-export default Cakes;
+export default GalleryAll;
 
