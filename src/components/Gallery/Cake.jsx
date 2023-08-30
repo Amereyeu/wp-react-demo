@@ -28,8 +28,7 @@ function Cake({ cake }) {
     return (
       <figure
         className="gallery__item"
-        style={{ backgroundImage: `url(${media})` }}
-      >
+        style={{ backgroundImage: `url(${media})` }}>
         <Link to={`/cake/${cake.id}`}>
           <figcaption>
             <h2> {cake.title.rendered}</h2>

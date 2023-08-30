@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_PAGE } from "../gql/queries";
 
@@ -11,8 +10,10 @@ function About({ lg }) {
 
   if (loading) {
     return (
-      <div className="posts__placeholder">
-        <div className="circle"></div>
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div className="circle"></div>
+        </div>
       </div>
     );
   }
@@ -77,7 +78,7 @@ function About({ lg }) {
               }}></div>
           </div>
         </div>
-       )} 
+      )}
     </>
   );
 }

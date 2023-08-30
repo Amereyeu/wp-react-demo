@@ -11,17 +11,21 @@ function CustomPosts({ lg }) {
 
   if (loading) {
     return (
-      <div className="posts__placeholder">
-        <div className="circle"></div>
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div className="circle"></div>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="posts__placeholder">
-        <div>
-          <p>Error loading posts!</p>
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div>
+            <p>Error loading posts!</p>
+          </div>
         </div>
       </div>
     );
@@ -31,9 +35,11 @@ function CustomPosts({ lg }) {
 
   if (!customPostsFound) {
     return (
-      <div className="posts__placeholder">
-        <div>
-          <p>No posts found!</p>
+      <div className="post-wrap">
+        <div className="posts__placeholder">
+          <div>
+            <p>No posts found.</p>
+          </div>
         </div>
       </div>
     );

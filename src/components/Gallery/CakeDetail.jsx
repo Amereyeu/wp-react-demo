@@ -25,7 +25,7 @@ function CakeDetail() {
     getEvents();
   }, []);
 
-  // console.log("cake:", cake);
+  console.log("cake:", cake);
 
   if (isLoaded) {
     return (
