@@ -72,23 +72,35 @@ function Navigation({ handleThemeChange, theme, lg, setlg }) {
             </Link>
           ))}
 
-          <div onClick={toggleLang} className="navigation__menu__item">
-            {isCzech ? (
-              <button
+          {isCzech ? (
+            <div
+              className="switch-wrap"
+              onClick={() => {
+                toggleLang();
+                toggleNavigation();
+              }}>
+              <div
                 className={`switch ${isShrunk ? "small" : ""}`}
                 aria-label="Language Switch"
                 onClick={() => setlg("EN")}>
                 EN
-              </button>
-            ) : (
-              <button
+              </div>
+            </div>
+          ) : (
+            <div
+              className="switch-wrap"
+              onClick={() => {
+                toggleLang();
+                toggleNavigation();
+              }}>
+              <div
                 className={`switch ${isShrunk ? "small" : ""}`}
                 aria-label="Language Switch"
                 onClick={() => setlg("CS")}>
                 CS
-              </button>
-            )}
-          </div>
+              </div>
+            </div>
+          )}
 
           <div className="switch-wrap" onClick={toggleNavigation}>
             <div
