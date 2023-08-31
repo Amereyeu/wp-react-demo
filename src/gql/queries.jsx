@@ -11,6 +11,7 @@ const GET_ALL_POSTS = gql`
           slug
           name
           id
+          
         }
         id
         slug
@@ -75,7 +76,7 @@ const GET_ALL_POSTS = gql`
 
 // single post - detail page
 const GET_POST_BY_SLUG = gql`
-  query getPostBySlug($id: ID!, $language: LanguageCodeEnum = CS) {
+  query getPostBySlug($id: ID!, $language: LanguageCodeEnum = EN) {
     post(id: $id, idType: SLUG) {
       id
       slug
@@ -184,10 +185,18 @@ const GET_POST_BY_SLUG = gql`
 
 //filter posts by category
 const GET_ALL_POSTS_FROM_CATEGORY = gql`
-  query getPostsFromCategory($after: String, $id: ID!) {
+  query getPostsFromCategory(
+    $after: String
+    $id: ID!
+  ) {
     category(id: $id, idType: SLUG) {
       name
       id
+      slug
+      language {
+        code
+        slug
+      }
       posts(first: 5, after: $after) {
         nodes {
           id
@@ -244,13 +253,6 @@ const GET_ALL_POSTS_FROM_CATEGORY = gql`
           endCursor
           hasNextPage
         }
-      }
-    }
-    categories {
-      nodes {
-        id
-        name
-        slug
       }
     }
   }
@@ -438,4 +440,11 @@ export {
   GET_CONTACT_PAGE,
   GET_ALL_CATEGORIES,
 };
+
+
+
+
+
+
+
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CategoryList from "./CategoryList";
 import CategoryPost from "./CategoryPost";
 import { SearchBar } from "../Search/Search";
@@ -19,7 +19,7 @@ function Category({ lg }) {
     }
   );
 
-  console.log("category:", data);
+  console.log("categoryPost:", data);
 
   if (loading) {
     return (
@@ -62,7 +62,17 @@ function Category({ lg }) {
       <div className="posts">
         <SearchBar />
 
-        <CategoryList lg={lg} />
+        {/* <CategoryList lg={lg} /> */}
+
+        {/* {data.categories.nodes.map((category) => (
+          <li className="categorylist__item" key={category.id}>
+            <Link
+              className="categorylist__item__link"
+              to={`/category/${category.slug}`}>
+              {category.name}
+            </Link>
+          </li>
+        ))} */}
 
         <CategoryPost data={data} lg={lg} />
 
